@@ -1,55 +1,9 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import axios from "axios";
 
-// ─────────────────────────────────────────────────────────────────────────────
-// MOCK RESPONSE — used as UI fallback if backend is offline
-// ─────────────────────────────────────────────────────────────────────────────
-const MOCK_RESPONSE = {
-  fruit: { name: "Alphonso Mango", origin: "Ratnagiri, MH", weight: "318g", color: "Golden Yellow" },
-  sensors: {
-    ethylene:    { value: 4.21, unit: "ppm",  safe: [0, 2],    label: "Ethylene",  icon: "⚗️" },
-    ammonia:     { value: 0.23, unit: "ppm",  safe: [0, 0.1],  label: "NH₃",       icon: "🧪" },
-    co2:         { value: 438,  unit: "ppm",  safe: [350, 450], label: "CO₂",      icon: "☁️" },
-    temperature: { value: 29.1, unit: "°C",   safe: [20, 32],  label: "Temp",      icon: "🌡️" },
-    humidity:    { value: 68.4, unit: "%",    safe: [50, 80],  label: "Humidity",  icon: "💧" },
-    voc:         { value: 1.12, unit: "idx",  safe: [0, 0.6],  label: "VOC",       icon: "🔬" },
-  },
-  prediction: {
-    label: "Chemically Ripened",
-    edible: false,
-    confidence: 93.2,
-    naturalProb: 6.8,
-    chemicalProb: 93.2,
-    risk: "High",
-    flags: ["Ethylene spike (4.21 ppm)", "NH₃ above threshold", "Uniform surface coloring"],
-    model: "FruitSense-CNN v2.1",
-    processedAt: new Date().toLocaleString("en-IN"),
-    consume: "Avoid — chemical residues detected",
-  },
-  validity: {
-    harvestedDaysAgo: 3,
-    chemicalShelfDays: 5,
-    storageAdvice: "Keep below 15°C, avoid direct sunlight",
-    consume: false,
-    stages: [
-      { day: 0, label: "Harvested",          done: true },
-      { day: 1, label: "Chemical treatment", done: true, alert: true },
-      { day: 3, label: "Today",              done: true, current: true },
-      { day: 4, label: "Peak visual",        done: false },
-      { day: 6, label: "Overripe",           done: false, warn: true },
-      { day: 8, label: "Spoiled",            done: false, danger: true },
-    ],
-  },
-  nutrition: {
-    calories: 60, carbs: 15, sugar: 14, fiber: 1.6, vitC: 36, vitA: 54,
-  },
-};
+const API = "http://127.0.0.1:5000";
 
-// ─────────────────────────────────────────────────────────────────────────────
-// Helper: map backend response → exact UI shape
-// ─────────────────────────────────────────────────────────────────────────────
 function mapBackendToUI(b) {
-  // stages: backend sends string[] → Timeline needs object[]
   const stagesRaw        = Array.isArray(b.validity?.stages) ? b.validity.stages : [];
   const harvestedDaysAgo = b.validity?.harvestedDaysAgo ?? 0;
   const shelfDays        = b.validity?.chemicalShelfDays ?? stagesRaw.length - 1;
@@ -66,15 +20,11 @@ function mapBackendToUI(b) {
 
   return {
     fruit: {
-      name:   b.fruit   ?? "Unknown Fruit",
+      name:   b.fruit ?? "Unknown Fruit",
       origin: "Detected via CNN",
-      weight: "—",
-      color:  "—",
     },
-
-    // sensors already match { value, unit, safe, label, icon }
-    sensors: b.sensors,
-
+    sensors:     b.sensors,
+    sampleCount: b.sample_count ?? 0,
     prediction: {
       label:        b.prediction?.label        ?? "Unknown",
       edible:       b.prediction?.edible       ?? false,
@@ -87,12 +37,8 @@ function mapBackendToUI(b) {
       processedAt:  b.prediction?.processedAt
                       ? new Date(b.prediction.processedAt).toLocaleString("en-IN")
                       : new Date().toLocaleString("en-IN"),
-      // backend: boolean → UI: string
-      consume: b.validity?.consume
-                 ? "Safe to consume"
-                 : "Avoid — chemical residues detected",
+      consume: b.validity?.consume ? "Safe to consume" : "Avoid — chemical residues detected",
     },
-
     validity: {
       harvestedDaysAgo,
       chemicalShelfDays: shelfDays,
@@ -100,7 +46,6 @@ function mapBackendToUI(b) {
       consume:       b.validity?.consume       ?? false,
       stages,
     },
-
     nutrition: {
       calories: b.nutrition?.calories ?? 0,
       carbs:    b.nutrition?.carbs    ?? 0,
@@ -113,7 +58,7 @@ function mapBackendToUI(b) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Sub-components (IDENTICAL to original — zero UI changes)
+// Sub-components  (your originals, untouched)
 // ─────────────────────────────────────────────────────────────────────────────
 function StepBadge({ n, active, done }) {
   return (
@@ -184,8 +129,7 @@ function Timeline({ stages }) {
         {stages.map((s, i) => (
           <div key={i} style={{ display: "flex", flexDirection: "column", alignItems: "center", flex: 1 }}>
             <div style={{
-              width: 22, height: 22, borderRadius: "50%",
-              border: "2px solid",
+              width: 22, height: 22, borderRadius: "50%", border: "2px solid",
               display: "flex", alignItems: "center", justifyContent: "center",
               fontSize: 8, fontWeight: 800, marginBottom: 4,
               background: s.current ? "#f59e0b" : s.done ? "#16a34a" : s.danger ? "#450a0a" : s.warn ? "#451a03" : "#1a1a1a",
@@ -224,31 +168,77 @@ function NutritionRow({ label, value, max, unit, color }) {
   );
 }
 
+// ── NEW: slim progress bar that fits your existing dark card style ─────────────
+function CollectionBar({ elapsed, total, samples }) {
+  const pct  = Math.min(100, (elapsed / total) * 100);
+  const secs = Math.max(0, Math.floor(total - elapsed));
+  return (
+    <div style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", gap: 8, background: "#0d0d0d", border: "1px solid #1f1f1f", borderRadius: 12, padding: "10px 20px", minWidth: 280 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", width: "100%", fontSize: 11, color: "#6b7280" }}>
+        <span>Collecting sensor data...</span>
+        <span style={{ fontFamily: "monospace" }}>{secs}s left · {samples} samples</span>
+      </div>
+      <div style={{ width: "100%", height: 6, borderRadius: 99, background: "#1a1a1a", overflow: "hidden" }}>
+        <div style={{
+          height: "100%", width: `${pct}%`,
+          background: "linear-gradient(90deg,#f59e0b,#fbbf24)",
+          borderRadius: 99, transition: "width 1s ease",
+        }} />
+      </div>
+    </div>
+  );
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // Main App
 // ─────────────────────────────────────────────────────────────────────────────
 export default function App() {
-  const videoRef   = useRef(null);
-  const canvasRef  = useRef(null);
-  const streamRef  = useRef(null);
+  const videoRef  = useRef(null);
+  const canvasRef = useRef(null);
+  const streamRef = useRef(null);
+  const pollRef   = useRef(null);
 
-  const [step,        setStep]        = useState(0);
-  const [capturedImg, setCapturedImg] = useState(null);
-  const [result,      setResult]      = useState(null);
-  const [camErr,      setCamErr]      = useState(false);
-  const [countdown,   setCountdown]   = useState(null);
-  const [aStep,       setAStep]       = useState(0);
-  const [backendErr,  setBackendErr]  = useState(null);  // NEW: surface errors
+  const [step,          setStep]          = useState(0);
+  const [capturedImg,   setCapturedImg]   = useState(null);
+  const [result,        setResult]        = useState(null);
+  const [camErr,        setCamErr]        = useState(false);
+  const [countdown,     setCountdown]     = useState(null);
+  const [aStep,         setAStep]         = useState(0);
+  const [error,         setError]         = useState(null);
+  const [detectedFruit, setDetectedFruit] = useState(null);
+  // eslint-disable-next-line no-unused-vars
+  const [sessionId,     setSessionId]     = useState(null);
+  const [sensorDots,    setSensorDots]    = useState(".");
 
+  // NEW sensor phase state — only used inside step 4
+  // "countdown"  = 15 s delay before LED activates
+  // "collecting" = LED ON, buffer filling (1 min)
+  const [sensorPhase,    setSensorPhase]    = useState(null);
+  const [countdownLeft,  setCountdownLeft]  = useState(15);
+  const [collectElapsed, setCollectElapsed] = useState(0);
+  const [collectSamples, setCollectSamples] = useState(0);
+  const COLLECTION_TOTAL = 60;   // 1 minute — matches backend COLLECTION_WINDOW_S
+
+  // BUG-1 FIX: ASTEPS inside component so ASTEPS.length is always correct
   const ASTEPS = [
-    "Detecting fruit type from image...",
-    "Initialising sensor array...",
-    "Reading chemical signatures...",
+    "Sending image to server...",
     "Running FruitSense-CNN v2.1...",
-    "Computing validity window...",
+    "Detecting fruit type...",
+    "Activating sensor LED...",
   ];
 
-  // ── Camera ────────────────────────────────────────────────────────────────
+  const STEP_LABELS = ["Camera", "Capture", "CNN", "Sensor", "Results"];
+
+  // Animate dots while collecting
+  useEffect(() => {
+    if (step !== 4 || sensorPhase !== "collecting") return;
+    const iv = setInterval(() => {
+      setSensorDots(d => d.length >= 3 ? "." : d + ".");
+    }, 500);
+    return () => clearInterval(iv);
+  }, [step, sensorPhase]);
+
+  // ── Camera ─────────────────────────────────────────────────────────────────
   const startCam = useCallback(async () => {
     setCamErr(false);
     setStep(1);
@@ -274,7 +264,8 @@ export default function App() {
       if (c === 0) {
         clearInterval(iv);
         setCountdown(null);
-        const cv = canvasRef.current, vd = videoRef.current;
+        const cv = canvasRef.current;
+        const vd = videoRef.current;
         if (cv && vd) {
           cv.width  = vd.videoWidth  || 640;
           cv.height = vd.videoHeight || 480;
@@ -289,70 +280,110 @@ export default function App() {
     }, 1000);
   }, [stopCam]);
 
-  // ── Analyse — FIXED: real backend call + proper data mapping ─────────────
-  const analyze = useCallback(async () => {
+  // ── Polling (replaces old blocking axios.get) ──────────────────────────────
+  const stopPolling = useCallback(() => {
+    if (pollRef.current) { clearInterval(pollRef.current); pollRef.current = null; }
+  }, []);
+
+  const startPolling = useCallback((sid) => {
+    stopPolling();
+    pollRef.current = setInterval(async () => {
+      try {
+        const res  = await axios.get(`${API}/sensor-result`, { params: { session_id: sid } });
+        const data = res.data;
+
+        if (data.status === "waiting_for_activation") {
+          setSensorPhase("countdown");
+          setCountdownLeft(Math.ceil(data.countdown_s ?? 15));
+
+        } else if (data.status === "collecting") {
+          setSensorPhase("collecting");
+          setCollectElapsed(data.elapsed_s ?? 0);
+          setCollectSamples(data.samples   ?? 0);
+
+        } else if (data.status === "done") {
+          stopPolling();
+          setResult(mapBackendToUI(data));
+          setStep(5);
+
+        } else if (data.status === "error") {
+          stopPolling();
+          setError(data.message ?? "Sensor pipeline error.");
+        }
+      } catch (err) {
+        stopPolling();
+        setError(err.response?.data?.error ?? err.message ?? "Polling failed");
+      }
+    }, 3000);
+  }, [stopPolling]);
+
+  useEffect(() => () => stopPolling(), [stopPolling]);
+
+  // ── Step 3 → 4 → 5 flow ───────────────────────────────────────────────────
+  const analyzeImage = useCallback(async () => {
     setStep(3);
     setAStep(0);
-    setBackendErr(null);
+    setError(null);
+    setSensorPhase("countdown");
+    setCountdownLeft(15);
+    setCollectElapsed(0);
+    setCollectSamples(0);
 
-    // Animate steps while waiting for response
     const iv = setInterval(() => {
       setAStep(p => {
         if (p >= ASTEPS.length - 1) { clearInterval(iv); return p; }
         return p + 1;
       });
-    }, 520);
+    }, 500);
 
     try {
-      const res = await axios.post("http://127.0.0.1:5000/analyze", {
-        image: capturedImg,
-      }, {
-        timeout: 30000,   // 30 s — CNN inference can be slow on CPU
-      });
-
+      const res = await axios.post(
+        `${API}/analyze-image`,
+        { image: capturedImg },
+        { timeout: 30000 },
+      );
       clearInterval(iv);
-      // Map backend shape → UI shape
-      setResult(mapBackendToUI(res.data));
+
+      const { fruit, confidence, session_id } = res.data;
+      setDetectedFruit({ name: fruit, confidence: Math.round(confidence * 10) / 10 });
+      setSessionId(session_id);
       setStep(4);
+      startPolling(session_id);
 
     } catch (err) {
       clearInterval(iv);
-
-      // Build a human-readable error message
-      let msg = "Backend error";
+      let msg;
       if (err.code === "ECONNREFUSED" || err.message?.includes("Network Error")) {
         msg = "Cannot reach backend at http://127.0.0.1:5000 — is app.py running?";
-      } else if (err.code === "ETIMEDOUT" || err.code === "ERR_NETWORK") {
-        msg = "Request timed out — CNN inference may still be loading. Try again.";
+      } else if (err.code === "ECONNABORTED") {
+        msg = "Request timed out — CNN inference may be slow. Try again.";
       } else if (err.response) {
         msg = `Server error ${err.response.status}: ${err.response.data?.error ?? err.message}`;
       } else {
-        msg = err.message;
+        msg = err.message ?? "Unknown error";
       }
-
-      console.error("[FruitSense]", msg, err);
-      setBackendErr(msg);
-
-      // Show mock data with error flag so UI doesn't break
-      setResult({
-        ...MOCK_RESPONSE,
-        prediction: {
-          ...MOCK_RESPONSE.prediction,
-          flags: [...MOCK_RESPONSE.prediction.flags, "⚠️ Demo mode — backend offline"],
-        },
-      });
-      setStep(4);
+      setError(msg);
+      setStep(2);
     }
-  }, [capturedImg]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [capturedImg, ASTEPS.length, startPolling]);
 
   const reset = useCallback(() => {
     stopCam();
+    stopPolling();
     setStep(0);
     setCapturedImg(null);
     setResult(null);
     setCamErr(false);
-    setBackendErr(null);
-  }, [stopCam]);
+    setError(null);
+    setDetectedFruit(null);
+    setSessionId(null);
+    setSensorPhase(null);
+    setCountdownLeft(15);
+    setCollectElapsed(0);
+    setCollectSamples(0);
+    setAStep(0);
+  }, [stopCam, stopPolling]);
 
   const edible = result?.prediction?.edible;
   const sColor = edible ? "#16a34a" : "#dc2626";
@@ -364,11 +395,12 @@ export default function App() {
     <div style={{ fontFamily: "'Outfit', 'Segoe UI', sans-serif", background: "#0a0a0a", minHeight: "100vh", color: "#f0f0f0" }}>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
-        @keyframes popIn  { from{opacity:0;transform:scale(0.75)} to{opacity:1;transform:scale(1)} }
-        @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
-        @keyframes spin   { to{transform:rotate(360deg)} }
-        @keyframes pulse  { 0%,100%{opacity:1} 50%{opacity:0.35} }
-        @keyframes scan   { 0%{top:-8%} 100%{top:108%} }
+        @keyframes popIn    { from{opacity:0;transform:scale(0.75)} to{opacity:1;transform:scale(1)} }
+        @keyframes fadeUp   { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+        @keyframes spin     { to{transform:rotate(360deg)} }
+        @keyframes pulse    { 0%,100%{opacity:1} 50%{opacity:0.35} }
+        @keyframes scan     { 0%{top:-8%} 100%{top:108%} }
+        @keyframes ledPulse { 0%,100%{box-shadow:0 0 0 4px rgba(250,204,21,0.25),0 0 12px rgba(250,204,21,0.5)} 50%{box-shadow:0 0 0 8px rgba(250,204,21,0.1),0 0 24px rgba(250,204,21,0.8)} }
         .fu  { animation: fadeUp 0.45s ease both; }
         .card{ background:#141414; border:1px solid #222; border-radius:16px; padding:18px; }
         .btn { background:#f59e0b; color:#0a0a0a; border:none; padding:13px 30px; border-radius:99px; font-size:14px; font-weight:700; cursor:pointer; font-family:inherit; transition:all .2s; }
@@ -392,14 +424,16 @@ export default function App() {
       {/* ── STEP TRACKER ── */}
       {step > 0 && (
         <div style={{ background: "#0d0d0d", borderBottom: "1px solid #1a1a1a", padding: "12px 24px" }}>
-          <div style={{ display: "flex", alignItems: "center", maxWidth: 520, margin: "0 auto" }}>
-            {["Camera", "Capture", "Analyse", "Results"].map((lbl, i) => (
-              <div key={i} style={{ display: "flex", alignItems: "center", flex: i < 3 ? "1 1 auto" : "0 0 auto" }}>
+          <div style={{ display: "flex", alignItems: "center", maxWidth: 620, margin: "0 auto" }}>
+            {STEP_LABELS.map((lbl, i) => (
+              <div key={i} style={{ display: "flex", alignItems: "center", flex: i < STEP_LABELS.length - 1 ? "1 1 auto" : "0 0 auto" }}>
                 <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 3 }}>
                   <StepBadge n={i + 1} active={step === i + 1} done={step > i + 1} />
                   <span style={{ fontSize: 9.5, color: step >= i + 1 ? "#f59e0b" : "#374151", fontWeight: step === i + 1 ? 700 : 400 }}>{lbl}</span>
                 </div>
-                {i < 3 && <div style={{ flex: 1, height: 2, background: step > i + 1 ? "#16a34a" : "#1f1f1f", margin: "0 5px", marginBottom: 14, transition: "background .5s" }} />}
+                {i < STEP_LABELS.length - 1 && (
+                  <div style={{ flex: 1, height: 2, background: step > i + 1 ? "#16a34a" : "#1f1f1f", margin: "0 5px", marginBottom: 14, transition: "background .5s" }} />
+                )}
               </div>
             ))}
           </div>
@@ -408,13 +442,13 @@ export default function App() {
 
       <div style={{ maxWidth: 960, margin: "0 auto", padding: "28px 18px" }}>
 
-        {/* ── BACKEND ERROR BANNER (shows only when backend failed) ── */}
-        {backendErr && (
+        {/* ── ERROR BANNER ── */}
+        {error && (
           <div style={{ background: "#450a0a", border: "1px solid #991b1b", borderRadius: 12, padding: "10px 16px", marginBottom: 16, display: "flex", alignItems: "center", gap: 10, animation: "fadeUp .4s ease" }}>
             <span style={{ fontSize: 16 }}>⚠️</span>
             <div>
-              <div style={{ fontSize: 12, fontWeight: 700, color: "#f87171" }}>Backend Unreachable — Showing Demo Data</div>
-              <div style={{ fontSize: 11, color: "#fca5a5", marginTop: 2 }}>{backendErr}</div>
+              <div style={{ fontSize: 12, fontWeight: 700, color: "#f87171" }}>Error</div>
+              <div style={{ fontSize: 11, color: "#fca5a5", marginTop: 2 }}>{error}</div>
             </div>
           </div>
         )}
@@ -426,12 +460,12 @@ export default function App() {
             <h1 style={{ fontSize: 34, fontWeight: 800, letterSpacing: "-0.04em", margin: "0 0 10px", background: "linear-gradient(130deg,#f59e0b,#fcd34d)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
               Fruit Ripeness Detector
             </h1>
-            <p style={{ color: "#6b7280", fontSize: 14, maxWidth: 360, margin: "0 auto 32px", lineHeight: 1.8 }}>
-              Capture a fruit image → sensor tray reads chemical data → AI predicts natural or chemical ripening in ~3 seconds.
+            <p style={{ color: "#6b7280", fontSize: 14, maxWidth: 380, margin: "0 auto 32px", lineHeight: 1.8 }}>
+              Capture a fruit image → CNN identifies the fruit → LED signals you to place it near the sensor → AI predicts natural or chemical ripening.
             </p>
             <button className="btn" onClick={startCam} style={{ fontSize: 15, padding: "15px 38px" }}>📷 Start Camera</button>
             <div style={{ marginTop: 36, display: "flex", justifyContent: "center", gap: 28 }}>
-              {["📡 6 IoT Sensors", "🧠 CNN v2.1", "⚡ ~3s Scan", "📅 Validity Window"].map(t => (
+              {["📡 6 IoT Sensors", "🧠 CNN v2.1", "💡 LED Guided", "📅 Validity Window"].map(t => (
                 <div key={t} style={{ fontSize: 11, color: "#374151" }}>{t}</div>
               ))}
             </div>
@@ -445,8 +479,7 @@ export default function App() {
               {camErr ? (
                 <div style={{ height: 340, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 12 }}>
                   <div style={{ fontSize: 48 }}>📷</div>
-                  <div style={{ color: "#6b7280", fontSize: 13 }}>Camera unavailable — using demo mode</div>
-                  <button className="btn" onClick={() => { stopCam(); setStep(2); }}>Continue with Demo Fruit →</button>
+                  <div style={{ color: "#6b7280", fontSize: 13 }}>Camera unavailable</div>
                 </div>
               ) : (
                 <>
@@ -489,30 +522,27 @@ export default function App() {
             <div style={{ position: "relative", borderRadius: 20, overflow: "hidden", maxWidth: 540, margin: "0 auto 16px", border: "2px solid #f59e0b" }}>
               {capturedImg
                 ? <img src={capturedImg} alt="Captured" style={{ width: "100%", display: "block" }} />
-                : <div style={{ height: 280, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "#111", gap: 8 }}>
-                    <div style={{ fontSize: 80 }}>🥭</div>
-                    <div style={{ fontSize: 13, color: "#6b7280" }}>Demo: Alphonso Mango</div>
-                  </div>
+                : <div style={{ height: 280, display: "flex", alignItems: "center", justifyContent: "center", background: "#111", fontSize: 80 }}>🥭</div>
               }
               <div style={{ position: "absolute", top: 12, left: 12, background: "#16a34a", color: "white", fontSize: 11, fontWeight: 700, padding: "4px 12px", borderRadius: 99 }}>
                 ✓ Captured
               </div>
             </div>
             <p style={{ color: "#6b7280", fontSize: 13, marginBottom: 20 }}>
-              Place the fruit on the sensor tray, then press Analyse.
+              Ready to analyse. The LED will turn ON after detection — then place the fruit near the sensor.
             </p>
             <div style={{ display: "flex", gap: 12, justifyContent: "center" }}>
               <button className="ghost" onClick={() => { stopCam(); startCam(); }}>↺ Retake</button>
-              <button className="btn" onClick={analyze} style={{ fontSize: 15 }}>🔬 Analyse Fruit →</button>
+              <button className="btn" onClick={analyzeImage} style={{ fontSize: 15 }}>🔬 Analyse Fruit →</button>
             </div>
           </div>
         )}
 
-        {/* ─── ANALYSING ─── */}
+        {/* ─── CNN RUNNING ─── */}
         {step === 3 && (
           <div className="fu" style={{ textAlign: "center", padding: "44px 20px" }}>
             <div style={{ width: 76, height: 76, border: "4px solid #1f1f1f", borderTop: "4px solid #f59e0b", borderRadius: "50%", margin: "0 auto 26px", animation: "spin 1s linear infinite" }} />
-            <h2 style={{ fontSize: 22, fontWeight: 700, marginBottom: 8, letterSpacing: "-0.02em" }}>Analysing your fruit...</h2>
+            <h2 style={{ fontSize: 22, fontWeight: 700, marginBottom: 8, letterSpacing: "-0.02em" }}>Identifying fruit...</h2>
             <div style={{ maxWidth: 360, margin: "0 auto" }}>
               {ASTEPS.map((s, i) => (
                 <div key={i} style={{ display: "flex", alignItems: "center", gap: 10, padding: "8px 0", borderBottom: "1px solid #1a1a1a", opacity: i <= aStep ? 1 : 0.22, transition: "opacity .4s" }}>
@@ -526,10 +556,94 @@ export default function App() {
           </div>
         )}
 
-        {/* ─── RESULTS ─── */}
-        {step === 4 && result && (
+        {/* ─── STEP 4: SENSOR PHASE ─── */}
+        {step === 4 && (
+          <div className="fu" style={{ textAlign: "center", padding: "36px 20px" }}>
+
+            {detectedFruit && (
+              <div style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "#0f2a0f", border: "1px solid #166534", borderRadius: 99, padding: "8px 20px", marginBottom: 28 }}>
+                <span style={{ fontSize: 18 }}>🧠</span>
+                <span style={{ fontWeight: 700, fontSize: 15, color: "#4ade80" }}>{detectedFruit.name}</span>
+                <span style={{ fontSize: 11, color: "#6b7280" }}>detected · {detectedFruit.confidence}% confidence</span>
+              </div>
+            )}
+
+            {/* LED visual — your original circle, LED dims during countdown */}
+            <div style={{ marginBottom: 24 }}>
+              <div style={{
+                width: 80, height: 80, borderRadius: "50%",
+                background: "#facc1522", border: "3px solid #facc15",
+                margin: "0 auto 12px",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                animation: (error || sensorPhase === "countdown") ? "none" : "ledPulse 1.4s ease-in-out infinite",
+              }}>
+                <div style={{
+                  width: 36, height: 36, borderRadius: "50%",
+                  background: (error || sensorPhase === "countdown") ? "#374151" : "#facc15",
+                  boxShadow: (error || sensorPhase === "countdown") ? "none" : "0 0 20px #facc15",
+                }} />
+              </div>
+              <div style={{ fontSize: 12, color: sensorPhase === "collecting" ? "#facc15" : "#4b5563", fontWeight: 600 }}>
+                {sensorPhase === "countdown"
+                  ? `LED activates in ${countdownLeft}s — get ready`
+                  : sensorPhase === "collecting"
+                  ? "LED ON — Sensor Active"
+                  : "LED OFF"}
+              </div>
+            </div>
+
+            {!error ? (
+              <>
+                <h2 style={{ fontSize: 26, fontWeight: 800, letterSpacing: "-0.03em", color: "#facc15", marginBottom: 10 }}>
+                  {sensorPhase === "countdown"
+                    ? "Place the fruit near the sensor"
+                    : `Collecting data${sensorDots}`}
+                </h2>
+
+                <p style={{ color: "#9ca3af", fontSize: 14, maxWidth: 400, margin: "0 auto 24px", lineHeight: 1.8 }}>
+                  {sensorPhase === "countdown"
+                    ? <>The LED on your Arduino will turn ON in <strong style={{ color: "#f0f0f0" }}>{countdownLeft}s</strong>. Hold the <strong style={{ color: "#f0f0f0" }}>{detectedFruit?.name}</strong> close to the MQ sensor tray.</>
+                    : <>Readings are being captured automatically for <strong style={{ color: "#f0f0f0" }}>1 minute</strong>. Keep the <strong style={{ color: "#f0f0f0" }}>{detectedFruit?.name}</strong> near the sensors.</>
+                  }
+                </p>
+
+                <div style={{ display: "flex", justifyContent: "center", gap: 20, flexWrap: "wrap", marginBottom: 20 }}>
+                  {["MQ3 ⚗️", "MQ5 🧪", "MQ135 ☁️", "DHT11 🌡️"].map(s => (
+                    <div key={s} style={{ background: "#111", border: "1px solid #222", borderRadius: 8, padding: "6px 14px", fontSize: 11, color: "#6b7280" }}>{s}</div>
+                  ))}
+                </div>
+
+                {/* NEW: progress bar when collecting, original pill when waiting */}
+                {sensorPhase === "collecting" ? (
+                  <CollectionBar
+                    elapsed={collectElapsed}
+                    total={COLLECTION_TOTAL}
+                    samples={collectSamples}
+                  />
+                ) : (
+                  <div style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "#0d0d0d", border: "1px solid #1f1f1f", borderRadius: 99, padding: "8px 18px", fontSize: 12, color: "#6b7280" }}>
+                    <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#f59e0b", animation: "pulse 1s ease infinite" }} />
+                    Waiting for sensor activation — {countdownLeft}s
+                  </div>
+                )}
+              </>
+            ) : (
+              <div style={{ maxWidth: 440, margin: "0 auto" }}>
+                <h2 style={{ fontSize: 22, fontWeight: 700, color: "#f87171", marginBottom: 10 }}>Sensor Error</h2>
+                <p style={{ color: "#9ca3af", fontSize: 13, marginBottom: 20 }}>{error}</p>
+                <div style={{ display: "flex", gap: 12, justifyContent: "center" }}>
+                  <button className="ghost" onClick={reset}>↺ Start Over</button>
+                  <button className="btn" onClick={() => { setError(null); analyzeImage(); }}>🔄 Retry</button>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* ─── STEP 5: RESULTS ─── */}
+        {step === 5 && result && (
           <div>
-            {/* Row 1: Image + Sensors */}
+            {/* Row 1: Image + Sensor Readings */}
             <div className="fu" style={{ display: "grid", gridTemplateColumns: "200px 1fr", gap: 14, marginBottom: 14 }}>
               <div style={{ borderRadius: 16, overflow: "hidden", border: `2px solid ${sBd}`, position: "relative" }}>
                 {capturedImg
@@ -538,7 +652,7 @@ export default function App() {
                 }
                 <div style={{ padding: "10px 12px", background: "#111" }}>
                   <div style={{ fontWeight: 700, fontSize: 13 }}>{result.fruit.name}</div>
-                  <div style={{ fontSize: 10, color: "#6b7280", marginTop: 2 }}>{result.fruit.origin} · {result.fruit.weight}</div>
+                  <div style={{ fontSize: 10, color: "#6b7280", marginTop: 2 }}>{result.fruit.origin}</div>
                   <div style={{ fontSize: 10, color: "#4b5563", marginTop: 1 }}>{result.prediction.processedAt}</div>
                 </div>
                 <div style={{ position: "absolute", top: 10, right: 10, background: sBg, border: `1px solid ${sBd}`, color: sColor, fontSize: 10, fontWeight: 700, padding: "3px 10px", borderRadius: 99 }}>
@@ -547,7 +661,7 @@ export default function App() {
               </div>
 
               <div>
-                <div style={{ fontSize: 9.5, fontWeight: 700, color: "#4b5563", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 10 }}>📡 Sensor Readings</div>
+                <div style={{ fontSize: 9.5, fontWeight: 700, color: "#4b5563", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 10 }}>📡 Real Sensor Readings</div>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 8 }}>
                   {Object.entries(result.sensors).map(([k, v], i) => (
                     <div key={k} style={{ animationDelay: `${i * 60}ms` }}>
@@ -571,7 +685,7 @@ export default function App() {
                 </div>
               </div>
               <div style={{ textAlign: "center", flexShrink: 0 }}>
-                <div style={{ fontSize: 38, fontWeight: 900, color: sColor, lineHeight: 1, fontVariantNumeric: "tabular-nums" }}>{result.prediction.confidence}%</div>
+                <div style={{ fontSize: 38, fontWeight: 900, color: sColor, lineHeight: 1 }}>{result.prediction.confidence}%</div>
                 <div style={{ fontSize: 10, color: "#6b7280" }}>confidence</div>
                 <div style={{ fontSize: 11, fontWeight: 700, marginTop: 4, padding: "2px 10px", borderRadius: 99, background: result.prediction.risk === "High" ? "#7f1d1d" : "#14532d", color: result.prediction.risk === "High" ? "#fca5a5" : "#86efac" }}>
                   {result.prediction.risk} Risk
@@ -581,8 +695,6 @@ export default function App() {
 
             {/* Row 3: ML + Validity + Nutrition */}
             <div className="fu" style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, animationDelay: "140ms" }}>
-
-              {/* ML */}
               <div className="card">
                 <div style={{ fontSize: 9.5, fontWeight: 700, color: "#4b5563", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 12 }}>🧠 ML Prediction</div>
                 <div style={{ fontSize: 17, fontWeight: 800, color: sColor, marginBottom: 3, letterSpacing: "-0.02em" }}>{result.prediction.label}</div>
@@ -591,7 +703,6 @@ export default function App() {
                 <ProbBar label="Chemical Ripening" value={result.prediction.chemicalProb} color="#dc2626" delay={450} />
               </div>
 
-              {/* Validity */}
               <div className="card">
                 <div style={{ fontSize: 9.5, fontWeight: 700, color: "#4b5563", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 12 }}>📅 Validity Window</div>
                 <div style={{ display: "flex", gap: 8, marginBottom: 14 }}>
@@ -611,7 +722,6 @@ export default function App() {
                 </div>
               </div>
 
-              {/* Nutrition */}
               <div className="card">
                 <div style={{ fontSize: 9.5, fontWeight: 700, color: "#4b5563", letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 12 }}>🥗 Nutrition / 100g</div>
                 <NutritionRow label="Calories"  value={result.nutrition.calories} max={120} unit=" kcal" color="#f59e0b" />
@@ -624,7 +734,6 @@ export default function App() {
               </div>
             </div>
 
-            {/* Actions */}
             <div className="fu" style={{ display: "flex", justifyContent: "center", gap: 12, marginTop: 22, animationDelay: "200ms" }}>
               <button className="ghost" onClick={reset}>↺ Scan Another Fruit</button>
               <button className="btn" onClick={() => window.print()}>⬇ Export Report</button>
