@@ -583,24 +583,6 @@ _CNN_TO_LE = {"grape": "Grapes"}
 
 
 def _compute_features(sensors, fruit_enc):
-    """
-    Build the 10-element feature vector in the EXACT order used during training.
-
-    Feature order (index 0-9):
-        0  mq3
-        1  mq5
-        2  mq135
-        3  temperature
-        4  humidity
-        5  gas_intensity      = mq3 + mq5 + mq135
-        6  fermentation_index = mq135 / (mq3 + 1e-6)
-        7  spoilage_index     = mq5  / (mq3 + 1e-6)
-        8  env_factor         = temperature * humidity
-        9  fruit_enc
-
-    Sensor values are clipped to valid hardware ranges.
-    All divisions include 1e-6 epsilon to prevent zero-division.
-    """
     mq3   = float(np.clip(sensors["mq3"],         0, 4095))
     mq5   = float(np.clip(sensors["mq5"],         0, 4095))
     mq135 = float(np.clip(sensors["mq135"],       0, 4095))
@@ -610,8 +592,16 @@ def _compute_features(sensors, fruit_enc):
     gas_intensity      = mq3 + mq5 + mq135
     fermentation_index = mq135 / (mq3 + 1e-6)
     spoilage_index     = mq5   / (mq3 + 1e-6)
-    # env_factor         = (temp*0.6)  +(hum * 0.4)
-    env_factor = temp * hum
+
+    # env_factor: use a thermodynamic model instead of arbitrary weighting.
+    # Represents "effective spoilage acceleration" — higher temp + lower humidity
+    # both accelerate ripening but in different ways. Normalized to [0, 1] range.
+    temp_norm = np.clip((temp - 0.0) / 50.0, 0.0, 1.0)   # 0°C baseline, 50°C max
+    hum_norm  = np.clip(hum / 100.0, 0.0, 1.0)
+    # High temp accelerates ripening; optimal humidity ~60–70% for storage.
+    # Deviation from optimal humidity (either direction) stresses the fruit.
+    hum_stress = abs(hum_norm - 0.65)                      # optimal ~65% RH
+    env_factor  = (temp_norm * 0.7) + (hum_stress * 0.3)   # [0, 1] range
 
     X = np.array([[
         mq3, mq5, mq135, temp, hum,
@@ -621,12 +611,11 @@ def _compute_features(sensors, fruit_enc):
 
     log.info(
         "Features: mq3=%.1f mq5=%.1f mq135=%.1f t=%.1f h=%.1f | "
-        "gas=%.1f ferm=%.4f spoil=%.4f env=%.1f enc=%d",
+        "gas=%.1f ferm=%.4f spoil=%.4f env=%.4f enc=%d",
         mq3, mq5, mq135, temp, hum,
         gas_intensity, fermentation_index, spoilage_index, env_factor, fruit_enc,
     )
     return X
-
 
 def _resolve_fruit_enc(fruit_label, le_fruit):
     """
@@ -703,40 +692,167 @@ def _safe_predict_proba(clf, X):
         return 75.0, None
 
 
-# def _predict_with_new_models(sensors, fruit_label):
-#     """
-#     Run the new individual ML files.
+def _detect_ripening_type(mq3: float, mq5: float, mq135: float,
+                           temp: float, hum: float) -> tuple[str, float, float]:
+    """
+    Determine ripening type using a ratio-based evidence model.
 
-#     Classifier output handling
-#     --------------------------
-#     The classifier is inspected at runtime to decide if it predicts:
-#       (a) condition labels  (Fresh / Ripe / Overripe / Rotten)
-#       (b) edibility flag    (Edible / Not Edible / 0 / 1)
-#       (c) numeric index     (0=Fresh, 1=Ripe, 2=Overripe, 3=Rotten)
-#     All three are handled transparently.
+    Returns: (ripening_type, natural_prob, chemical_prob)
 
-#     Ripening type derivation
-#     ------------------------
-#     The new model set has no ripening classifier, so Natural vs Chemical is
-#     derived from the fermentation_index gas signature (same chemistry used
-#     during feature engineering).
-#     """
-#     m        = load_new_models()
-#     clf      = m["classifier"]
-#     reg      = m["regressor"]
-#     scaler   = m["scaler"]
+    Physical basis:
+    ---------------
+    Chemical ripening agents (calcium carbide, ethephon, ethylene gas) produce:
+      - Elevated MQ5 relative to MQ3  (ammonia, acetylene byproducts)
+      - Elevated MQ135 relative to MQ3 (strong VOC/CO2 from agents)
+      - MQ5/MQ3 ratio typically > 1.4
+      - MQ135/MQ3 ratio typically > 1.5
+
+    Natural ripening produces:
+      - More balanced MQ3/MQ5/MQ135 readings (all rise together)
+      - MQ5/MQ3 ratio typically 0.7–1.3
+      - MQ135/MQ3 ratio typically 0.7–1.4
+      - Higher MQ3 relative to MQ5 (ethanol from natural fermentation)
+
+    Evidence scoring: each signal contributes [0, 1] evidence for chemical
+    ripening, weighted by reliability. Final score is a weighted mean,
+    not a sum — so adding more sensors doesn't inflate the result.
+    """
+    eps = 1e-6
+
+    # --- Primary ratio signals (most reliable) ----------------------------
+
+    # Signal 1: MQ5/MQ3 ratio
+    # Natural: 0.7–1.3  |  Chemical: >1.4
+    r_mq5_mq3 = mq5 / (mq3 + eps)
+    # Sigmoid-like mapping: returns 0 at ratio=0.8, 1 at ratio=2.5
+    sig1 = float(np.clip((r_mq5_mq3 - 1.1) / 1.0, 0.0, 1.0))
+
+    # Signal 2: MQ135/MQ3 ratio
+    # Natural: 0.7–1.4  |  Chemical: >1.5
+    r_mq135_mq3 = mq135 / (mq3 + eps)
+    sig2 = float(np.clip((r_mq135_mq3 - 1.2) / 1.0, 0.0, 1.0))
+
+    # Signal 3: MQ5/MQ135 ratio
+    # Chemical agents raise MQ5 and MQ135 together;
+    # if MQ5 >> MQ135, strong ammonia/acetylene signal (carbide byproduct)
+    r_mq5_mq135 = mq5 / (mq135 + eps)
+    sig3 = float(np.clip((r_mq5_mq135 - 0.9) / 0.8, 0.0, 1.0))
+
+    # --- Absolute magnitude signals (secondary) ---------------------------
+
+    # Signal 4: Absolute MQ5 level
+    # MQ5 > 800 is a strong indicator regardless of ratios
+    # (ammonia/acetylene from calcium carbide doesn't appear in natural fruit)
+    sig4 = float(np.clip((mq5 - 700.0) / 600.0, 0.0, 1.0))
+
+    # Signal 5: Absolute MQ135 level (VOC/CO2)
+    # Natural: typically < 700 in ambient conditions
+    # Chemical: 700–1500+ from ethylene/ethephon application
+    sig5 = float(np.clip((mq135 - 700.0) / 700.0, 0.0, 1.0))
+
+    # Signal 6: MQ3 relative suppression
+    # Chemical ripening often shows lower MQ3 than expected
+    # because there's less natural ethanol fermentation
+    # Low MQ3 (<200) with high MQ5/MQ135 is a chemical signature
+    mq3_suppressed = float(np.clip(1.0 - (mq3 / 600.0), 0.0, 1.0))
+    # Only counts as evidence if MQ5 or MQ135 are elevated
+    mq5_or_135_elevated = float(np.clip((max(mq5, mq135) - 400.0) / 400.0, 0.0, 1.0))
+    sig6 = mq3_suppressed * mq5_or_135_elevated
+
+    # --- Environmental correction -----------------------------------------
+    # High temp + low humidity causes sensors to drift upward independently
+    # of any ripening chemistry. Discount chemical evidence in these conditions
+    # because the readings are less reliable.
+    env_correction = 0.0
+    if temp > 35.0:
+        env_correction += 0.05 * ((temp - 35.0) / 10.0)   # max -0.05 at 45°C
+    if hum < 30.0:
+        env_correction += 0.04 * ((30.0 - hum) / 30.0)    # max -0.04 at 0% RH
+
+    env_correction = float(np.clip(env_correction, 0.0, 0.12))  # cap at -12%
+
+    # --- Weighted evidence aggregation ------------------------------------
+    # Weights reflect reliability:
+    #   Ratios (sig1, sig2) are most reliable — they cancel out sensor drift
+    #   Absolute levels (sig4, sig5) are secondary
+    #   Suppression (sig6) is tertiary
+    weights    = [0.30, 0.28, 0.15, 0.12, 0.10, 0.05]
+    signals    = [sig1, sig2, sig3, sig4, sig5, sig6]
+    raw_score  = sum(w * s for w, s in zip(weights, signals))
+
+    # Apply environmental correction (reduces score in harsh conditions)
+    chemical_score = float(np.clip(raw_score - env_correction, 0.0, 1.0))
+
+    # Convert to probabilities
+    chemical_prob = round(chemical_score * 100.0, 1)
+    natural_prob  = round(100.0 - chemical_prob, 1)
+
+    # Classification threshold — conservative to avoid false positives.
+    # Require clear ratio evidence (not just absolute levels) before
+    # classifying as Chemical. A score of 0.45 means at least two
+    # ratio signals must be substantially elevated.
+    if chemical_score >= 0.45:
+        ripening_type = "Chemical"
+    else:
+        ripening_type = "Natural"
+
+    log.info(
+        "Ripening signals: sig1(MQ5/MQ3)=%.3f sig2(MQ135/MQ3)=%.3f "
+        "sig3(MQ5/MQ135)=%.3f sig4(absQ5)=%.3f sig5(absMQ135)=%.3f "
+        "sig6(suppression)=%.3f | env_corr=%.3f -> score=%.3f -> %s",
+        sig1, sig2, sig3, sig4, sig5, sig6,
+        env_correction, chemical_score, ripening_type,
+    )
+
+    return ripening_type, natural_prob, chemical_prob
+
+# # def _predict_with_new_models(sensors, fruit_label):
+
+#     m = load_new_models()
+
+#     clf = m["classifier"]
+#     reg = m["regressor"]
+#     scaler = m["scaler"]
 #     le_fruit = m["le_fruit"]
 
 #     _, fruit_enc = _resolve_fruit_enc(fruit_label, le_fruit)
 
-#     # Build raw 10-feature vector then SCALE before prediction
-#     X_raw    = _compute_features(sensors, fruit_enc)
-#     X_scaled = scaler.transform(X_raw)   # must use scaler.transform, not fit_transform
+#     # =========================================================
+#     # SENSOR NORMALIZATION + STABILIZATION
+#     # =========================================================
 
-#     # --- Classifier ---------------------------------------------------------
+#     mq3 = float(sensors["mq3"])
+#     mq5 = float(sensors["mq5"])
+#     mq135 = float(sensors["mq135"])
+#     temp = float(sensors["temperature"])
+#     hum = float(sensors["humidity"])
+
+#     # normalize environment
+#     norm_temp = np.clip(temp / 40.0, 0.0, 1.0)
+#     norm_hum = np.clip(hum / 100.0, 0.0, 1.0)
+
+#     # reduce effect of dry/hot environments
+#     env_penalty = 0.0
+
+#     if hum < 30:
+#         env_penalty += 0.15
+
+#     if temp > 33:
+#         env_penalty += 0.10
+
+#     # =========================================================
+#     # BUILD FEATURES
+#     # =========================================================
+
+#     X_raw = _compute_features(sensors, fruit_enc)
+#     X_scaled = scaler.transform(X_raw)
+
+#     # =========================================================
+#     # CLASSIFIER
+#     # =========================================================
+
 #     raw_pred = clf.predict(X_scaled)
 
-#     # Flatten 2-D multi-output arrays to scalar
 #     if hasattr(raw_pred, "ndim") and raw_pred.ndim == 2:
 #         pred_val = raw_pred[0, 0]
 #     else:
@@ -744,287 +860,247 @@ def _safe_predict_proba(clf, X):
 
 #     pred_str = str(pred_val).strip().lower()
 
-#     # Confidence from predict_proba
 #     confidence, _ = _safe_predict_proba(clf, X_scaled)
 
-#     # Decode prediction -> (condition, edible)
-#     condition = "Ripe"   # safe default
-#     edible    = True
+#     condition = "Ripe"
+#     edible = True
+
+#     # =========================================================
+#     # CONDITION DECODER
+#     # =========================================================
 
 #     if pred_str in _COND_NORM:
-#         # (a) condition label
+
 #         condition = _COND_NORM[pred_str]
-#         edible    = (condition != "Rotten")
+
+#         if condition == "Rotten":
+#             edible = False
+
+#         else:
+#             edible = True
 
 #     elif pred_str in {"0", "1"}:
-#     # Numeric binary classifier handling
-#     # 0 = edible/safe
-#     # 1 = not edible/unsafe
+
+#         # fixed logic
+#         # 0 = edible
+#         # 1 = not edible
 
 #         edible = (pred_str == "0")
 
-#         if edible:
-#             condition = "Ripe"
-#         else:
-#             condition = "Rotten"
-
-#     elif pred_str in _EDIBLE_POS or pred_str in {"false", "not edible", "unsafe", "no"}:
-#         edible = pred_str in _EDIBLE_POS
 #         condition = "Ripe" if edible else "Rotten"
+
 #     else:
-#         # (c) numeric index
+
 #         try:
-#             idx       = int(float(pred_str))
+#             idx = int(float(pred_str))
+
 #             cond_list = ["Fresh", "Ripe", "Overripe", "Rotten"]
-#             condition = cond_list[idx] if 0 <= idx < len(cond_list) else "Ripe"
-#             edible    = idx < 3
-#         except (ValueError, TypeError):
-#             # Unknown string -- capitalise and assume edible
-#             condition = pred_str.capitalize() if pred_str else "Ripe"
-#             edible    = True
 
-#     # --- Regressor: shelf life ----------------------------------------------
-#     shelf_life = float(max(0.0, reg.predict(X_scaled)[0]))
+#             condition = cond_list[idx]
 
-#     # --- Derive ripening type from fermentation_index -----------------------
-#     # fermentation_index = mq135 / (mq3 + 1e-6)
-#     # High CO2/VOC relative to alcohol -> chemical ripening
-#     fi = float(sensors["mq135"]) / (float(sensors["mq3"]) + 1e-6)
+#             edible = idx < 3
 
-#     # safer scaling
-#     chemical_prob = float(np.clip((fi / 25.0) * 100.0, 0.0, 100.0))
+#         except:
+#             condition = "Ripe"
+#             edible = True
 
-#     natural_prob = 100.0 - chemical_prob
+#     # =========================================================
+#     # SHELF LIFE FIX
+#     # =========================================================
 
-#     # higher threshold
-#     ripening_type = "Chemical" if chemical_prob > 75.0 else "Natural"
+#     shelf_life = float(reg.predict(X_scaled)[0])
+
+#     # realistic clipping
+#     fruit_limits = {
+#         "Banana": 10,
+#         "Mango": 15,
+#         "Strawberry": 7,
+#         "Apple": 60,
+#         "Grape": 20,
+#         "Grapes": 20,
+#     }
+
+#     max_days = fruit_limits.get(fruit_label, 30)
+
+#     shelf_life = np.clip(shelf_life, 0, max_days)
+
+#     # =========================================================
+#     # RIPENING DETECTION FIX
+#     # =========================================================
+#     # =========================================================
+#     # IMPROVED RIPENING DETECTION
+#     # =========================================================
+
+#     fermentation_index = mq135 / (mq3 + 1e-6)
+#     spoilage_index = mq5 / (mq3 + 1e-6)
+
+#     mq3_norm = mq3 / 4095.0
+#     mq5_norm = mq5 / 4095.0
+#     mq135_norm = mq135 / 4095.0
+
+#     chemical_score = (
+#         (fermentation_index * 35) +
+#         (spoilage_index * 25) +
+#         (mq135_norm * 30) +
+#         (mq5_norm * 20) -
+#         (mq3_norm * 10)
+#     )
+
+#     # Environmental compensation
+#     if hum < 20:
+#         chemical_score += 8
+
+#     if temp > 38:
+#         chemical_score += 5
+
+#     # Strong VOC detection
+#     if mq135 > 750:
+#         chemical_score += 15
+
+#     # Ammonia spike
+#     if mq5 > 700:
+#         chemical_score += 10
+
+#     chemical_score = np.clip(chemical_score, 0, 100)
+
+#     natural_prob = round(100 - chemical_score, 1)
+#     chemical_prob = round(chemical_score, 1)
+
+#     # Final decision
+#     if chemical_score >= 65:
+#         ripening_type = "Chemical"
+#     else:
+#         ripening_type = "Natural"
+
 #     log.info(
-#         "NEW ML -> condition=%s  edible=%s  ripening=%s  shelf=%.1fd  conf=%.1f%%",
-#         condition, edible, ripening_type, shelf_life, confidence,
+#         "CHEMICAL DEBUG -> mq3=%.1f mq5=%.1f mq135=%.1f chem_score=%.1f",
+#         mq3, mq5, mq135, chemical_score
+#     )
+#     # =========================================================
+#     # FINAL SANITY RULES
+#     # =========================================================
+
+#     # Fresh/Natural should never become non-edible
+#     if condition in ["Fresh", "Ripe"] and ripening_type == "Natural":
+#         edible = True
+
+#     # Rotten always unsafe
+#     if condition == "Rotten":
+#         edible = False
+
+#     # Overripe still edible sometimes
+#     if condition == "Overripe" and chemical_score < 60:
+#         edible = True
+
+#     # =========================================================
+#     # CONFIDENCE STABILIZATION
+#     # =========================================================
+
+#     confidence = np.clip(confidence, 60, 99)
+
+#     log.info(
+#         "FIXED ML -> edible=%s condition=%s ripening=%s shelf=%.1fd chem=%.1f%%",
+#         edible,
+#         condition,
+#         ripening_type,
+#         shelf_life,
+#         chemical_prob,
 #     )
 
 #     return {
-#         "edible":        edible,
-#         "safe":          edible,
-#         "condition":     condition,
+#         "edible": bool(edible),
+#         "safe": bool(edible),
+#         "condition": condition,
 #         "ripening_type": ripening_type,
-#         "shelf_life":    round(shelf_life, 1),
-#         "confidence":    round(confidence, 1),
-#         "natural_prob":  round(natural_prob, 1),
-#         "chemical_prob": round(chemical_prob, 1),
+#         "shelf_life": round(float(shelf_life), 1),
+#         "confidence": round(float(confidence), 1),
+#         "natural_prob": natural_prob,
+#         "chemical_prob": chemical_prob,
 #     }
+
 def _predict_with_new_models(sensors, fruit_label):
-
-    m = load_new_models()
-
-    clf = m["classifier"]
-    reg = m["regressor"]
-    scaler = m["scaler"]
+    m        = load_new_models()
+    clf      = m["classifier"]
+    reg      = m["regressor"]
+    scaler   = m["scaler"]
     le_fruit = m["le_fruit"]
 
     _, fruit_enc = _resolve_fruit_enc(fruit_label, le_fruit)
 
-    # =========================================================
-    # SENSOR NORMALIZATION + STABILIZATION
-    # =========================================================
-
-    mq3 = float(sensors["mq3"])
-    mq5 = float(sensors["mq5"])
+    mq3   = float(sensors["mq3"])
+    mq5   = float(sensors["mq5"])
     mq135 = float(sensors["mq135"])
-    temp = float(sensors["temperature"])
-    hum = float(sensors["humidity"])
+    temp  = float(sensors["temperature"])
+    hum   = float(sensors["humidity"])
 
-    # normalize environment
-    norm_temp = np.clip(temp / 40.0, 0.0, 1.0)
-    norm_hum = np.clip(hum / 100.0, 0.0, 1.0)
-
-    # reduce effect of dry/hot environments
-    env_penalty = 0.0
-
-    if hum < 30:
-        env_penalty += 0.15
-
-    if temp > 33:
-        env_penalty += 0.10
-
-    # =========================================================
-    # BUILD FEATURES
-    # =========================================================
-
-    X_raw = _compute_features(sensors, fruit_enc)
+    # Build and scale features
+    X_raw    = _compute_features(sensors, fruit_enc)
     X_scaled = scaler.transform(X_raw)
 
-    # =========================================================
-    # CLASSIFIER
-    # =========================================================
-
+    # --- Classifier ---------------------------------------------------------
     raw_pred = clf.predict(X_scaled)
-
     if hasattr(raw_pred, "ndim") and raw_pred.ndim == 2:
         pred_val = raw_pred[0, 0]
     else:
         pred_val = np.atleast_1d(raw_pred)[0]
-
     pred_str = str(pred_val).strip().lower()
 
     confidence, _ = _safe_predict_proba(clf, X_scaled)
+    confidence     = float(np.clip(confidence, 60.0, 99.0))
 
-    condition = "Ripe"
-    edible = True
-
-    # =========================================================
-    # CONDITION DECODER
-    # =========================================================
-
+    # Decode condition
+    condition = "Ripe"   # safe default
     if pred_str in _COND_NORM:
-
         condition = _COND_NORM[pred_str]
-
-        if condition == "Rotten":
-            edible = False
-
-        else:
-            edible = True
-
     elif pred_str in {"0", "1"}:
-
-        # fixed logic
-        # 0 = edible
-        # 1 = not edible
-
-        edible = (pred_str == "0")
-
-        condition = "Ripe" if edible else "Rotten"
-
+        condition = "Ripe" if pred_str == "0" else "Rotten"
     else:
-
         try:
-            idx = int(float(pred_str))
-
+            idx       = int(float(pred_str))
             cond_list = ["Fresh", "Ripe", "Overripe", "Rotten"]
-
-            condition = cond_list[idx]
-
-            edible = idx < 3
-
-        except:
+            condition = cond_list[idx] if 0 <= idx < len(cond_list) else "Ripe"
+        except (ValueError, TypeError):
             condition = "Ripe"
-            edible = True
 
-    # =========================================================
-    # SHELF LIFE FIX
-    # =========================================================
-
+    # --- Shelf life ---------------------------------------------------------
     shelf_life = float(reg.predict(X_scaled)[0])
-
-    # realistic clipping
     fruit_limits = {
-        "Banana": 10,
-        "Mango": 15,
-        "Strawberry": 7,
-        "Apple": 60,
-        "Grape": 20,
-        "Grapes": 20,
+        "Banana": 10, "Mango": 15, "Strawberry": 7,
+        "Apple": 60,  "Grape": 20, "Grapes": 20,
     }
+    shelf_life = float(np.clip(shelf_life, 0.0, fruit_limits.get(fruit_label, 30)))
 
-    max_days = fruit_limits.get(fruit_label, 30)
-
-    shelf_life = np.clip(shelf_life, 0, max_days)
-
-    # =========================================================
-    # RIPENING DETECTION FIX
-    # =========================================================
-    # =========================================================
-    # IMPROVED RIPENING DETECTION
-    # =========================================================
-
-    fermentation_index = mq135 / (mq3 + 1e-6)
-    spoilage_index = mq5 / (mq3 + 1e-6)
-
-    mq3_norm = mq3 / 4095.0
-    mq5_norm = mq5 / 4095.0
-    mq135_norm = mq135 / 4095.0
-
-    chemical_score = (
-        (fermentation_index * 35) +
-        (spoilage_index * 25) +
-        (mq135_norm * 30) +
-        (mq5_norm * 20) -
-        (mq3_norm * 10)
+    # --- Ripening detection (new ratio-based model) -------------------------
+    ripening_type, natural_prob, chemical_prob = _detect_ripening_type(
+        mq3, mq5, mq135, temp, hum
     )
 
-    # Environmental compensation
-    if hum < 35:
-        chemical_score += 8
-
-    if temp > 32:
-        chemical_score += 5
-
-    # Strong VOC detection
-    if mq135 > 320:
-        chemical_score += 15
-
-    # Ammonia spike
-    if mq5 > 250:
-        chemical_score += 10
-
-    chemical_score = np.clip(chemical_score, 0, 100)
-
-    natural_prob = round(100 - chemical_score, 1)
-    chemical_prob = round(chemical_score, 1)
-
-    # Final decision
-    if chemical_score >= 65:
-        ripening_type = "Chemical"
-    else:
-        ripening_type = "Natural"
-
-    log.info(
-        "CHEMICAL DEBUG -> mq3=%.1f mq5=%.1f mq135=%.1f chem_score=%.1f",
-        mq3, mq5, mq135, chemical_score
+    # --- Reconcile all outputs into a consistent result --------------------
+    edible, risk, label, flags = _reconcile_quality(
+        condition, ripening_type, chemical_prob, shelf_life, fruit_label
     )
-    # =========================================================
-    # FINAL SANITY RULES
-    # =========================================================
-
-    # Fresh/Natural should never become non-edible
-    if condition in ["Fresh", "Ripe"] and ripening_type == "Natural":
-        edible = True
-
-    # Rotten always unsafe
-    if condition == "Rotten":
-        edible = False
-
-    # Overripe still edible sometimes
-    if condition == "Overripe" and chemical_score < 60:
-        edible = True
-
-    # =========================================================
-    # CONFIDENCE STABILIZATION
-    # =========================================================
-
-    confidence = np.clip(confidence, 60, 99)
 
     log.info(
-        "FIXED ML -> edible=%s condition=%s ripening=%s shelf=%.1fd chem=%.1f%%",
-        edible,
-        condition,
-        ripening_type,
-        shelf_life,
-        chemical_prob,
+        "FINAL -> fruit=%s condition=%s ripening=%s edible=%s "
+        "risk=%s shelf=%.1fd chem=%.1f%%",
+        fruit_label, condition, ripening_type, edible,
+        risk, shelf_life, chemical_prob,
     )
 
     return {
-        "edible": bool(edible),
-        "safe": bool(edible),
-        "condition": condition,
+        "edible":        edible,
+        "safe":          edible,
+        "condition":     condition,
         "ripening_type": ripening_type,
-        "shelf_life": round(float(shelf_life), 1),
-        "confidence": round(float(confidence), 1),
-        "natural_prob": natural_prob,
+        "shelf_life":    round(shelf_life, 1),
+        "confidence":    round(confidence, 1),
+        "natural_prob":  natural_prob,
         "chemical_prob": chemical_prob,
+        # These are consumed by build_prediction_ui
+        "_risk":         risk,
+        "_label":        label,
+        "_flags":        flags,
     }
-
 def _predict_with_legacy_bundle(sensors, fruit_label):
     """Fallback: uses the original fruit_quality_models.pkl bundle."""
     b            = load_legacy_models()
@@ -1101,56 +1177,98 @@ def build_sensor_ui(sensors):
     }
 
 
+# def build_prediction_ui(quality):
+#     edible    = quality["edible"]
+#     condition = quality["condition"]
+#     ripening  = quality["ripening_type"]
+
+#     # Risk level
+#     if condition == "Rotten":
+#         risk = "High"
+
+#     elif condition == "Overripe":
+#         risk = "Medium"
+
+#     elif ripening == "Chemical":
+#         risk = "Medium"
+
+#     else:
+#         risk = "Low"
+
+#     # Human-readable label
+#     if not edible:                label = "Not Edible"
+#     elif condition == "Rotten":   label = "Spoiled / Rotten"
+#     elif ripening == "Chemical":  label = "Chemically Ripened"
+#     elif condition == "Overripe": label = "Overripe"
+#     elif condition == "Ripe":     label = "Naturally Ripened"
+#     else:                         label = "Fresh & Natural"
+
+#     # Warning flags
+#     flags = []
+#     if quality["chemical_prob"] > 50:
+#         flags.append("High chemical ripening gas detected")
+#     if condition in ("Rotten", "Overripe"):
+#         flags.append(f"Fruit is {condition.lower()}")
+#     if not quality["safe"]:
+#         flags.append("Unsafe for consumption")
+#     if not edible:
+#         flags.append("Not recommended for eating")
+
+#     return {
+#         "label":        label,
+#         "edible":       edible,
+#         "confidence":   quality["confidence"],
+#         "naturalProb":  quality["natural_prob"],
+#         "chemicalProb": quality["chemical_prob"],
+#         "risk":         risk,
+#         "flags":        flags,
+#         "model":        "FruitSense-CNN v2.1 + NewML",
+#         "processedAt":  datetime.utcnow().isoformat() + "Z",
+#     }
+
 def build_prediction_ui(quality):
-    edible    = quality["edible"]
-    condition = quality["condition"]
-    ripening  = quality["ripening_type"]
-
-    # Risk level
-    if condition == "Rotten":
-        risk = "High"
-
-    elif condition == "Overripe":
-        risk = "Medium"
-
-    elif ripening == "Chemical":
-        risk = "Medium"
-
+    # Use pre-reconciled label/risk/flags if available (new path)
+    # Fall back to deriving them if coming from legacy bundle
+    if "_label" in quality:
+        label = quality["_label"]
+        risk  = quality["_risk"]
+        flags = quality["_flags"]
     else:
-        risk = "Low"
+        # Legacy fallback derivation (unchanged from original)
+        edible    = quality["edible"]
+        condition = quality["condition"]
+        ripening  = quality["ripening_type"]
 
-    # Human-readable label
-    if not edible:                label = "Not Edible"
-    elif condition == "Rotten":   label = "Spoiled / Rotten"
-    elif ripening == "Chemical":  label = "Chemically Ripened"
-    elif condition == "Overripe": label = "Overripe"
-    elif condition == "Ripe":     label = "Naturally Ripened"
-    else:                         label = "Fresh & Natural"
+        risk = ("High"   if condition == "Rotten" else
+                "Medium" if condition == "Overripe" or ripening == "Chemical" else
+                "Low")
 
-    # Warning flags
-    flags = []
-    if quality["chemical_prob"] > 50:
-        flags.append("High chemical ripening gas detected")
-    if condition in ("Rotten", "Overripe"):
-        flags.append(f"Fruit is {condition.lower()}")
-    if not quality["safe"]:
-        flags.append("Unsafe for consumption")
-    if not edible:
-        flags.append("Not recommended for eating")
+        if not edible:                label = "Not Edible"
+        elif condition == "Rotten":   label = "Spoiled / Rotten"
+        elif ripening == "Chemical":  label = "Chemically Ripened"
+        elif condition == "Overripe": label = "Overripe"
+        elif condition == "Ripe":     label = "Naturally Ripened"
+        else:                         label = "Fresh & Natural"
+
+        flags = []
+        if quality["chemical_prob"] > 55:
+            flags.append("Chemical ripening indicators detected")
+        if condition in ("Rotten", "Overripe"):
+            flags.append(f"Fruit is {condition.lower()}")
+        if not quality["safe"]:
+            flags.append("Unsafe for consumption")
 
     return {
         "label":        label,
-        "edible":       edible,
+        "edible":       quality["edible"],
         "confidence":   quality["confidence"],
         "naturalProb":  quality["natural_prob"],
         "chemicalProb": quality["chemical_prob"],
         "risk":         risk,
         "flags":        flags,
-        "model":        "FruitSense-CNN v2.1 + NewML",
+        "model":        "FruitSense-CNN v2.1 + NewML v3.2",
         "processedAt":  datetime.utcnow().isoformat() + "Z",
     }
-
-
 NUTRITION_DB = {
     "Apple":      {"calories": 52,  "carbs": 13.8, "sugar": 10.4, "fiber": 2.4, "vitC": 4.6,  "vitA": 54},
     "Banana":     {"calories": 89,  "carbs": 22.8, "sugar": 12.2, "fiber": 2.6, "vitC": 8.7,  "vitA": 64},

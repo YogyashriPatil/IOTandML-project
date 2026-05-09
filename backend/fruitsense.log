@@ -3921,3 +3921,604 @@
 2026-05-08 21:39:36,474 [WARNING] Serial reader thread exiting -- port unavailable.
 2026-05-08 21:39:36,474 [INFO] Server             : http://127.0.0.1:5000
 2026-05-08 21:39:36,474 [INFO] ==============================================================
+2026-05-08 21:39:52,942 [INFO] ==============================================================
+2026-05-08 21:39:52,942 [INFO]   FruitSense Backend  v3.1
+2026-05-08 21:39:52,942 [INFO]   Serial port        : COM4
+2026-05-08 21:39:52,942 [INFO]   Baud rate          : 115200
+2026-05-08 21:39:52,943 [INFO]   Sensor delay       : 15 s after image upload
+2026-05-08 21:39:52,943 [INFO]   Collection window  : 15 s
+2026-05-08 21:39:52,943 [INFO]   Sensor gate        : CLOSED at startup
+2026-05-08 21:39:52,943 [INFO] ==============================================================
+2026-05-08 21:39:54,581 [INFO] Loading CNN from E:\finall-iot\backend\model\best_fruit_model_resnet50.pth
+2026-05-08 21:39:56,293 [WARNING] Unexpected keys (first 10): ['_backbone_ref.0.weight', '_backbone_ref.1.weight', '_backbone_ref.1.bias', '_backbone_ref.1.running_mean', '_backbone_ref.1.running_var', '_backbone_ref.1.num_batches_tracked', '_backbone_ref.4.0.conv1.weight', '_backbone_ref.4.0.bn1.weight', '_backbone_ref.4.0.bn1.bias', '_backbone_ref.4.0.bn1.running_mean']
+2026-05-08 21:39:56,297 [INFO] CNN loaded OK (5 classes)
+2026-05-08 21:39:56,298 [INFO] CNN model          : READY
+2026-05-08 21:39:57,282 [INFO] le_fruit classes : ['apple', 'banana', 'grape', 'mango', 'strawberry']
+2026-05-08 21:39:57,283 [INFO] classifier classes: [0, 1]
+2026-05-08 21:39:57,283 [INFO] New ML models loaded OK (classifier + regressor + scaler + le_fruit)
+2026-05-08 21:39:57,283 [INFO] New ML models      : READY  (classifier + regressor + scaler + le_fruit)
+2026-05-08 21:39:57,286 [INFO] Opening COM4 @ 115200 baud ...
+2026-05-08 21:39:57,289 [INFO] Waiting 2.5 s for Arduino boot + sensor warm-up ...
+2026-05-08 21:39:59,792 [INFO] Serial ready (COM4 @ 115200 baud) -- sensor INACTIVE until image upload
+2026-05-08 21:39:59,794 [INFO] Serial reader thread running (COM4 @ 115200 baud) -- idle until sensor activated
+2026-05-08 21:39:59,795 [INFO] Serial reader thread started (sensor gate CLOSED -- awaiting image upload)
+2026-05-08 21:39:59,796 [INFO] Serial reader      : IDLE (gate opens on first /analyze-image call)
+2026-05-08 21:39:59,796 [INFO] Server             : http://127.0.0.1:5000
+2026-05-08 21:39:59,797 [INFO] ==============================================================
+2026-05-08 21:40:00,901 [INFO] Arduino: # Ready. Awaiting commands: LED_ON | LED_OFF
+2026-05-08 21:40:00,905 [INFO] Arduino: # CSV format: mq3,mq5,mq135,temperature,humidity
+2026-05-08 21:40:47,474 [INFO] CNN -> Mango (90.2%)
+2026-05-08 21:40:47,474 [INFO] [39c45b06-a87c-4621-8119-4ecc0c71cb2f] Lifecycle: waiting 15 s before activating sensor ...
+2026-05-08 21:40:47,474 [INFO] analyze-image -> Mango 90.2%  session=39c45b06-a87c-4621-8119-4ecc0c71cb2f  (sensor in 15 s)
+2026-05-08 21:41:02,495 [INFO] Turning LED ON -- sensor activation in progress
+2026-05-08 21:41:02,495 [INFO] -> Arduino: LED_ON
+2026-05-08 21:41:02,495 [INFO] [39c45b06-a87c-4621-8119-4ecc0c71cb2f] Sensor ACTIVATED -- collecting for 15 s
+2026-05-08 21:41:02,511 [INFO] Arduino: # LED ON
+2026-05-08 21:41:02,566 [INFO] Sensor <- mq3=533  mq5=582  mq135=646  t=34.8 C  h=23.9%
+2026-05-08 21:41:03,550 [INFO] Sensor <- mq3=533  mq5=582  mq135=646  t=34.8 C  h=23.9%
+2026-05-08 21:41:04,552 [INFO] Sensor <- mq3=534  mq5=583  mq135=647  t=34.8 C  h=23.9%
+2026-05-08 21:41:05,580 [INFO] Sensor <- mq3=534  mq5=582  mq135=646  t=35.7 C  h=25.6%
+2026-05-08 21:41:06,559 [INFO] Sensor <- mq3=533  mq5=581  mq135=646  t=35.7 C  h=25.6%
+2026-05-08 21:41:07,584 [INFO] Sensor <- mq3=534  mq5=582  mq135=646  t=35.7 C  h=25.7%
+2026-05-08 21:41:08,567 [INFO] Sensor <- mq3=534  mq5=582  mq135=646  t=35.7 C  h=25.7%
+2026-05-08 21:41:09,593 [INFO] Sensor <- mq3=533  mq5=581  mq135=646  t=35.7 C  h=25.6%
+2026-05-08 21:41:10,573 [INFO] Sensor <- mq3=533  mq5=581  mq135=645  t=35.7 C  h=25.6%
+2026-05-08 21:41:11,575 [INFO] Sensor <- mq3=533  mq5=581  mq135=645  t=35.7 C  h=25.6%
+2026-05-08 21:41:12,596 [INFO] Sensor <- mq3=533  mq5=581  mq135=645  t=35.7 C  h=25.6%
+2026-05-08 21:41:13,582 [INFO] Sensor <- mq3=533  mq5=581  mq135=645  t=35.7 C  h=25.6%
+2026-05-08 21:41:14,609 [INFO] Sensor <- mq3=533  mq5=581  mq135=645  t=35.8 C  h=25.5%
+2026-05-08 21:41:15,591 [INFO] Sensor <- mq3=532  mq5=580  mq135=644  t=35.8 C  h=25.5%
+2026-05-08 21:41:16,617 [INFO] Sensor <- mq3=532  mq5=580  mq135=644  t=35.8 C  h=25.4%
+2026-05-08 21:41:17,513 [INFO] Turning LED OFF
+2026-05-08 21:41:17,513 [INFO] -> Arduino: LED_OFF
+2026-05-08 21:41:17,513 [INFO] [39c45b06-a87c-4621-8119-4ecc0c71cb2f] Collection window complete -- processing buffer
+2026-05-08 21:41:17,513 [INFO] [39c45b06-a87c-4621-8119-4ecc0c71cb2f] Averaged 15 readings: mq3=533.1 mq5=581.3 mq135=645.5 t=35.5 h=25.2
+2026-05-08 21:41:17,513 [INFO] Using NEW ML models (best_classifier + best_regressor + scaler + le_fruit)
+2026-05-08 21:41:17,513 [INFO] fruit_enc for 'Mango' -> 3  (LE class: 'mango')
+2026-05-08 21:41:17,513 [INFO] Features: mq3=533.1 mq5=581.3 mq135=645.5 t=35.5 h=25.2 | gas=1759.9 ferm=1.2107 spoil=1.0904 env=897.3 enc=3
+2026-05-08 21:41:17,513 [INFO] Arduino: # LED OFF
+2026-05-08 21:41:17,775 [INFO] CHEMICAL DEBUG -> mq3=533.1 mq5=581.3 mq135=645.5 chem_score=100.0
+2026-05-08 21:41:17,775 [INFO] FIXED ML -> edible=True condition=Ripe ripening=Chemical shelf=15.0d chem=100.0%
+2026-05-08 21:41:17,775 [INFO] [39c45b06-a87c-4621-8119-4ecc0c71cb2f] Lifecycle complete -- result stored
+2026-05-08 21:44:02,071 [INFO] CNN -> Mango (85.0%)
+2026-05-08 21:44:02,071 [INFO] [e137295a-6661-47f6-afed-5c4320e70b83] Lifecycle: waiting 15 s before activating sensor ...
+2026-05-08 21:44:02,071 [INFO] analyze-image -> Mango 85.0%  session=e137295a-6661-47f6-afed-5c4320e70b83  (sensor in 15 s)
+2026-05-08 21:44:17,079 [INFO] Turning LED ON -- sensor activation in progress
+2026-05-08 21:44:17,080 [INFO] -> Arduino: LED_ON
+2026-05-08 21:44:17,081 [INFO] [e137295a-6661-47f6-afed-5c4320e70b83] Sensor ACTIVATED -- collecting for 15 s
+2026-05-08 21:44:17,083 [INFO] Arduino: # LED ON
+2026-05-08 21:44:17,141 [INFO] Sensor <- mq3=543  mq5=574  mq135=641  t=35.8 C  h=25.4%
+2026-05-08 21:44:18,121 [INFO] Sensor <- mq3=542  mq5=573  mq135=638  t=35.8 C  h=25.4%
+2026-05-08 21:44:19,123 [INFO] Sensor <- mq3=543  mq5=573  mq135=640  t=35.8 C  h=25.4%
+2026-05-08 21:44:20,150 [INFO] Sensor <- mq3=544  mq5=574  mq135=642  t=36.0 C  h=25.5%
+2026-05-08 21:44:21,129 [INFO] Sensor <- mq3=543  mq5=573  mq135=640  t=36.0 C  h=25.5%
+2026-05-08 21:44:22,154 [INFO] Sensor <- mq3=542  mq5=573  mq135=640  t=36.0 C  h=25.5%
+2026-05-08 21:44:23,137 [INFO] Sensor <- mq3=542  mq5=574  mq135=642  t=36.0 C  h=25.5%
+2026-05-08 21:44:24,164 [INFO] Sensor <- mq3=543  mq5=574  mq135=642  t=36.0 C  h=25.5%
+2026-05-08 21:44:25,145 [INFO] Sensor <- mq3=543  mq5=574  mq135=641  t=36.0 C  h=25.5%
+2026-05-08 21:44:26,171 [INFO] Sensor <- mq3=541  mq5=573  mq135=640  t=36.0 C  h=25.5%
+2026-05-08 21:44:27,146 [INFO] Sensor <- mq3=542  mq5=574  mq135=641  t=36.0 C  h=25.5%
+2026-05-08 21:44:28,153 [INFO] Sensor <- mq3=542  mq5=574  mq135=641  t=36.0 C  h=25.5%
+2026-05-08 21:44:29,180 [INFO] Sensor <- mq3=542  mq5=574  mq135=641  t=36.0 C  h=25.5%
+2026-05-08 21:44:30,159 [INFO] Sensor <- mq3=543  mq5=575  mq135=642  t=36.0 C  h=25.5%
+2026-05-08 21:44:31,187 [INFO] Sensor <- mq3=544  mq5=576  mq135=643  t=36.0 C  h=25.5%
+2026-05-08 21:44:32,095 [INFO] Turning LED OFF
+2026-05-08 21:44:32,096 [INFO] -> Arduino: LED_OFF
+2026-05-08 21:44:32,096 [INFO] [e137295a-6661-47f6-afed-5c4320e70b83] Collection window complete -- processing buffer
+2026-05-08 21:44:32,096 [INFO] [e137295a-6661-47f6-afed-5c4320e70b83] Averaged 15 readings: mq3=542.6 mq5=573.9 mq135=640.9 t=36.0 h=25.5
+2026-05-08 21:44:32,096 [INFO] Using NEW ML models (best_classifier + best_regressor + scaler + le_fruit)
+2026-05-08 21:44:32,108 [INFO] fruit_enc for 'Mango' -> 3  (LE class: 'mango')
+2026-05-08 21:44:32,111 [INFO] Features: mq3=542.6 mq5=573.9 mq135=640.9 t=36.0 h=25.5 | gas=1757.4 ferm=1.1812 spoil=1.0576 env=916.3 enc=3
+2026-05-08 21:44:32,121 [INFO] Arduino: # LED OFF
+2026-05-08 21:44:32,246 [INFO] CHEMICAL DEBUG -> mq3=542.6 mq5=573.9 mq135=640.9 chem_score=100.0
+2026-05-08 21:44:32,246 [INFO] FIXED ML -> edible=True condition=Ripe ripening=Chemical shelf=15.0d chem=100.0%
+2026-05-08 21:44:32,246 [INFO] [e137295a-6661-47f6-afed-5c4320e70b83] Lifecycle complete -- result stored
+2026-05-09 06:08:17,273 [INFO] ==============================================================
+2026-05-09 06:08:17,274 [INFO]   FruitSense Backend  v3.1
+2026-05-09 06:08:17,274 [INFO]   Serial port        : COM4
+2026-05-09 06:08:17,274 [INFO]   Baud rate          : 115200
+2026-05-09 06:08:17,274 [INFO]   Sensor delay       : 15 s after image upload
+2026-05-09 06:08:17,275 [INFO]   Collection window  : 15 s
+2026-05-09 06:08:17,275 [INFO]   Sensor gate        : CLOSED at startup
+2026-05-09 06:08:17,275 [INFO] ==============================================================
+2026-05-09 06:08:22,556 [INFO] Loading CNN from E:\finall-iot\backend\model\best_fruit_model_resnet50.pth
+2026-05-09 06:08:26,352 [WARNING] Unexpected keys (first 10): ['_backbone_ref.0.weight', '_backbone_ref.1.weight', '_backbone_ref.1.bias', '_backbone_ref.1.running_mean', '_backbone_ref.1.running_var', '_backbone_ref.1.num_batches_tracked', '_backbone_ref.4.0.conv1.weight', '_backbone_ref.4.0.bn1.weight', '_backbone_ref.4.0.bn1.bias', '_backbone_ref.4.0.bn1.running_mean']
+2026-05-09 06:08:26,359 [INFO] CNN loaded OK (5 classes)
+2026-05-09 06:08:26,360 [INFO] CNN model          : READY
+2026-05-09 06:08:43,676 [INFO] le_fruit classes : ['apple', 'banana', 'grape', 'mango', 'strawberry']
+2026-05-09 06:08:43,677 [INFO] classifier classes: [0, 1]
+2026-05-09 06:08:43,677 [INFO] New ML models loaded OK (classifier + regressor + scaler + le_fruit)
+2026-05-09 06:08:43,678 [INFO] New ML models      : READY  (classifier + regressor + scaler + le_fruit)
+2026-05-09 06:08:43,697 [INFO] Opening COM4 @ 115200 baud ...
+2026-05-09 06:08:43,697 [WARNING] Cannot open COM4: could not open port 'COM4': FileNotFoundError(2, 'The system cannot find the file specified.', None, 2)
+2026-05-09 06:08:43,700 [INFO] Opening COM4 @ 115200 baud ...
+2026-05-09 06:08:43,700 [INFO] Serial reader thread started (sensor gate CLOSED -- awaiting image upload)
+2026-05-09 06:08:43,701 [WARNING] Cannot open COM4: could not open port 'COM4': FileNotFoundError(2, 'The system cannot find the file specified.', None, 2)
+2026-05-09 06:08:43,702 [INFO] Serial reader      : IDLE (gate opens on first /analyze-image call)
+2026-05-09 06:08:43,702 [WARNING] Serial reader thread exiting -- port unavailable.
+2026-05-09 06:08:43,702 [INFO] Server             : http://127.0.0.1:5000
+2026-05-09 06:08:43,703 [INFO] ==============================================================
+2026-05-09 06:09:13,680 [INFO] ==============================================================
+2026-05-09 06:09:13,682 [INFO]   FruitSense Backend  v3.1
+2026-05-09 06:09:13,682 [INFO]   Serial port        : COM4
+2026-05-09 06:09:13,682 [INFO]   Baud rate          : 115200
+2026-05-09 06:09:13,682 [INFO]   Sensor delay       : 15 s after image upload
+2026-05-09 06:09:13,682 [INFO]   Collection window  : 15 s
+2026-05-09 06:09:13,683 [INFO]   Sensor gate        : CLOSED at startup
+2026-05-09 06:09:13,683 [INFO] ==============================================================
+2026-05-09 06:09:15,752 [INFO] Loading CNN from E:\finall-iot\backend\model\best_fruit_model_resnet50.pth
+2026-05-09 06:09:18,069 [WARNING] Unexpected keys (first 10): ['_backbone_ref.0.weight', '_backbone_ref.1.weight', '_backbone_ref.1.bias', '_backbone_ref.1.running_mean', '_backbone_ref.1.running_var', '_backbone_ref.1.num_batches_tracked', '_backbone_ref.4.0.conv1.weight', '_backbone_ref.4.0.bn1.weight', '_backbone_ref.4.0.bn1.bias', '_backbone_ref.4.0.bn1.running_mean']
+2026-05-09 06:09:18,074 [INFO] CNN loaded OK (5 classes)
+2026-05-09 06:09:18,074 [INFO] CNN model          : READY
+2026-05-09 06:09:19,510 [INFO] le_fruit classes : ['apple', 'banana', 'grape', 'mango', 'strawberry']
+2026-05-09 06:09:19,510 [INFO] classifier classes: [0, 1]
+2026-05-09 06:09:19,511 [INFO] New ML models loaded OK (classifier + regressor + scaler + le_fruit)
+2026-05-09 06:09:19,511 [INFO] New ML models      : READY  (classifier + regressor + scaler + le_fruit)
+2026-05-09 06:09:19,515 [INFO] Opening COM4 @ 115200 baud ...
+2026-05-09 06:09:19,518 [INFO] Waiting 2.5 s for Arduino boot + sensor warm-up ...
+2026-05-09 06:09:22,030 [INFO] Serial ready (COM4 @ 115200 baud) -- sensor INACTIVE until image upload
+2026-05-09 06:09:22,032 [INFO] Serial reader thread running (COM4 @ 115200 baud) -- idle until sensor activated
+2026-05-09 06:09:22,032 [INFO] Serial reader thread started (sensor gate CLOSED -- awaiting image upload)
+2026-05-09 06:09:22,033 [INFO] Serial reader      : IDLE (gate opens on first /analyze-image call)
+2026-05-09 06:09:22,033 [INFO] Server             : http://127.0.0.1:5000
+2026-05-09 06:09:22,033 [INFO] ==============================================================
+2026-05-09 06:09:23,122 [INFO] Arduino: # Ready. Awaiting commands: LED_ON | LED_OFF
+2026-05-09 06:09:23,126 [INFO] Arduino: # CSV format: mq3,mq5,mq135,temperature,humidity
+2026-05-09 06:10:11,387 [INFO] CNN -> Mango (92.4%)
+2026-05-09 06:10:11,390 [INFO] [ca7e5609-ae20-43a5-bf70-a41890804cd9] Lifecycle: waiting 15 s before activating sensor ...
+2026-05-09 06:10:11,390 [INFO] analyze-image -> Mango 92.4%  session=ca7e5609-ae20-43a5-bf70-a41890804cd9  (sensor in 15 s)
+2026-05-09 06:10:26,407 [INFO] Turning LED ON -- sensor activation in progress
+2026-05-09 06:10:26,407 [INFO] -> Arduino: LED_ON
+2026-05-09 06:10:26,407 [INFO] [ca7e5609-ae20-43a5-bf70-a41890804cd9] Sensor ACTIVATED -- collecting for 15 s
+2026-05-09 06:10:26,407 [INFO] Arduino: # LED ON
+2026-05-09 06:10:26,463 [INFO] Sensor <- mq3=303  mq5=550  mq135=585  t=29.6 C  h=36.1%
+2026-05-09 06:10:27,446 [INFO] Sensor <- mq3=304  mq5=551  mq135=587  t=29.6 C  h=36.1%
+2026-05-09 06:10:28,474 [INFO] Sensor <- mq3=309  mq5=554  mq135=589  t=30.3 C  h=37.4%
+2026-05-09 06:10:29,455 [INFO] Sensor <- mq3=307  mq5=553  mq135=588  t=30.3 C  h=37.4%
+2026-05-09 06:10:30,481 [INFO] Sensor <- mq3=309  mq5=554  mq135=589  t=30.3 C  h=37.4%
+2026-05-09 06:10:31,461 [INFO] Sensor <- mq3=311  mq5=554  mq135=591  t=30.3 C  h=37.4%
+2026-05-09 06:10:32,462 [INFO] Sensor <- mq3=309  mq5=553  mq135=589  t=30.3 C  h=37.4%
+2026-05-09 06:10:33,490 [INFO] Sensor <- mq3=311  mq5=553  mq135=589  t=30.3 C  h=37.3%
+2026-05-09 06:10:34,469 [INFO] Sensor <- mq3=311  mq5=552  mq135=589  t=30.3 C  h=37.3%
+2026-05-09 06:10:35,492 [INFO] Sensor <- mq3=312  mq5=553  mq135=590  t=30.3 C  h=37.3%
+2026-05-09 06:10:36,477 [INFO] Sensor <- mq3=313  mq5=553  mq135=590  t=30.3 C  h=37.3%
+2026-05-09 06:10:37,502 [INFO] Sensor <- mq3=316  mq5=554  mq135=592  t=30.3 C  h=37.2%
+2026-05-09 06:10:38,483 [INFO] Sensor <- mq3=317  mq5=555  mq135=593  t=30.3 C  h=37.2%
+2026-05-09 06:10:39,510 [INFO] Sensor <- mq3=317  mq5=555  mq135=592  t=30.3 C  h=37.1%
+2026-05-09 06:10:40,490 [INFO] Sensor <- mq3=320  mq5=557  mq135=594  t=30.3 C  h=37.1%
+2026-05-09 06:10:41,413 [INFO] Turning LED OFF
+2026-05-09 06:10:41,413 [INFO] -> Arduino: LED_OFF
+2026-05-09 06:10:41,414 [INFO] [ca7e5609-ae20-43a5-bf70-a41890804cd9] Collection window complete -- processing buffer
+2026-05-09 06:10:41,415 [INFO] [ca7e5609-ae20-43a5-bf70-a41890804cd9] Averaged 15 readings: mq3=311.3 mq5=553.4 mq135=589.8 t=30.2 h=37.1
+2026-05-09 06:10:41,415 [INFO] Using NEW ML models (best_classifier + best_regressor + scaler + le_fruit)
+2026-05-09 06:10:41,416 [INFO] fruit_enc for 'Mango' -> 3  (LE class: 'mango')
+2026-05-09 06:10:41,417 [INFO] Features: mq3=311.3 mq5=553.4 mq135=589.8 t=30.2 h=37.1 | gas=1454.5 ferm=1.8948 spoil=1.7779 env=1121.7 enc=3
+2026-05-09 06:10:41,419 [INFO] Arduino: # LED OFF
+2026-05-09 06:10:41,593 [INFO] CHEMICAL DEBUG -> mq3=311.3 mq5=553.4 mq135=589.8 chem_score=100.0
+2026-05-09 06:10:41,594 [INFO] FIXED ML -> edible=True condition=Ripe ripening=Chemical shelf=15.0d chem=100.0%
+2026-05-09 06:10:41,594 [INFO] [ca7e5609-ae20-43a5-bf70-a41890804cd9] Lifecycle complete -- result stored
+2026-05-09 06:24:35,095 [INFO] ==============================================================
+2026-05-09 06:24:35,095 [INFO]   FruitSense Backend  v3.1
+2026-05-09 06:24:35,098 [INFO]   Serial port        : COM4
+2026-05-09 06:24:35,098 [INFO]   Baud rate          : 115200
+2026-05-09 06:24:35,098 [INFO]   Sensor delay       : 15 s after image upload
+2026-05-09 06:24:35,098 [INFO]   Collection window  : 15 s
+2026-05-09 06:24:35,099 [INFO]   Sensor gate        : CLOSED at startup
+2026-05-09 06:24:35,099 [INFO] ==============================================================
+2026-05-09 06:24:40,388 [INFO] Loading CNN from E:\finall-iot\backend\model\best_fruit_model_resnet50.pth
+2026-05-09 06:24:44,699 [WARNING] Unexpected keys (first 10): ['_backbone_ref.0.weight', '_backbone_ref.1.weight', '_backbone_ref.1.bias', '_backbone_ref.1.running_mean', '_backbone_ref.1.running_var', '_backbone_ref.1.num_batches_tracked', '_backbone_ref.4.0.conv1.weight', '_backbone_ref.4.0.bn1.weight', '_backbone_ref.4.0.bn1.bias', '_backbone_ref.4.0.bn1.running_mean']
+2026-05-09 06:24:44,706 [INFO] CNN loaded OK (5 classes)
+2026-05-09 06:24:44,706 [INFO] CNN model          : READY
+2026-05-09 06:25:00,785 [INFO] le_fruit classes : ['apple', 'banana', 'grape', 'mango', 'strawberry']
+2026-05-09 06:25:00,785 [INFO] classifier classes: [0, 1]
+2026-05-09 06:25:00,786 [INFO] New ML models loaded OK (classifier + regressor + scaler + le_fruit)
+2026-05-09 06:25:00,786 [INFO] New ML models      : READY  (classifier + regressor + scaler + le_fruit)
+2026-05-09 06:25:00,795 [INFO] Opening COM4 @ 115200 baud ...
+2026-05-09 06:25:00,798 [INFO] Waiting 2.5 s for Arduino boot + sensor warm-up ...
+2026-05-09 06:25:03,303 [INFO] Serial ready (COM4 @ 115200 baud) -- sensor INACTIVE until image upload
+2026-05-09 06:25:03,306 [INFO] Serial reader thread running (COM4 @ 115200 baud) -- idle until sensor activated
+2026-05-09 06:25:03,306 [INFO] Serial reader thread started (sensor gate CLOSED -- awaiting image upload)
+2026-05-09 06:25:03,307 [INFO] Serial reader      : IDLE (gate opens on first /analyze-image call)
+2026-05-09 06:25:03,308 [INFO] Server             : http://127.0.0.1:5000
+2026-05-09 06:25:03,308 [INFO] ==============================================================
+2026-05-09 06:25:04,407 [INFO] Arduino: # Ready. Awaiting commands: LED_ON | LED_OFF
+2026-05-09 06:25:04,411 [INFO] Arduino: # CSV format: mq3,mq5,mq135,temperature,humidity
+2026-05-09 06:30:01,153 [INFO] CNN -> Mango (89.1%)
+2026-05-09 06:30:01,153 [INFO] [1f8f35a2-addc-4fc2-8ec3-5bdc2a6ba7f8] Lifecycle: waiting 15 s before activating sensor ...
+2026-05-09 06:30:01,153 [INFO] analyze-image -> Mango 89.1%  session=1f8f35a2-addc-4fc2-8ec3-5bdc2a6ba7f8  (sensor in 15 s)
+2026-05-09 06:30:16,169 [INFO] Turning LED ON -- sensor activation in progress
+2026-05-09 06:30:16,172 [INFO] -> Arduino: LED_ON
+2026-05-09 06:30:16,172 [INFO] [1f8f35a2-addc-4fc2-8ec3-5bdc2a6ba7f8] Sensor ACTIVATED -- collecting for 15 s
+2026-05-09 06:30:16,174 [INFO] Arduino: # LED ON
+2026-05-09 06:30:16,231 [INFO] Sensor <- mq3=472  mq5=536  mq135=590  t=30.3 C  h=37.1%
+2026-05-09 06:30:17,212 [INFO] Sensor <- mq3=472  mq5=536  mq135=590  t=30.3 C  h=37.1%
+2026-05-09 06:30:18,213 [INFO] Sensor <- mq3=472  mq5=537  mq135=591  t=30.3 C  h=37.1%
+2026-05-09 06:30:19,240 [INFO] Sensor <- mq3=472  mq5=537  mq135=591  t=30.7 C  h=37.0%
+2026-05-09 06:30:20,215 [INFO] Sensor <- mq3=472  mq5=537  mq135=591  t=30.7 C  h=37.0%
+2026-05-09 06:30:21,246 [INFO] Sensor <- mq3=472  mq5=537  mq135=591  t=30.7 C  h=36.9%
+2026-05-09 06:30:22,227 [INFO] Sensor <- mq3=472  mq5=536  mq135=591  t=30.7 C  h=36.9%
+2026-05-09 06:30:23,251 [INFO] Sensor <- mq3=472  mq5=536  mq135=591  t=30.7 C  h=36.8%
+2026-05-09 06:30:24,228 [INFO] Sensor <- mq3=472  mq5=536  mq135=590  t=30.7 C  h=36.8%
+2026-05-09 06:30:25,261 [INFO] Sensor <- mq3=472  mq5=536  mq135=590  t=30.8 C  h=36.7%
+2026-05-09 06:30:26,241 [INFO] Sensor <- mq3=471  mq5=536  mq135=590  t=30.8 C  h=36.7%
+2026-05-09 06:30:27,242 [INFO] Sensor <- mq3=471  mq5=536  mq135=590  t=30.8 C  h=36.7%
+2026-05-09 06:30:28,263 [INFO] Sensor <- mq3=471  mq5=536  mq135=590  t=30.8 C  h=36.7%
+2026-05-09 06:30:29,248 [INFO] Sensor <- mq3=472  mq5=536  mq135=590  t=30.8 C  h=36.7%
+2026-05-09 06:30:30,277 [INFO] Sensor <- mq3=472  mq5=536  mq135=590  t=30.7 C  h=36.8%
+2026-05-09 06:30:31,181 [INFO] Turning LED OFF
+2026-05-09 06:30:31,182 [INFO] -> Arduino: LED_OFF
+2026-05-09 06:30:31,182 [INFO] [1f8f35a2-addc-4fc2-8ec3-5bdc2a6ba7f8] Collection window complete -- processing buffer
+2026-05-09 06:30:31,183 [INFO] [1f8f35a2-addc-4fc2-8ec3-5bdc2a6ba7f8] Averaged 15 readings: mq3=471.8 mq5=536.3 mq135=590.4 t=30.7 h=36.9
+2026-05-09 06:30:31,183 [INFO] Using NEW ML models (best_classifier + best_regressor + scaler + le_fruit)
+2026-05-09 06:30:31,186 [INFO] fruit_enc for 'Mango' -> 3  (LE class: 'mango')
+2026-05-09 06:30:31,186 [INFO] Features: mq3=471.8 mq5=536.3 mq135=590.4 t=30.7 h=36.9 | gas=1598.5 ferm=1.2514 spoil=1.1366 env=1130.1 enc=3
+2026-05-09 06:30:31,187 [INFO] Arduino: # LED OFF
+2026-05-09 06:30:31,360 [INFO] CHEMICAL DEBUG -> mq3=471.8 mq5=536.3 mq135=590.4 chem_score=100.0
+2026-05-09 06:30:31,361 [INFO] FIXED ML -> edible=True condition=Ripe ripening=Chemical shelf=15.0d chem=100.0%
+2026-05-09 06:30:31,362 [INFO] [1f8f35a2-addc-4fc2-8ec3-5bdc2a6ba7f8] Lifecycle complete -- result stored
+2026-05-09 06:36:22,731 [INFO] CNN -> Mango (90.1%)
+2026-05-09 06:36:22,731 [INFO] [42ca1a77-d728-4c7b-8aaa-1b188e5edb90] Lifecycle: waiting 15 s before activating sensor ...
+2026-05-09 06:36:22,731 [INFO] analyze-image -> Mango 90.1%  session=42ca1a77-d728-4c7b-8aaa-1b188e5edb90  (sensor in 15 s)
+2026-05-09 06:36:37,752 [INFO] Turning LED ON -- sensor activation in progress
+2026-05-09 06:36:37,753 [INFO] -> Arduino: LED_ON
+2026-05-09 06:36:37,754 [INFO] [42ca1a77-d728-4c7b-8aaa-1b188e5edb90] Sensor ACTIVATED -- collecting for 15 s
+2026-05-09 06:36:37,756 [INFO] Arduino: # LED ON
+2026-05-09 06:36:37,814 [INFO] Sensor <- mq3=479  mq5=535  mq135=589  t=30.8 C  h=36.6%
+2026-05-09 06:36:38,794 [INFO] Sensor <- mq3=479  mq5=535  mq135=588  t=30.8 C  h=36.6%
+2026-05-09 06:36:39,821 [INFO] Sensor <- mq3=479  mq5=535  mq135=589  t=30.8 C  h=38.9%
+2026-05-09 06:36:40,801 [INFO] Sensor <- mq3=479  mq5=535  mq135=588  t=30.8 C  h=38.9%
+2026-05-09 06:36:41,791 [INFO] Sensor <- mq3=479  mq5=535  mq135=589  t=30.8 C  h=38.9%
+2026-05-09 06:36:42,830 [INFO] Sensor <- mq3=477  mq5=533  mq135=587  t=30.8 C  h=38.9%
+2026-05-09 06:36:43,804 [INFO] Sensor <- mq3=477  mq5=533  mq135=587  t=30.8 C  h=38.9%
+2026-05-09 06:36:44,836 [INFO] Sensor <- mq3=477  mq5=533  mq135=588  t=30.8 C  h=39.0%
+2026-05-09 06:36:45,815 [INFO] Sensor <- mq3=477  mq5=534  mq135=587  t=30.8 C  h=39.0%
+2026-05-09 06:36:46,839 [INFO] Sensor <- mq3=477  mq5=533  mq135=587  t=30.8 C  h=38.9%
+2026-05-09 06:36:47,822 [INFO] Sensor <- mq3=477  mq5=533  mq135=587  t=30.8 C  h=38.9%
+2026-05-09 06:36:48,824 [INFO] Sensor <- mq3=477  mq5=533  mq135=587  t=30.8 C  h=38.9%
+2026-05-09 06:36:49,853 [INFO] Sensor <- mq3=477  mq5=533  mq135=588  t=30.8 C  h=38.8%
+2026-05-09 06:36:50,825 [INFO] Sensor <- mq3=477  mq5=533  mq135=588  t=30.8 C  h=38.8%
+2026-05-09 06:36:51,857 [INFO] Sensor <- mq3=478  mq5=534  mq135=588  t=30.8 C  h=38.8%
+2026-05-09 06:36:52,764 [INFO] Turning LED OFF
+2026-05-09 06:36:52,764 [INFO] -> Arduino: LED_OFF
+2026-05-09 06:36:52,766 [INFO] [42ca1a77-d728-4c7b-8aaa-1b188e5edb90] Collection window complete -- processing buffer
+2026-05-09 06:36:52,769 [INFO] [42ca1a77-d728-4c7b-8aaa-1b188e5edb90] Averaged 15 readings: mq3=477.7 mq5=533.8 mq135=587.8 t=30.8 h=38.6
+2026-05-09 06:36:52,770 [INFO] Using NEW ML models (best_classifier + best_regressor + scaler + le_fruit)
+2026-05-09 06:36:52,773 [INFO] fruit_enc for 'Mango' -> 3  (LE class: 'mango')
+2026-05-09 06:36:52,774 [INFO] Features: mq3=477.7 mq5=533.8 mq135=587.8 t=30.8 h=38.6 | gas=1599.3 ferm=1.2304 spoil=1.1174 env=1188.5 enc=3
+2026-05-09 06:36:52,778 [INFO] Arduino: # LED OFF
+2026-05-09 06:36:52,954 [INFO] CHEMICAL DEBUG -> mq3=477.7 mq5=533.8 mq135=587.8 chem_score=100.0
+2026-05-09 06:36:52,955 [INFO] FIXED ML -> edible=True condition=Ripe ripening=Chemical shelf=15.0d chem=100.0%
+2026-05-09 06:36:52,956 [INFO] [42ca1a77-d728-4c7b-8aaa-1b188e5edb90] Lifecycle complete -- result stored
+2026-05-09 06:43:17,295 [INFO] CNN -> Mango (91.2%)
+2026-05-09 06:43:17,298 [INFO] [c0519606-1d82-46d6-86f0-45ebca6c3e26] Lifecycle: waiting 15 s before activating sensor ...
+2026-05-09 06:43:17,298 [INFO] analyze-image -> Mango 91.2%  session=c0519606-1d82-46d6-86f0-45ebca6c3e26  (sensor in 15 s)
+2026-05-09 06:43:32,305 [INFO] Turning LED ON -- sensor activation in progress
+2026-05-09 06:43:32,307 [INFO] -> Arduino: LED_ON
+2026-05-09 06:43:32,309 [INFO] [c0519606-1d82-46d6-86f0-45ebca6c3e26] Sensor ACTIVATED -- collecting for 15 s
+2026-05-09 06:43:32,311 [INFO] Arduino: # LED ON
+2026-05-09 06:43:32,365 [INFO] Sensor <- mq3=469  mq5=524  mq135=578  t=30.8 C  h=38.8%
+2026-05-09 06:43:33,346 [INFO] Sensor <- mq3=469  mq5=524  mq135=578  t=30.8 C  h=38.8%
+2026-05-09 06:43:34,363 [INFO] Sensor <- mq3=469  mq5=524  mq135=578  t=30.9 C  h=38.5%
+2026-05-09 06:43:35,353 [INFO] Sensor <- mq3=469  mq5=524  mq135=579  t=30.9 C  h=38.5%
+2026-05-09 06:43:36,382 [INFO] Sensor <- mq3=469  mq5=524  mq135=578  t=30.9 C  h=38.5%
+2026-05-09 06:43:37,360 [INFO] Sensor <- mq3=469  mq5=524  mq135=579  t=30.9 C  h=38.5%
+2026-05-09 06:43:38,386 [INFO] Sensor <- mq3=470  mq5=525  mq135=578  t=30.9 C  h=38.5%
+2026-05-09 06:43:39,366 [INFO] Sensor <- mq3=470  mq5=525  mq135=579  t=30.9 C  h=38.5%
+2026-05-09 06:43:40,370 [INFO] Sensor <- mq3=470  mq5=525  mq135=579  t=30.9 C  h=38.5%
+2026-05-09 06:43:41,397 [INFO] Sensor <- mq3=470  mq5=525  mq135=579  t=30.9 C  h=38.5%
+2026-05-09 06:43:42,376 [INFO] Sensor <- mq3=470  mq5=525  mq135=579  t=30.9 C  h=38.5%
+2026-05-09 06:43:43,403 [INFO] Sensor <- mq3=470  mq5=525  mq135=579  t=30.9 C  h=38.5%
+2026-05-09 06:43:44,383 [INFO] Sensor <- mq3=470  mq5=525  mq135=579  t=30.9 C  h=38.5%
+2026-05-09 06:43:45,411 [INFO] Sensor <- mq3=470  mq5=525  mq135=579  t=30.9 C  h=38.5%
+2026-05-09 06:43:46,390 [INFO] Sensor <- mq3=471  mq5=525  mq135=579  t=30.9 C  h=38.5%
+2026-05-09 06:43:47,325 [INFO] Turning LED OFF
+2026-05-09 06:43:47,326 [INFO] -> Arduino: LED_OFF
+2026-05-09 06:43:47,328 [INFO] [c0519606-1d82-46d6-86f0-45ebca6c3e26] Collection window complete -- processing buffer
+2026-05-09 06:43:47,330 [INFO] [c0519606-1d82-46d6-86f0-45ebca6c3e26] Averaged 15 readings: mq3=469.7 mq5=524.6 mq135=578.7 t=30.9 h=38.5
+2026-05-09 06:43:47,331 [INFO] Using NEW ML models (best_classifier + best_regressor + scaler + le_fruit)
+2026-05-09 06:43:47,333 [INFO] fruit_enc for 'Mango' -> 3  (LE class: 'mango')
+2026-05-09 06:43:47,336 [INFO] Features: mq3=469.7 mq5=524.6 mq135=578.7 t=30.9 h=38.5 | gas=1572.9 ferm=1.2321 spoil=1.1170 env=1190.4 enc=3
+2026-05-09 06:43:47,336 [INFO] Arduino: # LED OFF
+2026-05-09 06:43:47,531 [INFO] CHEMICAL DEBUG -> mq3=469.7 mq5=524.6 mq135=578.7 chem_score=100.0
+2026-05-09 06:43:47,531 [INFO] FIXED ML -> edible=True condition=Ripe ripening=Chemical shelf=15.0d chem=100.0%
+2026-05-09 06:43:47,532 [INFO] [c0519606-1d82-46d6-86f0-45ebca6c3e26] Lifecycle complete -- result stored
+2026-05-09 06:45:55,133 [INFO] CNN -> Mango (87.3%)
+2026-05-09 06:45:55,134 [INFO] [94741ad7-6506-43f6-8d0c-262bcce6f81b] Lifecycle: waiting 15 s before activating sensor ...
+2026-05-09 06:45:55,134 [INFO] analyze-image -> Mango 87.3%  session=94741ad7-6506-43f6-8d0c-262bcce6f81b  (sensor in 15 s)
+2026-05-09 06:46:10,144 [INFO] Turning LED ON -- sensor activation in progress
+2026-05-09 06:46:10,145 [INFO] -> Arduino: LED_ON
+2026-05-09 06:46:10,146 [INFO] [94741ad7-6506-43f6-8d0c-262bcce6f81b] Sensor ACTIVATED -- collecting for 15 s
+2026-05-09 06:46:10,148 [INFO] Arduino: # LED ON
+2026-05-09 06:46:10,206 [INFO] Sensor <- mq3=472  mq5=524  mq135=578  t=30.9 C  h=38.4%
+2026-05-09 06:46:11,186 [INFO] Sensor <- mq3=472  mq5=524  mq135=578  t=30.9 C  h=38.4%
+2026-05-09 06:46:12,213 [INFO] Sensor <- mq3=472  mq5=524  mq135=579  t=31.0 C  h=38.4%
+2026-05-09 06:46:13,190 [INFO] Sensor <- mq3=472  mq5=523  mq135=579  t=31.0 C  h=38.4%
+2026-05-09 06:46:14,219 [INFO] Sensor <- mq3=472  mq5=523  mq135=578  t=31.1 C  h=38.4%
+2026-05-09 06:46:15,200 [INFO] Sensor <- mq3=471  mq5=524  mq135=578  t=31.1 C  h=38.4%
+2026-05-09 06:46:16,201 [INFO] Sensor <- mq3=471  mq5=523  mq135=578  t=31.1 C  h=38.4%
+2026-05-09 06:46:17,230 [INFO] Sensor <- mq3=471  mq5=524  mq135=578  t=31.0 C  h=38.4%
+2026-05-09 06:46:18,208 [INFO] Sensor <- mq3=471  mq5=524  mq135=578  t=31.0 C  h=38.4%
+2026-05-09 06:46:19,228 [INFO] Sensor <- mq3=471  mq5=524  mq135=578  t=31.1 C  h=38.2%
+2026-05-09 06:46:20,210 [INFO] Sensor <- mq3=471  mq5=523  mq135=578  t=31.1 C  h=38.2%
+2026-05-09 06:46:21,243 [INFO] Sensor <- mq3=471  mq5=523  mq135=578  t=31.1 C  h=38.1%
+2026-05-09 06:46:22,212 [INFO] Sensor <- mq3=471  mq5=523  mq135=578  t=31.1 C  h=38.1%
+2026-05-09 06:46:23,249 [INFO] Sensor <- mq3=471  mq5=523  mq135=578  t=31.1 C  h=38.1%
+2026-05-09 06:46:24,230 [INFO] Sensor <- mq3=471  mq5=523  mq135=578  t=31.1 C  h=38.1%
+2026-05-09 06:46:25,159 [INFO] Turning LED OFF
+2026-05-09 06:46:25,160 [INFO] -> Arduino: LED_OFF
+2026-05-09 06:46:25,161 [INFO] [94741ad7-6506-43f6-8d0c-262bcce6f81b] Collection window complete -- processing buffer
+2026-05-09 06:46:25,163 [INFO] [94741ad7-6506-43f6-8d0c-262bcce6f81b] Averaged 15 readings: mq3=471.3 mq5=523.5 mq135=578.1 t=31.0 h=38.3
+2026-05-09 06:46:25,163 [INFO] Using NEW ML models (best_classifier + best_regressor + scaler + le_fruit)
+2026-05-09 06:46:25,165 [INFO] fruit_enc for 'Mango' -> 3  (LE class: 'mango')
+2026-05-09 06:46:25,167 [INFO] Features: mq3=471.3 mq5=523.5 mq135=578.1 t=31.0 h=38.3 | gas=1572.9 ferm=1.2266 spoil=1.1106 env=1188.9 enc=3
+2026-05-09 06:46:25,172 [INFO] Arduino: # LED OFF
+2026-05-09 06:46:25,243 [INFO] CHEMICAL DEBUG -> mq3=471.3 mq5=523.5 mq135=578.1 chem_score=100.0
+2026-05-09 06:46:25,243 [INFO] FIXED ML -> edible=True condition=Ripe ripening=Chemical shelf=15.0d chem=100.0%
+2026-05-09 06:46:25,243 [INFO] [94741ad7-6506-43f6-8d0c-262bcce6f81b] Lifecycle complete -- result stored
+2026-05-09 06:46:49,590 [INFO] ==============================================================
+2026-05-09 06:46:49,590 [INFO]   FruitSense Backend  v3.1
+2026-05-09 06:46:49,590 [INFO]   Serial port        : COM4
+2026-05-09 06:46:49,591 [INFO]   Baud rate          : 115200
+2026-05-09 06:46:49,591 [INFO]   Sensor delay       : 15 s after image upload
+2026-05-09 06:46:49,591 [INFO]   Collection window  : 15 s
+2026-05-09 06:46:49,591 [INFO]   Sensor gate        : CLOSED at startup
+2026-05-09 06:46:49,591 [INFO] ==============================================================
+2026-05-09 06:46:52,299 [INFO] Loading CNN from E:\finall-iot\backend\model\best_fruit_model_resnet50.pth
+2026-05-09 06:46:55,382 [WARNING] Unexpected keys (first 10): ['_backbone_ref.0.weight', '_backbone_ref.1.weight', '_backbone_ref.1.bias', '_backbone_ref.1.running_mean', '_backbone_ref.1.running_var', '_backbone_ref.1.num_batches_tracked', '_backbone_ref.4.0.conv1.weight', '_backbone_ref.4.0.bn1.weight', '_backbone_ref.4.0.bn1.bias', '_backbone_ref.4.0.bn1.running_mean']
+2026-05-09 06:46:55,392 [INFO] CNN loaded OK (5 classes)
+2026-05-09 06:46:55,392 [INFO] CNN model          : READY
+2026-05-09 06:46:56,725 [INFO] le_fruit classes : ['apple', 'banana', 'grape', 'mango', 'strawberry']
+2026-05-09 06:46:56,725 [INFO] classifier classes: [0, 1]
+2026-05-09 06:46:56,726 [INFO] New ML models loaded OK (classifier + regressor + scaler + le_fruit)
+2026-05-09 06:46:56,726 [INFO] New ML models      : READY  (classifier + regressor + scaler + le_fruit)
+2026-05-09 06:46:56,731 [INFO] Opening COM4 @ 115200 baud ...
+2026-05-09 06:46:56,734 [INFO] Waiting 2.5 s for Arduino boot + sensor warm-up ...
+2026-05-09 06:46:59,239 [INFO] Serial ready (COM4 @ 115200 baud) -- sensor INACTIVE until image upload
+2026-05-09 06:46:59,242 [INFO] Serial reader thread running (COM4 @ 115200 baud) -- idle until sensor activated
+2026-05-09 06:46:59,243 [INFO] Serial reader thread started (sensor gate CLOSED -- awaiting image upload)
+2026-05-09 06:46:59,244 [INFO] Serial reader      : IDLE (gate opens on first /analyze-image call)
+2026-05-09 06:46:59,245 [INFO] Server             : http://127.0.0.1:5000
+2026-05-09 06:46:59,246 [INFO] ==============================================================
+2026-05-09 06:47:00,345 [INFO] Arduino: # Ready. Awaiting commands: LED_ON | LED_OFF
+2026-05-09 06:47:00,351 [INFO] Arduino: # CSV format: mq3,mq5,mq135,temperature,humidity
+2026-05-09 06:47:15,105 [INFO] CNN -> Mango (91.9%)
+2026-05-09 06:47:15,110 [INFO] [3b0546ce-e98c-4a7c-b4d3-f22bc48d789a] Lifecycle: waiting 15 s before activating sensor ...
+2026-05-09 06:47:15,110 [INFO] analyze-image -> Mango 91.9%  session=3b0546ce-e98c-4a7c-b4d3-f22bc48d789a  (sensor in 15 s)
+2026-05-09 06:47:30,124 [INFO] Turning LED ON -- sensor activation in progress
+2026-05-09 06:47:30,129 [INFO] -> Arduino: LED_ON
+2026-05-09 06:47:30,129 [INFO] [3b0546ce-e98c-4a7c-b4d3-f22bc48d789a] Sensor ACTIVATED -- collecting for 15 s
+2026-05-09 06:47:30,131 [INFO] Arduino: # LED ON
+2026-05-09 06:47:30,189 [INFO] Sensor <- mq3=469  mq5=521  mq135=580  t=31.1 C  h=38.1%
+2026-05-09 06:47:31,167 [INFO] Sensor <- mq3=469  mq5=521  mq135=580  t=31.1 C  h=38.1%
+2026-05-09 06:47:32,172 [INFO] Sensor <- mq3=469  mq5=521  mq135=580  t=31.1 C  h=38.1%
+2026-05-09 06:47:33,196 [INFO] Sensor <- mq3=469  mq5=521  mq135=580  t=31.2 C  h=37.4%
+2026-05-09 06:47:34,175 [INFO] Sensor <- mq3=469  mq5=521  mq135=580  t=31.2 C  h=37.4%
+2026-05-09 06:47:35,204 [INFO] Sensor <- mq3=469  mq5=521  mq135=580  t=31.2 C  h=37.4%
+2026-05-09 06:47:36,185 [INFO] Sensor <- mq3=469  mq5=521  mq135=580  t=31.2 C  h=37.4%
+2026-05-09 06:47:37,213 [INFO] Sensor <- mq3=469  mq5=521  mq135=580  t=31.2 C  h=37.3%
+2026-05-09 06:47:38,192 [INFO] Sensor <- mq3=469  mq5=521  mq135=580  t=31.2 C  h=37.3%
+2026-05-09 06:47:39,218 [INFO] Sensor <- mq3=469  mq5=521  mq135=580  t=31.2 C  h=37.2%
+2026-05-09 06:47:40,197 [INFO] Sensor <- mq3=469  mq5=520  mq135=580  t=31.2 C  h=37.2%
+2026-05-09 06:47:41,224 [INFO] Sensor <- mq3=468  mq5=520  mq135=579  t=31.2 C  h=37.1%
+2026-05-09 06:47:42,205 [INFO] Sensor <- mq3=468  mq5=520  mq135=579  t=31.2 C  h=37.1%
+2026-05-09 06:47:43,231 [INFO] Sensor <- mq3=468  mq5=520  mq135=580  t=31.2 C  h=37.1%
+2026-05-09 06:47:44,211 [INFO] Sensor <- mq3=468  mq5=520  mq135=579  t=31.2 C  h=37.1%
+2026-05-09 06:47:45,139 [INFO] Turning LED OFF
+2026-05-09 06:47:45,141 [INFO] -> Arduino: LED_OFF
+2026-05-09 06:47:45,142 [INFO] [3b0546ce-e98c-4a7c-b4d3-f22bc48d789a] Collection window complete -- processing buffer
+2026-05-09 06:47:45,144 [INFO] [3b0546ce-e98c-4a7c-b4d3-f22bc48d789a] Averaged 15 readings: mq3=468.7 mq5=520.7 mq135=579.8 t=31.2 h=37.4
+2026-05-09 06:47:45,145 [INFO] Using NEW ML models (best_classifier + best_regressor + scaler + le_fruit)
+2026-05-09 06:47:45,149 [INFO] fruit_enc for 'Mango' -> 3  (LE class: 'mango')
+2026-05-09 06:47:45,152 [INFO] Arduino: # LED OFF
+2026-05-09 06:47:45,152 [INFO] Features: mq3=468.7 mq5=520.7 mq135=579.8 t=31.2 h=37.4 | gas=1569.2 ferm=1.2370 spoil=1.1108 env=0.5193 enc=3
+2026-05-09 06:47:45,454 [INFO] Ripening signals: sig1(MQ5/MQ3)=0.011 sig2(MQ135/MQ3)=0.037 sig3(MQ5/MQ135)=0.000 sig4(absQ5)=0.000 sig5(absMQ135)=0.000 sig6(suppression)=0.098 | env_corr=0.000 -> score=0.019 -> Natural
+2026-05-09 06:47:45,455 [INFO] No override for Mango: r1=1.11 r2=1.24 mq5=521 mq135=580 → Natural retained
+2026-05-09 06:47:45,455 [ERROR] New model prediction failed (name '_reconcile_quality' is not defined) -- trying legacy bundle
+2026-05-09 06:47:45,456 [INFO] Using LEGACY ML bundle (fruit_quality_models.pkl)
+2026-05-09 06:47:45,456 [INFO] Loading legacy ML bundle from E:\finall-iot\backend\model\fruit_quality_models.pkl
+2026-05-09 06:47:45,895 [INFO] Legacy ML bundle loaded. Keys: ['clf_condition', 'clf_edible', 'clf_safe', 'clf_ripening', 'reg_shelf', 'le_fruit', 'le_condition', 'le_ripening', 'features']
+2026-05-09 06:47:45,896 [INFO] fruit_enc for 'Mango' -> 3  (LE class: 'Mango')
+2026-05-09 06:47:45,896 [INFO] Features: mq3=468.7 mq5=520.7 mq135=579.8 t=31.2 h=37.4 | gas=1569.2 ferm=1.2370 spoil=1.1108 env=0.5193 enc=3
+2026-05-09 06:47:46,488 [INFO] LEGACY ML -> edible=False  condition=Fresh  ripening=Natural  shelf=108.1d
+2026-05-09 06:47:46,489 [INFO] [3b0546ce-e98c-4a7c-b4d3-f22bc48d789a] Lifecycle complete -- result stored
+2026-05-09 06:48:41,148 [INFO] ==============================================================
+2026-05-09 06:48:41,148 [INFO]   FruitSense Backend  v3.1
+2026-05-09 06:48:41,150 [INFO]   Serial port        : COM4
+2026-05-09 06:48:41,150 [INFO]   Baud rate          : 115200
+2026-05-09 06:48:41,150 [INFO]   Sensor delay       : 15 s after image upload
+2026-05-09 06:48:41,150 [INFO]   Collection window  : 15 s
+2026-05-09 06:48:41,151 [INFO]   Sensor gate        : CLOSED at startup
+2026-05-09 06:48:41,151 [INFO] ==============================================================
+2026-05-09 06:48:43,360 [INFO] Loading CNN from E:\finall-iot\backend\model\best_fruit_model_resnet50.pth
+2026-05-09 06:48:47,182 [WARNING] Unexpected keys (first 10): ['_backbone_ref.0.weight', '_backbone_ref.1.weight', '_backbone_ref.1.bias', '_backbone_ref.1.running_mean', '_backbone_ref.1.running_var', '_backbone_ref.1.num_batches_tracked', '_backbone_ref.4.0.conv1.weight', '_backbone_ref.4.0.bn1.weight', '_backbone_ref.4.0.bn1.bias', '_backbone_ref.4.0.bn1.running_mean']
+2026-05-09 06:48:47,207 [INFO] CNN loaded OK (5 classes)
+2026-05-09 06:48:47,209 [INFO] CNN model          : READY
+2026-05-09 06:48:49,967 [INFO] le_fruit classes : ['apple', 'banana', 'grape', 'mango', 'strawberry']
+2026-05-09 06:48:49,967 [INFO] classifier classes: [0, 1]
+2026-05-09 06:48:49,970 [INFO] New ML models loaded OK (classifier + regressor + scaler + le_fruit)
+2026-05-09 06:48:49,970 [INFO] New ML models      : READY  (classifier + regressor + scaler + le_fruit)
+2026-05-09 06:48:49,977 [INFO] Opening COM4 @ 115200 baud ...
+2026-05-09 06:48:49,980 [INFO] Waiting 2.5 s for Arduino boot + sensor warm-up ...
+2026-05-09 06:48:52,494 [INFO] Serial ready (COM4 @ 115200 baud) -- sensor INACTIVE until image upload
+2026-05-09 06:48:52,499 [INFO] Serial reader thread running (COM4 @ 115200 baud) -- idle until sensor activated
+2026-05-09 06:48:52,500 [INFO] Serial reader thread started (sensor gate CLOSED -- awaiting image upload)
+2026-05-09 06:48:52,502 [INFO] Serial reader      : IDLE (gate opens on first /analyze-image call)
+2026-05-09 06:48:52,502 [INFO] Server             : http://127.0.0.1:5000
+2026-05-09 06:48:52,505 [INFO] ==============================================================
+2026-05-09 06:48:53,588 [INFO] Arduino: # Ready. Awaiting commands: LED_ON | LED_OFF
+2026-05-09 06:48:53,599 [INFO] Arduino: # CSV format: mq3,mq5,mq135,temperature,humidity
+2026-05-09 06:49:02,838 [INFO] CNN -> Mango (89.5%)
+2026-05-09 06:49:02,843 [INFO] [05d26f3c-7c88-463b-8e23-c2b174614b38] Lifecycle: waiting 15 s before activating sensor ...
+2026-05-09 06:49:02,844 [INFO] analyze-image -> Mango 89.5%  session=05d26f3c-7c88-463b-8e23-c2b174614b38  (sensor in 15 s)
+2026-05-09 06:49:17,859 [INFO] Turning LED ON -- sensor activation in progress
+2026-05-09 06:49:17,860 [INFO] -> Arduino: LED_ON
+2026-05-09 06:49:17,861 [INFO] [05d26f3c-7c88-463b-8e23-c2b174614b38] Sensor ACTIVATED -- collecting for 15 s
+2026-05-09 06:49:17,862 [INFO] Arduino: # LED ON
+2026-05-09 06:49:17,921 [INFO] Sensor <- mq3=470  mq5=520  mq135=580  t=31.2 C  h=37.0%
+2026-05-09 06:49:18,894 [INFO] Sensor <- mq3=470  mq5=521  mq135=580  t=31.2 C  h=37.0%
+2026-05-09 06:49:19,897 [INFO] Sensor <- mq3=470  mq5=521  mq135=580  t=31.2 C  h=37.0%
+2026-05-09 06:49:20,929 [INFO] Sensor <- mq3=470  mq5=521  mq135=580  t=31.3 C  h=37.6%
+2026-05-09 06:49:21,898 [INFO] Sensor <- mq3=470  mq5=521  mq135=580  t=31.3 C  h=37.6%
+2026-05-09 06:49:22,932 [INFO] Sensor <- mq3=470  mq5=521  mq135=580  t=31.3 C  h=37.4%
+2026-05-09 06:49:23,913 [INFO] Sensor <- mq3=470  mq5=521  mq135=580  t=31.3 C  h=37.4%
+2026-05-09 06:49:24,935 [INFO] Sensor <- mq3=470  mq5=520  mq135=580  t=31.3 C  h=37.3%
+2026-05-09 06:49:25,913 [INFO] Sensor <- mq3=470  mq5=520  mq135=580  t=31.3 C  h=37.3%
+2026-05-09 06:49:26,946 [INFO] Sensor <- mq3=470  mq5=520  mq135=580  t=31.3 C  h=37.2%
+2026-05-09 06:49:27,929 [INFO] Sensor <- mq3=470  mq5=520  mq135=580  t=31.3 C  h=37.2%
+2026-05-09 06:49:28,948 [INFO] Sensor <- mq3=471  mq5=521  mq135=581  t=31.3 C  h=37.1%
+2026-05-09 06:49:29,932 [INFO] Sensor <- mq3=470  mq5=520  mq135=580  t=31.3 C  h=37.1%
+2026-05-09 06:49:30,959 [INFO] Sensor <- mq3=470  mq5=520  mq135=580  t=31.3 C  h=37.0%
+2026-05-09 06:49:31,943 [INFO] Sensor <- mq3=470  mq5=521  mq135=580  t=31.3 C  h=37.0%
+2026-05-09 06:49:32,874 [INFO] Turning LED OFF
+2026-05-09 06:49:32,875 [INFO] -> Arduino: LED_OFF
+2026-05-09 06:49:32,875 [INFO] [05d26f3c-7c88-463b-8e23-c2b174614b38] Collection window complete -- processing buffer
+2026-05-09 06:49:32,878 [INFO] [05d26f3c-7c88-463b-8e23-c2b174614b38] Averaged 15 readings: mq3=470.1 mq5=520.5 mq135=580.1 t=31.3 h=37.2
+2026-05-09 06:49:32,878 [INFO] Using NEW ML models (best_classifier + best_regressor + scaler + le_fruit)
+2026-05-09 06:49:32,880 [INFO] fruit_enc for 'Mango' -> 3  (LE class: 'mango')
+2026-05-09 06:49:32,882 [INFO] Features: mq3=470.1 mq5=520.5 mq135=580.1 t=31.3 h=37.2 | gas=1570.7 ferm=1.2340 spoil=1.1074 env=0.5213 enc=3
+2026-05-09 06:49:32,884 [INFO] Arduino: # LED OFF
+2026-05-09 06:49:32,998 [INFO] Ripening signals: sig1(MQ5/MQ3)=0.007 sig2(MQ135/MQ3)=0.034 sig3(MQ5/MQ135)=0.000 sig4(absQ5)=0.000 sig5(absMQ135)=0.000 sig6(suppression)=0.097 | env_corr=0.000 -> score=0.017 -> Natural
+2026-05-09 06:49:33,001 [INFO] No override for Mango: r1=1.11 r2=1.23 mq5=521 mq135=580 → Natural retained
+2026-05-09 06:49:33,001 [ERROR] New model prediction failed (name '_reconcile_quality' is not defined) -- trying legacy bundle
+2026-05-09 06:49:33,002 [INFO] Using LEGACY ML bundle (fruit_quality_models.pkl)
+2026-05-09 06:49:33,003 [INFO] Loading legacy ML bundle from E:\finall-iot\backend\model\fruit_quality_models.pkl
+2026-05-09 06:49:33,251 [INFO] Legacy ML bundle loaded. Keys: ['clf_condition', 'clf_edible', 'clf_safe', 'clf_ripening', 'reg_shelf', 'le_fruit', 'le_condition', 'le_ripening', 'features']
+2026-05-09 06:49:33,260 [INFO] fruit_enc for 'Mango' -> 3  (LE class: 'Mango')
+2026-05-09 06:49:33,260 [INFO] Features: mq3=470.1 mq5=520.5 mq135=580.1 t=31.3 h=37.2 | gas=1570.7 ferm=1.2340 spoil=1.1074 env=0.5213 enc=3
+2026-05-09 06:49:34,092 [INFO] LEGACY ML -> edible=False  condition=Fresh  ripening=Natural  shelf=108.1d
+2026-05-09 06:49:34,093 [INFO] [05d26f3c-7c88-463b-8e23-c2b174614b38] Lifecycle complete -- result stored
+2026-05-09 06:50:20,470 [INFO] ==============================================================
+2026-05-09 06:50:20,470 [INFO]   FruitSense Backend  v3.1
+2026-05-09 06:50:20,472 [INFO]   Serial port        : COM4
+2026-05-09 06:50:20,472 [INFO]   Baud rate          : 115200
+2026-05-09 06:50:20,472 [INFO]   Sensor delay       : 15 s after image upload
+2026-05-09 06:50:20,472 [INFO]   Collection window  : 15 s
+2026-05-09 06:50:20,473 [INFO]   Sensor gate        : CLOSED at startup
+2026-05-09 06:50:20,473 [INFO] ==============================================================
+2026-05-09 06:50:22,637 [INFO] Loading CNN from E:\finall-iot\backend\model\best_fruit_model_resnet50.pth
+2026-05-09 06:50:26,170 [WARNING] Unexpected keys (first 10): ['_backbone_ref.0.weight', '_backbone_ref.1.weight', '_backbone_ref.1.bias', '_backbone_ref.1.running_mean', '_backbone_ref.1.running_var', '_backbone_ref.1.num_batches_tracked', '_backbone_ref.4.0.conv1.weight', '_backbone_ref.4.0.bn1.weight', '_backbone_ref.4.0.bn1.bias', '_backbone_ref.4.0.bn1.running_mean']
+2026-05-09 06:50:26,182 [INFO] CNN loaded OK (5 classes)
+2026-05-09 06:50:26,183 [INFO] CNN model          : READY
+2026-05-09 06:50:29,120 [INFO] le_fruit classes : ['apple', 'banana', 'grape', 'mango', 'strawberry']
+2026-05-09 06:50:29,120 [INFO] classifier classes: [0, 1]
+2026-05-09 06:50:29,121 [INFO] New ML models loaded OK (classifier + regressor + scaler + le_fruit)
+2026-05-09 06:50:29,121 [INFO] New ML models      : READY  (classifier + regressor + scaler + le_fruit)
+2026-05-09 06:50:29,131 [INFO] Opening COM4 @ 115200 baud ...
+2026-05-09 06:50:29,133 [INFO] Waiting 2.5 s for Arduino boot + sensor warm-up ...
+2026-05-09 06:50:31,647 [INFO] Serial ready (COM4 @ 115200 baud) -- sensor INACTIVE until image upload
+2026-05-09 06:50:31,648 [INFO] Serial reader thread running (COM4 @ 115200 baud) -- idle until sensor activated
+2026-05-09 06:50:31,649 [INFO] Serial reader thread started (sensor gate CLOSED -- awaiting image upload)
+2026-05-09 06:50:31,649 [INFO] Serial reader      : IDLE (gate opens on first /analyze-image call)
+2026-05-09 06:50:31,650 [INFO] Server             : http://127.0.0.1:5000
+2026-05-09 06:50:31,650 [INFO] ==============================================================
+2026-05-09 06:50:32,743 [INFO] Arduino: # Ready. Awaiting commands: LED_ON | LED_OFF
+2026-05-09 06:50:32,748 [INFO] Arduino: # CSV format: mq3,mq5,mq135,temperature,humidity
+2026-05-09 06:50:39,647 [INFO] CNN -> Mango (90.6%)
+2026-05-09 06:50:39,648 [INFO] [66311b82-d017-43aa-930f-884943221aae] Lifecycle: waiting 15 s before activating sensor ...
+2026-05-09 06:50:39,648 [INFO] analyze-image -> Mango 90.6%  session=66311b82-d017-43aa-930f-884943221aae  (sensor in 15 s)
+2026-05-09 06:50:54,665 [INFO] Turning LED ON -- sensor activation in progress
+2026-05-09 06:50:54,666 [INFO] -> Arduino: LED_ON
+2026-05-09 06:50:54,667 [INFO] [66311b82-d017-43aa-930f-884943221aae] Sensor ACTIVATED -- collecting for 15 s
+2026-05-09 06:50:54,670 [INFO] Arduino: # LED ON
+2026-05-09 06:50:54,728 [INFO] Sensor <- mq3=473  mq5=520  mq135=575  t=31.3 C  h=36.9%
+2026-05-09 06:50:55,705 [INFO] Sensor <- mq3=473  mq5=520  mq135=575  t=31.3 C  h=36.9%
+2026-05-09 06:50:56,708 [INFO] Sensor <- mq3=473  mq5=520  mq135=576  t=31.3 C  h=36.9%
+2026-05-09 06:50:57,736 [INFO] Sensor <- mq3=473  mq5=520  mq135=577  t=31.4 C  h=37.2%
+2026-05-09 06:50:58,715 [INFO] Sensor <- mq3=473  mq5=520  mq135=576  t=31.4 C  h=37.2%
+2026-05-09 06:50:59,741 [INFO] Sensor <- mq3=473  mq5=520  mq135=576  t=31.4 C  h=37.5%
+2026-05-09 06:51:00,722 [INFO] Sensor <- mq3=473  mq5=520  mq135=576  t=31.4 C  h=37.5%
+2026-05-09 06:51:01,750 [INFO] Sensor <- mq3=473  mq5=520  mq135=576  t=31.4 C  h=37.7%
+2026-05-09 06:51:02,719 [INFO] Sensor <- mq3=473  mq5=520  mq135=576  t=31.4 C  h=37.7%
+2026-05-09 06:51:03,753 [INFO] Sensor <- mq3=473  mq5=520  mq135=576  t=31.4 C  h=37.8%
+2026-05-09 06:51:04,733 [INFO] Sensor <- mq3=474  mq5=520  mq135=576  t=31.4 C  h=37.8%
+2026-05-09 06:51:05,755 [INFO] Sensor <- mq3=474  mq5=521  mq135=577  t=31.4 C  h=37.8%
+2026-05-09 06:51:06,738 [INFO] Sensor <- mq3=474  mq5=521  mq135=576  t=31.4 C  h=37.8%
+2026-05-09 06:51:07,766 [INFO] Sensor <- mq3=474  mq5=521  mq135=576  t=31.4 C  h=37.8%
+2026-05-09 06:51:08,749 [INFO] Sensor <- mq3=474  mq5=520  mq135=576  t=31.4 C  h=37.8%
+2026-05-09 06:51:09,681 [INFO] Turning LED OFF
+2026-05-09 06:51:09,682 [INFO] -> Arduino: LED_OFF
+2026-05-09 06:51:09,683 [INFO] [66311b82-d017-43aa-930f-884943221aae] Collection window complete -- processing buffer
+2026-05-09 06:51:09,685 [INFO] [66311b82-d017-43aa-930f-884943221aae] Averaged 15 readings: mq3=473.3 mq5=520.2 mq135=576.0 t=31.4 h=37.5
+2026-05-09 06:51:09,686 [INFO] Using NEW ML models (best_classifier + best_regressor + scaler + le_fruit)
+2026-05-09 06:51:09,688 [INFO] fruit_enc for 'Mango' -> 3  (LE class: 'mango')
+2026-05-09 06:51:09,690 [INFO] Features: mq3=473.3 mq5=520.2 mq135=576.0 t=31.4 h=37.5 | gas=1569.5 ferm=1.2169 spoil=1.0990 env=0.5219 enc=3
+2026-05-09 06:51:09,694 [INFO] Arduino: # LED OFF
+2026-05-09 06:51:09,816 [INFO] Ripening signals: sig1(MQ5/MQ3)=0.000 sig2(MQ135/MQ3)=0.017 sig3(MQ5/MQ135)=0.004 sig4(absQ5)=0.000 sig5(absMQ135)=0.000 sig6(suppression)=0.093 | env_corr=0.000 -> score=0.010 -> Natural
+2026-05-09 06:51:09,818 [ERROR] New model prediction failed (name '_reconcile_quality' is not defined) -- trying legacy bundle
+2026-05-09 06:51:09,819 [INFO] Using LEGACY ML bundle (fruit_quality_models.pkl)
+2026-05-09 06:51:09,820 [INFO] Loading legacy ML bundle from E:\finall-iot\backend\model\fruit_quality_models.pkl
+2026-05-09 06:51:09,998 [INFO] Legacy ML bundle loaded. Keys: ['clf_condition', 'clf_edible', 'clf_safe', 'clf_ripening', 'reg_shelf', 'le_fruit', 'le_condition', 'le_ripening', 'features']
+2026-05-09 06:51:10,011 [INFO] fruit_enc for 'Mango' -> 3  (LE class: 'Mango')
+2026-05-09 06:51:10,011 [INFO] Features: mq3=473.3 mq5=520.2 mq135=576.0 t=31.4 h=37.5 | gas=1569.5 ferm=1.2169 spoil=1.0990 env=0.5219 enc=3
+2026-05-09 06:51:10,616 [INFO] LEGACY ML -> edible=False  condition=Fresh  ripening=Natural  shelf=108.1d
+2026-05-09 06:51:10,616 [INFO] [66311b82-d017-43aa-930f-884943221aae] Lifecycle complete -- result stored
+2026-05-09 07:32:13,117 [INFO] ==============================================================
+2026-05-09 07:32:13,117 [INFO]   FruitSense Backend  v3.1
+2026-05-09 07:32:13,117 [INFO]   Serial port        : COM4
+2026-05-09 07:32:13,117 [INFO]   Baud rate          : 115200
+2026-05-09 07:32:13,117 [INFO]   Sensor delay       : 15 s after image upload
+2026-05-09 07:32:13,117 [INFO]   Collection window  : 15 s
+2026-05-09 07:32:13,117 [INFO]   Sensor gate        : CLOSED at startup
+2026-05-09 07:32:13,117 [INFO] ==============================================================
+2026-05-09 07:32:16,706 [INFO] Loading CNN from E:\finall-iot\backend\model\best_fruit_model_resnet50.pth
+2026-05-09 07:32:19,299 [WARNING] Unexpected keys (first 10): ['_backbone_ref.0.weight', '_backbone_ref.1.weight', '_backbone_ref.1.bias', '_backbone_ref.1.running_mean', '_backbone_ref.1.running_var', '_backbone_ref.1.num_batches_tracked', '_backbone_ref.4.0.conv1.weight', '_backbone_ref.4.0.bn1.weight', '_backbone_ref.4.0.bn1.bias', '_backbone_ref.4.0.bn1.running_mean']
+2026-05-09 07:32:19,305 [INFO] CNN loaded OK (5 classes)
+2026-05-09 07:32:19,305 [INFO] CNN model          : READY
+2026-05-09 07:32:28,060 [INFO] le_fruit classes : ['apple', 'banana', 'grape', 'mango', 'strawberry']
+2026-05-09 07:32:28,060 [INFO] classifier classes: [0, 1]
+2026-05-09 07:32:28,060 [INFO] New ML models loaded OK (classifier + regressor + scaler + le_fruit)
+2026-05-09 07:32:28,060 [INFO] New ML models      : READY  (classifier + regressor + scaler + le_fruit)
+2026-05-09 07:32:28,071 [INFO] Opening COM4 @ 115200 baud ...
+2026-05-09 07:32:28,074 [INFO] Waiting 2.5 s for Arduino boot + sensor warm-up ...
+2026-05-09 07:32:30,574 [INFO] Serial ready (COM4 @ 115200 baud) -- sensor INACTIVE until image upload
+2026-05-09 07:32:30,577 [INFO] Serial reader thread running (COM4 @ 115200 baud) -- idle until sensor activated
+2026-05-09 07:32:30,577 [INFO] Serial reader thread started (sensor gate CLOSED -- awaiting image upload)
+2026-05-09 07:32:30,578 [INFO] Serial reader      : IDLE (gate opens on first /analyze-image call)
+2026-05-09 07:32:30,579 [INFO] Server             : http://127.0.0.1:5000
+2026-05-09 07:32:30,579 [INFO] ==============================================================
+2026-05-09 07:32:31,666 [INFO] Arduino: # Ready. Awaiting commands: LED_ON | LED_OFF
+2026-05-09 07:32:31,682 [INFO] Arduino: # CSV format: mq3,mq5,mq135,temperature,humidity
+2026-05-09 07:32:57,079 [INFO] CNN -> Unknown (62.4%)
+2026-05-09 07:32:57,079 [INFO] [756a90a7-c04a-4927-a91c-e7b412e9d442] Lifecycle: waiting 15 s before activating sensor ...
+2026-05-09 07:32:57,079 [INFO] analyze-image -> Unknown 62.4%  session=756a90a7-c04a-4927-a91c-e7b412e9d442  (sensor in 15 s)
+2026-05-09 07:33:12,093 [INFO] Turning LED ON -- sensor activation in progress
+2026-05-09 07:33:12,093 [INFO] -> Arduino: LED_ON
+2026-05-09 07:33:12,094 [INFO] [756a90a7-c04a-4927-a91c-e7b412e9d442] Sensor ACTIVATED -- collecting for 15 s
+2026-05-09 07:33:12,094 [INFO] Arduino: # LED ON
+2026-05-09 07:33:12,154 [INFO] Sensor <- mq3=461  mq5=534  mq135=624  t=29.2 C  h=40.9%
+2026-05-09 07:33:13,130 [INFO] Sensor <- mq3=461  mq5=534  mq135=624  t=29.2 C  h=40.9%
+2026-05-09 07:33:14,161 [INFO] Sensor <- mq3=462  mq5=534  mq135=623  t=29.9 C  h=40.1%
+2026-05-09 07:33:15,141 [INFO] Sensor <- mq3=462  mq5=533  mq135=623  t=29.9 C  h=40.1%
+2026-05-09 07:33:16,161 [INFO] Sensor <- mq3=462  mq5=533  mq135=624  t=29.9 C  h=40.2%
+2026-05-09 07:33:17,145 [INFO] Sensor <- mq3=462  mq5=533  mq135=624  t=29.9 C  h=40.2%
+2026-05-09 07:33:18,144 [INFO] Sensor <- mq3=463  mq5=533  mq135=623  t=29.9 C  h=40.2%
+2026-05-09 07:33:19,122 [INFO] CNN -> Unknown (66.1%)
+2026-05-09 07:33:19,123 [INFO] [0aa20a4c-6c2b-4efd-ba19-2916a5698e30] Lifecycle: waiting 15 s before activating sensor ...
+2026-05-09 07:33:19,123 [INFO] analyze-image -> Unknown 66.1%  session=0aa20a4c-6c2b-4efd-ba19-2916a5698e30  (sensor in 15 s)
+2026-05-09 07:33:19,176 [INFO] Sensor <- mq3=463  mq5=533  mq135=624  t=30.0 C  h=40.1%
+2026-05-09 07:33:20,145 [INFO] Sensor <- mq3=462  mq5=533  mq135=624  t=30.0 C  h=40.1%
+2026-05-09 07:33:21,178 [INFO] Sensor <- mq3=463  mq5=533  mq135=623  t=30.0 C  h=39.9%
+2026-05-09 07:33:22,160 [INFO] Sensor <- mq3=463  mq5=534  mq135=623  t=30.0 C  h=39.9%
+2026-05-09 07:33:23,177 [INFO] Sensor <- mq3=463  mq5=534  mq135=623  t=30.0 C  h=39.7%
+2026-05-09 07:33:24,169 [INFO] Sensor <- mq3=463  mq5=533  mq135=622  t=30.0 C  h=39.7%
+2026-05-09 07:33:25,157 [INFO] Sensor <- mq3=463  mq5=533  mq135=624  t=30.0 C  h=39.7%
+2026-05-09 07:33:26,188 [INFO] Sensor <- mq3=463  mq5=533  mq135=623  t=30.0 C  h=39.6%
+2026-05-09 07:33:27,110 [INFO] Turning LED OFF
+2026-05-09 07:33:27,110 [INFO] -> Arduino: LED_OFF
+2026-05-09 07:33:27,110 [INFO] [756a90a7-c04a-4927-a91c-e7b412e9d442] Collection window complete -- processing buffer
+2026-05-09 07:33:27,110 [INFO] [756a90a7-c04a-4927-a91c-e7b412e9d442] Averaged 15 readings: mq3=462.4 mq5=533.3 mq135=623.4 t=29.9 h=40.1
+2026-05-09 07:33:27,112 [INFO] Using NEW ML models (best_classifier + best_regressor + scaler + le_fruit)
+2026-05-09 07:33:27,112 [WARNING] Fruit 'Unknown' not in LE vocabulary -- using 'apple' as fallback
+2026-05-09 07:33:27,112 [INFO] fruit_enc for 'Unknown' -> 0  (LE class: 'apple')
+2026-05-09 07:33:27,112 [INFO] Arduino: # LED OFF
+2026-05-09 07:33:27,112 [INFO] Features: mq3=462.4 mq5=533.3 mq135=623.4 t=29.9 h=40.1 | gas=1619.1 ferm=1.3482 spoil=1.1534 env=0.4928 enc=0
+2026-05-09 07:33:27,241 [INFO] Ripening signals: sig1(MQ5/MQ3)=0.053 sig2(MQ135/MQ3)=0.148 sig3(MQ5/MQ135)=0.000 sig4(absQ5)=0.000 sig5(absMQ135)=0.000 sig6(suppression)=0.128 | env_corr=0.000 -> score=0.064 -> Natural
+2026-05-09 07:33:27,241 [ERROR] New model prediction failed (name '_reconcile_quality' is not defined) -- trying legacy bundle
+2026-05-09 07:33:27,242 [INFO] Using LEGACY ML bundle (fruit_quality_models.pkl)
+2026-05-09 07:33:27,242 [INFO] Loading legacy ML bundle from E:\finall-iot\backend\model\fruit_quality_models.pkl
+2026-05-09 07:33:27,461 [INFO] Legacy ML bundle loaded. Keys: ['clf_condition', 'clf_edible', 'clf_safe', 'clf_ripening', 'reg_shelf', 'le_fruit', 'le_condition', 'le_ripening', 'features']
+2026-05-09 07:33:27,462 [WARNING] Fruit 'Unknown' not in LE vocabulary -- using 'Apple' as fallback
+2026-05-09 07:33:27,463 [INFO] fruit_enc for 'Unknown' -> 0  (LE class: 'Apple')
+2026-05-09 07:33:27,463 [INFO] Features: mq3=462.4 mq5=533.3 mq135=623.4 t=29.9 h=40.1 | gas=1619.1 ferm=1.3482 spoil=1.1534 env=0.4928 enc=0
+2026-05-09 07:33:27,810 [INFO] LEGACY ML -> edible=False  condition=Fresh  ripening=Natural  shelf=108.1d
+2026-05-09 07:33:27,810 [INFO] [756a90a7-c04a-4927-a91c-e7b412e9d442] Lifecycle complete -- result stored
