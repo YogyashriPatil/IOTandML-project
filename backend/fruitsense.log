@@ -4522,3 +4522,1550 @@
 2026-05-09 07:33:27,463 [INFO] Features: mq3=462.4 mq5=533.3 mq135=623.4 t=29.9 h=40.1 | gas=1619.1 ferm=1.3482 spoil=1.1534 env=0.4928 enc=0
 2026-05-09 07:33:27,810 [INFO] LEGACY ML -> edible=False  condition=Fresh  ripening=Natural  shelf=108.1d
 2026-05-09 07:33:27,810 [INFO] [756a90a7-c04a-4927-a91c-e7b412e9d442] Lifecycle complete -- result stored
+2026-05-09 07:33:41,612 [INFO] ==============================================================
+2026-05-09 07:33:41,612 [INFO]   FruitSense Backend  v3.1
+2026-05-09 07:33:41,612 [INFO]   Serial port        : COM4
+2026-05-09 07:33:41,612 [INFO]   Baud rate          : 115200
+2026-05-09 07:33:41,612 [INFO]   Sensor delay       : 15 s after image upload
+2026-05-09 07:33:41,612 [INFO]   Collection window  : 15 s
+2026-05-09 07:33:41,612 [INFO]   Sensor gate        : CLOSED at startup
+2026-05-09 07:33:41,612 [INFO] ==============================================================
+2026-05-09 07:33:43,939 [INFO] Loading CNN from E:\finall-iot\backend\model\best_fruit_model_resnet50.pth
+2026-05-09 07:33:47,150 [WARNING] Unexpected keys (first 10): ['_backbone_ref.0.weight', '_backbone_ref.1.weight', '_backbone_ref.1.bias', '_backbone_ref.1.running_mean', '_backbone_ref.1.running_var', '_backbone_ref.1.num_batches_tracked', '_backbone_ref.4.0.conv1.weight', '_backbone_ref.4.0.bn1.weight', '_backbone_ref.4.0.bn1.bias', '_backbone_ref.4.0.bn1.running_mean']
+2026-05-09 07:33:47,163 [INFO] CNN loaded OK (5 classes)
+2026-05-09 07:33:47,163 [INFO] CNN model          : READY
+2026-05-09 07:33:48,944 [INFO] le_fruit classes : ['apple', 'banana', 'grape', 'mango', 'strawberry']
+2026-05-09 07:33:48,944 [INFO] classifier classes: [0, 1]
+2026-05-09 07:33:48,944 [INFO] New ML models loaded OK (classifier + regressor + scaler + le_fruit)
+2026-05-09 07:33:48,944 [INFO] New ML models      : READY  (classifier + regressor + scaler + le_fruit)
+2026-05-09 07:33:48,959 [INFO] Opening COM4 @ 115200 baud ...
+2026-05-09 07:33:48,962 [INFO] Waiting 2.5 s for Arduino boot + sensor warm-up ...
+2026-05-09 07:33:51,473 [INFO] Serial ready (COM4 @ 115200 baud) -- sensor INACTIVE until image upload
+2026-05-09 07:33:51,475 [INFO] Serial reader thread running (COM4 @ 115200 baud) -- idle until sensor activated
+2026-05-09 07:33:51,475 [INFO] Serial reader thread started (sensor gate CLOSED -- awaiting image upload)
+2026-05-09 07:33:51,476 [INFO] Serial reader      : IDLE (gate opens on first /analyze-image call)
+2026-05-09 07:33:51,476 [INFO] Server             : http://127.0.0.1:5000
+2026-05-09 07:33:51,476 [INFO] ==============================================================
+2026-05-09 07:33:52,570 [INFO] Arduino: # Ready. Awaiting commands: LED_ON | LED_OFF
+2026-05-09 07:33:52,574 [INFO] Arduino: # CSV format: mq3,mq5,mq135,temperature,humidity
+2026-05-09 07:33:56,844 [INFO] CNN -> Mango (88.1%)
+2026-05-09 07:33:56,844 [INFO] [6dc4eff0-0654-4480-a2b2-3c189e7a38af] Lifecycle: waiting 15 s before activating sensor ...
+2026-05-09 07:33:56,844 [INFO] analyze-image -> Mango 88.1%  session=6dc4eff0-0654-4480-a2b2-3c189e7a38af  (sensor in 15 s)
+2026-05-09 07:34:11,853 [INFO] Turning LED ON -- sensor activation in progress
+2026-05-09 07:34:11,853 [INFO] -> Arduino: LED_ON
+2026-05-09 07:34:11,853 [INFO] [6dc4eff0-0654-4480-a2b2-3c189e7a38af] Sensor ACTIVATED -- collecting for 15 s
+2026-05-09 07:34:11,853 [INFO] Arduino: # LED ON
+2026-05-09 07:34:11,916 [INFO] Sensor <- mq3=467  mq5=531  mq135=622  t=30.0 C  h=39.4%
+2026-05-09 07:34:12,888 [INFO] Sensor <- mq3=467  mq5=530  mq135=622  t=30.0 C  h=39.4%
+2026-05-09 07:34:13,923 [INFO] Sensor <- mq3=467  mq5=530  mq135=622  t=30.3 C  h=38.9%
+2026-05-09 07:34:14,899 [INFO] Sensor <- mq3=467  mq5=531  mq135=622  t=30.3 C  h=38.9%
+2026-05-09 07:34:15,929 [INFO] Sensor <- mq3=468  mq5=531  mq135=623  t=30.3 C  h=39.0%
+2026-05-09 07:34:16,901 [INFO] Sensor <- mq3=468  mq5=531  mq135=622  t=30.3 C  h=39.0%
+2026-05-09 07:34:17,937 [INFO] Sensor <- mq3=467  mq5=531  mq135=622  t=30.3 C  h=39.2%
+2026-05-09 07:34:18,908 [INFO] Sensor <- mq3=468  mq5=530  mq135=623  t=30.3 C  h=39.2%
+2026-05-09 07:34:19,943 [INFO] Sensor <- mq3=468  mq5=530  mq135=622  t=30.3 C  h=39.2%
+2026-05-09 07:34:20,916 [INFO] Sensor <- mq3=468  mq5=530  mq135=622  t=30.3 C  h=39.2%
+2026-05-09 07:34:21,949 [INFO] Sensor <- mq3=468  mq5=530  mq135=622  t=30.3 C  h=39.2%
+2026-05-09 07:34:22,929 [INFO] Sensor <- mq3=468  mq5=531  mq135=623  t=30.3 C  h=39.2%
+2026-05-09 07:34:23,955 [INFO] Sensor <- mq3=468  mq5=531  mq135=622  t=30.3 C  h=39.2%
+2026-05-09 07:34:24,928 [INFO] Sensor <- mq3=468  mq5=531  mq135=622  t=30.3 C  h=39.2%
+2026-05-09 07:34:25,948 [INFO] Sensor <- mq3=468  mq5=531  mq135=622  t=30.3 C  h=39.2%
+2026-05-09 07:34:26,873 [INFO] Turning LED OFF
+2026-05-09 07:34:26,873 [INFO] -> Arduino: LED_OFF
+2026-05-09 07:34:26,873 [INFO] [6dc4eff0-0654-4480-a2b2-3c189e7a38af] Collection window complete -- processing buffer
+2026-05-09 07:34:26,873 [INFO] [6dc4eff0-0654-4480-a2b2-3c189e7a38af] Averaged 15 readings: mq3=467.7 mq5=530.6 mq135=622.2 t=30.3 h=39.2
+2026-05-09 07:34:26,873 [INFO] Using NEW ML models (best_classifier + best_regressor + scaler + le_fruit)
+2026-05-09 07:34:26,873 [INFO] fruit_enc for 'Mango' -> 3  (LE class: 'mango')
+2026-05-09 07:34:26,873 [INFO] Features: mq3=467.7 mq5=530.6 mq135=622.2 t=30.3 h=39.2 | gas=1620.5 ferm=1.3304 spoil=1.1346 env=0.5012 enc=3
+2026-05-09 07:34:26,873 [INFO] Arduino: # LED OFF
+2026-05-09 07:34:26,969 [INFO] Ripening signals: sig1(MQ5/MQ3)=0.035 sig2(MQ135/MQ3)=0.130 sig3(MQ5/MQ135)=0.000 sig4(absQ5)=0.000 sig5(absMQ135)=0.000 sig6(suppression)=0.123 | env_corr=0.000 -> score=0.053 -> Natural
+2026-05-09 07:34:26,969 [ERROR] New model prediction failed (name '_reconcile_quality' is not defined) -- trying legacy bundle
+2026-05-09 07:34:26,970 [INFO] Using LEGACY ML bundle (fruit_quality_models.pkl)
+2026-05-09 07:34:26,970 [INFO] Loading legacy ML bundle from E:\finall-iot\backend\model\fruit_quality_models.pkl
+2026-05-09 07:34:27,153 [INFO] Legacy ML bundle loaded. Keys: ['clf_condition', 'clf_edible', 'clf_safe', 'clf_ripening', 'reg_shelf', 'le_fruit', 'le_condition', 'le_ripening', 'features']
+2026-05-09 07:34:27,153 [INFO] fruit_enc for 'Mango' -> 3  (LE class: 'Mango')
+2026-05-09 07:34:27,153 [INFO] Features: mq3=467.7 mq5=530.6 mq135=622.2 t=30.3 h=39.2 | gas=1620.5 ferm=1.3304 spoil=1.1346 env=0.5012 enc=3
+2026-05-09 07:34:27,489 [INFO] LEGACY ML -> edible=False  condition=Fresh  ripening=Natural  shelf=108.1d
+2026-05-09 07:34:27,489 [INFO] [6dc4eff0-0654-4480-a2b2-3c189e7a38af] Lifecycle complete -- result stored
+2026-05-09 07:44:46,990 [INFO] CNN -> Unknown (46.1%)
+2026-05-09 07:44:46,992 [INFO] [11474c5b-5c08-41f7-9c18-0e53e94b81a7] Lifecycle: waiting 15 s before activating sensor ...
+2026-05-09 07:44:46,992 [INFO] analyze-image -> Unknown 46.1%  session=11474c5b-5c08-41f7-9c18-0e53e94b81a7  (sensor in 15 s)
+2026-05-09 07:44:59,778 [INFO] CNN -> Mango (83.3%)
+2026-05-09 07:44:59,779 [INFO] [50cd2170-f46c-4260-bfba-e2eac0a5ecf5] Lifecycle: waiting 15 s before activating sensor ...
+2026-05-09 07:44:59,779 [INFO] analyze-image -> Mango 83.3%  session=50cd2170-f46c-4260-bfba-e2eac0a5ecf5  (sensor in 15 s)
+2026-05-09 07:45:02,003 [INFO] Turning LED ON -- sensor activation in progress
+2026-05-09 07:45:02,004 [INFO] -> Arduino: LED_ON
+2026-05-09 07:45:02,004 [INFO] [11474c5b-5c08-41f7-9c18-0e53e94b81a7] Sensor ACTIVATED -- collecting for 15 s
+2026-05-09 07:45:02,005 [INFO] Arduino: # LED ON
+2026-05-09 07:45:02,064 [INFO] Sensor <- mq3=494  mq5=520  mq135=625  t=30.3 C  h=39.2%
+2026-05-09 07:45:03,045 [INFO] Sensor <- mq3=494  mq5=519  mq135=625  t=30.3 C  h=39.2%
+2026-05-09 07:45:04,057 [INFO] Sensor <- mq3=494  mq5=519  mq135=625  t=31.5 C  h=35.6%
+2026-05-09 07:45:05,048 [INFO] Sensor <- mq3=494  mq5=519  mq135=625  t=31.5 C  h=35.6%
+2026-05-09 07:45:06,073 [INFO] Sensor <- mq3=494  mq5=519  mq135=625  t=31.5 C  h=35.6%
+2026-05-09 07:45:07,059 [INFO] Sensor <- mq3=494  mq5=519  mq135=624  t=31.5 C  h=35.6%
+2026-05-09 07:45:08,086 [INFO] Sensor <- mq3=494  mq5=519  mq135=624  t=31.5 C  h=35.7%
+2026-05-09 07:45:09,066 [INFO] Sensor <- mq3=494  mq5=518  mq135=625  t=31.5 C  h=35.7%
+2026-05-09 07:45:10,093 [INFO] Sensor <- mq3=493  mq5=518  mq135=624  t=31.4 C  h=35.9%
+2026-05-09 07:45:11,072 [INFO] Sensor <- mq3=493  mq5=519  mq135=624  t=31.4 C  h=35.9%
+2026-05-09 07:45:12,100 [INFO] Sensor <- mq3=493  mq5=519  mq135=624  t=31.4 C  h=35.9%
+2026-05-09 07:45:13,080 [INFO] Sensor <- mq3=493  mq5=518  mq135=624  t=31.4 C  h=35.9%
+2026-05-09 07:45:14,105 [INFO] Sensor <- mq3=493  mq5=518  mq135=624  t=31.4 C  h=36.0%
+2026-05-09 07:45:14,795 [INFO] Turning LED ON -- sensor activation in progress
+2026-05-09 07:45:14,795 [INFO] -> Arduino: LED_ON
+2026-05-09 07:45:14,795 [INFO] [50cd2170-f46c-4260-bfba-e2eac0a5ecf5] Sensor ACTIVATED -- collecting for 15 s
+2026-05-09 07:45:14,795 [INFO] Arduino: # LED ON
+2026-05-09 07:45:15,086 [INFO] Sensor <- mq3=493  mq5=518  mq135=624  t=31.4 C  h=36.0%
+2026-05-09 07:45:16,113 [INFO] Sensor <- mq3=493  mq5=519  mq135=624  t=31.5 C  h=35.9%
+2026-05-09 07:45:17,017 [INFO] Turning LED OFF
+2026-05-09 07:45:17,018 [INFO] -> Arduino: LED_OFF
+2026-05-09 07:45:17,018 [INFO] [11474c5b-5c08-41f7-9c18-0e53e94b81a7] Collection window complete -- processing buffer
+2026-05-09 07:45:17,019 [INFO] [11474c5b-5c08-41f7-9c18-0e53e94b81a7] Averaged 15 readings: mq3=493.5 mq5=518.7 mq135=624.4 t=31.3 h=36.2
+2026-05-09 07:45:17,019 [INFO] Using NEW ML models (best_classifier + best_regressor + scaler + le_fruit)
+2026-05-09 07:45:17,020 [WARNING] Fruit 'Unknown' not in LE vocabulary -- using 'apple' as fallback
+2026-05-09 07:45:17,021 [INFO] fruit_enc for 'Unknown' -> 0  (LE class: 'apple')
+2026-05-09 07:45:17,022 [INFO] Features: mq3=493.5 mq5=518.7 mq135=624.4 t=31.3 h=36.2 | gas=1636.7 ferm=1.2652 spoil=1.0511 env=0.5245 enc=0
+2026-05-09 07:45:17,026 [INFO] Arduino: # LED OFF
+2026-05-09 07:45:17,105 [INFO] Ripening signals: sig1(MQ5/MQ3)=0.000 sig2(MQ135/MQ3)=0.065 sig3(MQ5/MQ135)=0.000 sig4(absQ5)=0.000 sig5(absMQ135)=0.000 sig6(suppression)=0.100 | env_corr=0.000 -> score=0.023 -> Natural
+2026-05-09 07:45:17,105 [ERROR] New model prediction failed (name '_reconcile_quality' is not defined) -- trying legacy bundle
+2026-05-09 07:45:17,106 [INFO] Using LEGACY ML bundle (fruit_quality_models.pkl)
+2026-05-09 07:45:17,106 [WARNING] Fruit 'Unknown' not in LE vocabulary -- using 'Apple' as fallback
+2026-05-09 07:45:17,107 [INFO] fruit_enc for 'Unknown' -> 0  (LE class: 'Apple')
+2026-05-09 07:45:17,107 [INFO] Features: mq3=493.5 mq5=518.7 mq135=624.4 t=31.3 h=36.2 | gas=1636.7 ferm=1.2652 spoil=1.0511 env=0.5245 enc=0
+2026-05-09 07:45:17,491 [INFO] LEGACY ML -> edible=False  condition=Fresh  ripening=Natural  shelf=108.1d
+2026-05-09 07:45:17,492 [INFO] [11474c5b-5c08-41f7-9c18-0e53e94b81a7] Lifecycle complete -- result stored
+2026-05-09 07:45:29,807 [INFO] Turning LED OFF
+2026-05-09 07:45:29,808 [INFO] -> Arduino: LED_OFF
+2026-05-09 07:45:29,809 [INFO] [50cd2170-f46c-4260-bfba-e2eac0a5ecf5] Collection window complete -- processing buffer
+2026-05-09 07:45:29,809 [INFO] [50cd2170-f46c-4260-bfba-e2eac0a5ecf5] Averaged 15 readings: mq3=493.5 mq5=518.7 mq135=624.4 t=31.3 h=36.2
+2026-05-09 07:45:29,810 [INFO] Using NEW ML models (best_classifier + best_regressor + scaler + le_fruit)
+2026-05-09 07:45:29,810 [INFO] fruit_enc for 'Mango' -> 3  (LE class: 'mango')
+2026-05-09 07:45:29,811 [INFO] Features: mq3=493.5 mq5=518.7 mq135=624.4 t=31.3 h=36.2 | gas=1636.7 ferm=1.2652 spoil=1.0511 env=0.5245 enc=3
+2026-05-09 07:45:29,812 [INFO] Arduino: # LED OFF
+2026-05-09 07:45:29,906 [INFO] Ripening signals: sig1(MQ5/MQ3)=0.000 sig2(MQ135/MQ3)=0.065 sig3(MQ5/MQ135)=0.000 sig4(absQ5)=0.000 sig5(absMQ135)=0.000 sig6(suppression)=0.100 | env_corr=0.000 -> score=0.023 -> Natural
+2026-05-09 07:45:29,908 [ERROR] New model prediction failed (name '_reconcile_quality' is not defined) -- trying legacy bundle
+2026-05-09 07:45:29,909 [INFO] Using LEGACY ML bundle (fruit_quality_models.pkl)
+2026-05-09 07:45:29,911 [INFO] fruit_enc for 'Mango' -> 3  (LE class: 'Mango')
+2026-05-09 07:45:29,912 [INFO] Features: mq3=493.5 mq5=518.7 mq135=624.4 t=31.3 h=36.2 | gas=1636.7 ferm=1.2652 spoil=1.0511 env=0.5245 enc=3
+2026-05-09 07:45:30,296 [INFO] LEGACY ML -> edible=False  condition=Fresh  ripening=Natural  shelf=108.1d
+2026-05-09 07:45:30,296 [INFO] [50cd2170-f46c-4260-bfba-e2eac0a5ecf5] Lifecycle complete -- result stored
+2026-05-09 08:04:12,805 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:13,809 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:14,822 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:15,835 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:16,844 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:17,856 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:18,858 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:19,866 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:20,883 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:21,891 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:22,894 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:23,902 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:24,914 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:25,929 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:26,937 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:27,942 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:28,955 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:29,966 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:30,978 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:31,980 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:32,989 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:33,994 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:34,996 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:36,010 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:37,031 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:38,035 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:39,037 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:40,039 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:41,055 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:42,072 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:43,074 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:44,082 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:45,090 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:46,105 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:47,122 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:48,124 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:49,131 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:50,142 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:51,157 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:52,173 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:53,175 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:54,192 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:55,207 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:56,223 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:57,240 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:58,257 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:04:59,273 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:00,283 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:01,291 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:02,306 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:03,308 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:04,324 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:05,340 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:06,357 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:07,359 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:08,370 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:09,384 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:10,387 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:11,398 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:12,400 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:13,413 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:14,421 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:15,434 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:16,436 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:17,438 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:18,446 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:19,461 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:20,463 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:21,479 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:22,480 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:23,481 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:24,483 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:25,497 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:26,500 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:27,513 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:28,518 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:29,533 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:30,538 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:31,550 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:32,564 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:33,568 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:34,584 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:35,585 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:36,598 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:37,614 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:38,618 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:39,634 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:40,639 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:41,655 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:42,664 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:43,668 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:44,671 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:45,682 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:46,683 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:47,696 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:48,698 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:49,715 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:50,722 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:51,733 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:52,749 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:53,763 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:54,766 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:55,774 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:56,785 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:57,787 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:58,798 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:05:59,813 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:00,819 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:01,832 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:02,847 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:03,863 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:04,867 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:05,871 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:06,881 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:07,897 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:08,910 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:09,924 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:10,941 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:11,948 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:12,964 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:13,979 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:14,981 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:15,984 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:17,004 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:18,024 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:19,028 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:20,031 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:21,046 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:22,062 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:23,074 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:24,080 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:25,094 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:26,105 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:27,111 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:28,114 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:29,129 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:30,130 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:31,141 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:32,148 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:33,155 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:34,159 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:35,161 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:36,176 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:37,190 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:38,205 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:39,218 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:40,229 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:41,245 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:42,254 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:43,259 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:44,262 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:45,278 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:46,292 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:47,312 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:48,330 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:49,345 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:50,350 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:51,361 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:52,377 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:53,380 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:54,389 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:55,390 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:56,404 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:57,421 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:58,437 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 08:06:59,469 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:03:04,005 [INFO] ==============================================================
+2026-05-09 11:03:04,005 [INFO]   FruitSense Backend  v3.1
+2026-05-09 11:03:04,005 [INFO]   Serial port        : COM4
+2026-05-09 11:03:04,005 [INFO]   Baud rate          : 115200
+2026-05-09 11:03:04,005 [INFO]   Sensor delay       : 15 s after image upload
+2026-05-09 11:03:04,005 [INFO]   Collection window  : 15 s
+2026-05-09 11:03:04,005 [INFO]   Sensor gate        : CLOSED at startup
+2026-05-09 11:03:04,005 [INFO] ==============================================================
+2026-05-09 11:03:08,987 [INFO] Loading CNN from E:\finall-iot\backend\model\best_fruit_model_resnet50.pth
+2026-05-09 11:03:22,953 [WARNING] Unexpected keys (first 10): ['_backbone_ref.0.weight', '_backbone_ref.1.weight', '_backbone_ref.1.bias', '_backbone_ref.1.running_mean', '_backbone_ref.1.running_var', '_backbone_ref.1.num_batches_tracked', '_backbone_ref.4.0.conv1.weight', '_backbone_ref.4.0.bn1.weight', '_backbone_ref.4.0.bn1.bias', '_backbone_ref.4.0.bn1.running_mean']
+2026-05-09 11:03:22,969 [INFO] CNN loaded OK (5 classes)
+2026-05-09 11:03:22,969 [INFO] CNN model          : READY
+2026-05-09 11:03:43,366 [INFO] le_fruit classes : ['apple', 'banana', 'grape', 'mango', 'strawberry']
+2026-05-09 11:03:43,367 [INFO] classifier classes: [0, 1]
+2026-05-09 11:03:43,367 [INFO] New ML models loaded OK (classifier + regressor + scaler + le_fruit)
+2026-05-09 11:03:43,368 [INFO] New ML models      : READY  (classifier + regressor + scaler + le_fruit)
+2026-05-09 11:03:43,780 [INFO] Opening COM4 @ 115200 baud ...
+2026-05-09 11:03:43,780 [INFO] Waiting 2.5 s for Arduino boot + sensor warm-up ...
+2026-05-09 11:03:46,284 [INFO] Serial ready (COM4 @ 115200 baud) -- sensor INACTIVE until image upload
+2026-05-09 11:03:46,284 [INFO] Serial reader thread running (COM4 @ 115200 baud) -- idle until sensor activated
+2026-05-09 11:03:46,284 [INFO] Serial reader thread started (sensor gate CLOSED -- awaiting image upload)
+2026-05-09 11:03:46,284 [INFO] Serial reader      : IDLE (gate opens on first /analyze-image call)
+2026-05-09 11:03:46,284 [INFO] Server             : http://127.0.0.1:5000
+2026-05-09 11:03:46,284 [INFO] ==============================================================
+2026-05-09 11:03:47,381 [INFO] Arduino: # Ready. Awaiting commands: LED_ON | LED_OFF
+2026-05-09 11:03:47,396 [INFO] Arduino: # CSV format: mq3,mq5,mq135,temperature,humidity
+2026-05-09 11:04:11,316 [INFO] CNN -> Unknown (35.6%)
+2026-05-09 11:04:11,316 [INFO] [c6633a75-a03d-4d23-a691-61a87e73fb6b] Lifecycle: waiting 15 s before activating sensor ...
+2026-05-09 11:04:11,316 [INFO] analyze-image -> Unknown 35.6%  session=c6633a75-a03d-4d23-a691-61a87e73fb6b  (sensor in 15 s)
+2026-05-09 11:04:26,330 [INFO] Turning LED ON -- sensor activation in progress
+2026-05-09 11:04:26,331 [INFO] -> Arduino: LED_ON
+2026-05-09 11:04:26,331 [INFO] [c6633a75-a03d-4d23-a691-61a87e73fb6b] Sensor ACTIVATED -- collecting for 15 s
+2026-05-09 11:04:26,331 [INFO] Arduino: # LED ON
+2026-05-09 11:04:26,381 [INFO] Sensor <- mq3=528  mq5=592  mq135=640  t=29.1 C  h=46.4%
+2026-05-09 11:04:27,371 [INFO] Sensor <- mq3=530  mq5=594  mq135=641  t=29.1 C  h=46.4%
+2026-05-09 11:04:28,398 [INFO] Sensor <- mq3=530  mq5=593  mq135=640  t=29.5 C  h=47.1%
+2026-05-09 11:04:29,370 [INFO] Sensor <- mq3=529  mq5=591  mq135=638  t=29.5 C  h=47.1%
+2026-05-09 11:04:30,398 [INFO] Sensor <- mq3=530  mq5=592  mq135=640  t=29.6 C  h=47.0%
+2026-05-09 11:04:30,448 [INFO] CNN -> Grape (90.2%)
+2026-05-09 11:04:30,448 [INFO] [ad4b5e35-8214-4233-a70f-712713827481] Lifecycle: waiting 15 s before activating sensor ...
+2026-05-09 11:04:30,448 [INFO] analyze-image -> Grape 90.2%  session=ad4b5e35-8214-4233-a70f-712713827481  (sensor in 15 s)
+2026-05-09 11:04:31,381 [INFO] Sensor <- mq3=530  mq5=592  mq135=641  t=29.6 C  h=47.0%
+2026-05-09 11:04:32,398 [INFO] Sensor <- mq3=529  mq5=591  mq135=640  t=29.6 C  h=47.0%
+2026-05-09 11:04:33,380 [INFO] Sensor <- mq3=535  mq5=595  mq135=647  t=29.6 C  h=47.0%
+2026-05-09 11:04:34,414 [INFO] Sensor <- mq3=536  mq5=597  mq135=649  t=29.6 C  h=46.9%
+2026-05-09 11:04:35,398 [INFO] Sensor <- mq3=537  mq5=597  mq135=649  t=29.6 C  h=46.9%
+2026-05-09 11:04:36,414 [INFO] Sensor <- mq3=532  mq5=592  mq135=643  t=29.6 C  h=47.0%
+2026-05-09 11:04:37,398 [INFO] Sensor <- mq3=522  mq5=583  mq135=635  t=29.6 C  h=47.0%
+2026-05-09 11:04:38,430 [INFO] Sensor <- mq3=523  mq5=583  mq135=634  t=29.6 C  h=47.0%
+2026-05-09 11:04:39,413 [INFO] Sensor <- mq3=523  mq5=582  mq135=633  t=29.6 C  h=47.0%
+2026-05-09 11:04:40,413 [INFO] Sensor <- mq3=522  mq5=580  mq135=631  t=29.6 C  h=47.0%
+2026-05-09 11:04:41,346 [INFO] Turning LED OFF
+2026-05-09 11:04:41,347 [INFO] -> Arduino: LED_OFF
+2026-05-09 11:04:41,349 [INFO] [c6633a75-a03d-4d23-a691-61a87e73fb6b] Collection window complete -- processing buffer
+2026-05-09 11:04:41,349 [INFO] [c6633a75-a03d-4d23-a691-61a87e73fb6b] Averaged 15 readings: mq3=529.1 mq5=590.3 mq135=640.1 t=29.5 h=46.9
+2026-05-09 11:04:41,349 [INFO] Using NEW ML models (best_classifier + best_regressor + scaler + le_fruit)
+2026-05-09 11:04:41,349 [WARNING] Fruit 'Unknown' not in LE vocabulary -- using 'apple' as fallback
+2026-05-09 11:04:41,349 [INFO] fruit_enc for 'Unknown' -> 0  (LE class: 'apple')
+2026-05-09 11:04:41,364 [INFO] Features: mq3=529.1 mq5=590.3 mq135=640.1 t=29.5 h=46.9 | gas=1759.4 ferm=1.2098 spoil=1.1157 env=0.4675 enc=0
+2026-05-09 11:04:41,364 [INFO] Arduino: # LED OFF
+2026-05-09 11:04:41,546 [INFO] Ripening signals: sig1(MQ5/MQ3)=0.016 sig2(MQ135/MQ3)=0.010 sig3(MQ5/MQ135)=0.028 sig4(absQ5)=0.000 sig5(absMQ135)=0.000 sig6(suppression)=0.071 | env_corr=0.000 -> score=0.015 -> Natural
+2026-05-09 11:04:41,546 [ERROR] New model prediction failed (name '_reconcile_quality' is not defined) -- trying legacy bundle
+2026-05-09 11:04:41,546 [INFO] Using LEGACY ML bundle (fruit_quality_models.pkl)
+2026-05-09 11:04:41,546 [INFO] Loading legacy ML bundle from E:\finall-iot\backend\model\fruit_quality_models.pkl
+2026-05-09 11:04:41,797 [INFO] Legacy ML bundle loaded. Keys: ['clf_condition', 'clf_edible', 'clf_safe', 'clf_ripening', 'reg_shelf', 'le_fruit', 'le_condition', 'le_ripening', 'features']
+2026-05-09 11:04:41,797 [WARNING] Fruit 'Unknown' not in LE vocabulary -- using 'Apple' as fallback
+2026-05-09 11:04:41,797 [INFO] fruit_enc for 'Unknown' -> 0  (LE class: 'Apple')
+2026-05-09 11:04:41,797 [INFO] Features: mq3=529.1 mq5=590.3 mq135=640.1 t=29.5 h=46.9 | gas=1759.4 ferm=1.2098 spoil=1.1157 env=0.4675 enc=0
+2026-05-09 11:04:42,297 [INFO] LEGACY ML -> edible=False  condition=Fresh  ripening=Natural  shelf=107.7d
+2026-05-09 11:04:42,297 [INFO] [c6633a75-a03d-4d23-a691-61a87e73fb6b] Lifecycle complete -- result stored
+2026-05-09 11:04:45,462 [INFO] Turning LED ON -- sensor activation in progress
+2026-05-09 11:04:45,462 [INFO] -> Arduino: LED_ON
+2026-05-09 11:04:45,462 [INFO] [ad4b5e35-8214-4233-a70f-712713827481] Sensor ACTIVATED -- collecting for 15 s
+2026-05-09 11:04:45,462 [INFO] Arduino: # LED ON
+2026-05-09 11:04:45,518 [INFO] Sensor <- mq3=532  mq5=584  mq135=634  t=29.6 C  h=47.1%
+2026-05-09 11:04:46,501 [INFO] Sensor <- mq3=534  mq5=585  mq135=635  t=29.6 C  h=47.1%
+2026-05-09 11:04:47,531 [INFO] Sensor <- mq3=535  mq5=585  mq135=635  t=29.6 C  h=47.6%
+2026-05-09 11:04:48,499 [INFO] Sensor <- mq3=536  mq5=586  mq135=635  t=29.6 C  h=47.6%
+2026-05-09 11:04:49,533 [INFO] Sensor <- mq3=538  mq5=587  mq135=636  t=29.6 C  h=47.6%
+2026-05-09 11:04:50,514 [INFO] Sensor <- mq3=539  mq5=587  mq135=636  t=29.6 C  h=47.6%
+2026-05-09 11:04:51,546 [INFO] Sensor <- mq3=540  mq5=587  mq135=636  t=29.7 C  h=47.8%
+2026-05-09 11:04:52,518 [INFO] Sensor <- mq3=541  mq5=587  mq135=636  t=29.7 C  h=47.8%
+2026-05-09 11:04:53,552 [INFO] Sensor <- mq3=541  mq5=587  mq135=636  t=29.7 C  h=47.8%
+2026-05-09 11:04:54,518 [INFO] Sensor <- mq3=542  mq5=587  mq135=636  t=29.7 C  h=47.8%
+2026-05-09 11:04:55,550 [INFO] Sensor <- mq3=543  mq5=587  mq135=636  t=29.7 C  h=47.8%
+2026-05-09 11:04:56,534 [INFO] Sensor <- mq3=544  mq5=587  mq135=637  t=29.7 C  h=47.8%
+2026-05-09 11:04:57,566 [INFO] Sensor <- mq3=545  mq5=587  mq135=637  t=29.7 C  h=47.7%
+2026-05-09 11:04:58,539 [INFO] Sensor <- mq3=545  mq5=587  mq135=637  t=29.7 C  h=47.7%
+2026-05-09 11:04:59,561 [INFO] Sensor <- mq3=546  mq5=587  mq135=637  t=29.7 C  h=47.6%
+2026-05-09 11:05:00,477 [INFO] Turning LED OFF
+2026-05-09 11:05:00,479 [INFO] -> Arduino: LED_OFF
+2026-05-09 11:05:00,479 [INFO] [ad4b5e35-8214-4233-a70f-712713827481] Collection window complete -- processing buffer
+2026-05-09 11:05:00,479 [INFO] [ad4b5e35-8214-4233-a70f-712713827481] Averaged 15 readings: mq3=540.1 mq5=586.5 mq135=635.9 t=29.7 h=47.6
+2026-05-09 11:05:00,479 [INFO] Using NEW ML models (best_classifier + best_regressor + scaler + le_fruit)
+2026-05-09 11:05:00,479 [INFO] fruit_enc for 'Grape' -> 2  (LE class: 'grape')
+2026-05-09 11:05:00,479 [INFO] Features: mq3=540.1 mq5=586.5 mq135=635.9 t=29.7 h=47.6 | gas=1762.5 ferm=1.1775 spoil=1.0859 env=0.4674 enc=2
+2026-05-09 11:05:00,479 [INFO] Arduino: # LED OFF
+2026-05-09 11:05:00,579 [INFO] Ripening signals: sig1(MQ5/MQ3)=0.000 sig2(MQ135/MQ3)=0.000 sig3(MQ5/MQ135)=0.028 sig4(absQ5)=0.000 sig5(absMQ135)=0.000 sig6(suppression)=0.059 | env_corr=0.000 -> score=0.007 -> Natural
+2026-05-09 11:05:00,579 [ERROR] New model prediction failed (name '_reconcile_quality' is not defined) -- trying legacy bundle
+2026-05-09 11:05:00,579 [INFO] Using LEGACY ML bundle (fruit_quality_models.pkl)
+2026-05-09 11:05:00,579 [INFO] fruit_enc for 'Grape' -> 2  (LE class: 'Grapes')
+2026-05-09 11:05:00,579 [INFO] Features: mq3=540.1 mq5=586.5 mq135=635.9 t=29.7 h=47.6 | gas=1762.5 ferm=1.1775 spoil=1.0859 env=0.4674 enc=2
+2026-05-09 11:05:00,938 [INFO] LEGACY ML -> edible=False  condition=Fresh  ripening=Natural  shelf=107.7d
+2026-05-09 11:05:00,938 [INFO] [ad4b5e35-8214-4233-a70f-712713827481] Lifecycle complete -- result stored
+2026-05-09 11:05:42,643 [INFO] CNN -> Apple (91.9%)
+2026-05-09 11:05:42,643 [INFO] [4343ef1f-e391-42dd-97d3-98ff575575ef] Lifecycle: waiting 15 s before activating sensor ...
+2026-05-09 11:05:42,643 [INFO] analyze-image -> Apple 91.9%  session=4343ef1f-e391-42dd-97d3-98ff575575ef  (sensor in 15 s)
+2026-05-09 11:05:57,671 [INFO] Turning LED ON -- sensor activation in progress
+2026-05-09 11:05:57,671 [INFO] -> Arduino: LED_ON
+2026-05-09 11:05:57,672 [INFO] [4343ef1f-e391-42dd-97d3-98ff575575ef] Sensor ACTIVATED -- collecting for 15 s
+2026-05-09 11:05:57,676 [INFO] Arduino: # LED ON
+2026-05-09 11:05:57,723 [INFO] Sensor <- mq3=555  mq5=581  mq135=636  t=29.7 C  h=47.5%
+2026-05-09 11:05:58,707 [INFO] Sensor <- mq3=555  mq5=581  mq135=636  t=29.7 C  h=47.5%
+2026-05-09 11:05:59,739 [INFO] Sensor <- mq3=555  mq5=581  mq135=635  t=30.0 C  h=47.3%
+2026-05-09 11:06:00,719 [INFO] Sensor <- mq3=554  mq5=580  mq135=635  t=30.0 C  h=47.3%
+2026-05-09 11:06:01,739 [INFO] Sensor <- mq3=554  mq5=580  mq135=635  t=30.0 C  h=47.1%
+2026-05-09 11:06:02,727 [INFO] Sensor <- mq3=554  mq5=580  mq135=634  t=30.0 C  h=47.1%
+2026-05-09 11:06:03,753 [INFO] Sensor <- mq3=554  mq5=579  mq135=634  t=30.0 C  h=46.9%
+2026-05-09 11:06:04,723 [INFO] Sensor <- mq3=554  mq5=579  mq135=634  t=30.0 C  h=46.9%
+2026-05-09 11:06:05,759 [INFO] Sensor <- mq3=552  mq5=577  mq135=632  t=30.0 C  h=46.8%
+2026-05-09 11:06:06,740 [INFO] Sensor <- mq3=552  mq5=577  mq135=632  t=30.0 C  h=46.8%
+2026-05-09 11:06:07,737 [INFO] Sensor <- mq3=552  mq5=577  mq135=631  t=30.0 C  h=46.8%
+2026-05-09 11:06:08,755 [INFO] Sensor <- mq3=551  mq5=576  mq135=631  t=30.0 C  h=46.8%
+2026-05-09 11:06:09,740 [INFO] Sensor <- mq3=550  mq5=576  mq135=630  t=30.0 C  h=46.8%
+2026-05-09 11:06:10,771 [INFO] Sensor <- mq3=549  mq5=574  mq135=628  t=30.0 C  h=46.6%
+2026-05-09 11:06:11,755 [INFO] Sensor <- mq3=547  mq5=572  mq135=626  t=30.0 C  h=46.6%
+2026-05-09 11:06:12,687 [INFO] Turning LED OFF
+2026-05-09 11:06:12,687 [INFO] -> Arduino: LED_OFF
+2026-05-09 11:06:12,688 [INFO] [4343ef1f-e391-42dd-97d3-98ff575575ef] Collection window complete -- processing buffer
+2026-05-09 11:06:12,689 [INFO] [4343ef1f-e391-42dd-97d3-98ff575575ef] Averaged 15 readings: mq3=552.5 mq5=578.0 mq135=632.6 t=30.0 h=47.0
+2026-05-09 11:06:12,689 [INFO] Using NEW ML models (best_classifier + best_regressor + scaler + le_fruit)
+2026-05-09 11:06:12,690 [INFO] fruit_enc for 'Apple' -> 0  (LE class: 'apple')
+2026-05-09 11:06:12,690 [INFO] Features: mq3=552.5 mq5=578.0 mq135=632.6 t=30.0 h=47.0 | gas=1763.1 ferm=1.1449 spoil=1.0461 env=0.4735 enc=0
+2026-05-09 11:06:12,690 [INFO] Arduino: # LED OFF
+2026-05-09 11:06:12,805 [INFO] Ripening signals: sig1(MQ5/MQ3)=0.000 sig2(MQ135/MQ3)=0.000 sig3(MQ5/MQ135)=0.017 sig4(absQ5)=0.000 sig5(absMQ135)=0.000 sig6(suppression)=0.046 | env_corr=0.000 -> score=0.005 -> Natural
+2026-05-09 11:06:12,805 [ERROR] New model prediction failed (name '_reconcile_quality' is not defined) -- trying legacy bundle
+2026-05-09 11:06:12,805 [INFO] Using LEGACY ML bundle (fruit_quality_models.pkl)
+2026-05-09 11:06:12,805 [INFO] fruit_enc for 'Apple' -> 0  (LE class: 'Apple')
+2026-05-09 11:06:12,805 [INFO] Features: mq3=552.5 mq5=578.0 mq135=632.6 t=30.0 h=47.0 | gas=1763.1 ferm=1.1449 spoil=1.0461 env=0.4735 enc=0
+2026-05-09 11:06:13,205 [INFO] LEGACY ML -> edible=False  condition=Fresh  ripening=Natural  shelf=107.7d
+2026-05-09 11:06:13,205 [INFO] [4343ef1f-e391-42dd-97d3-98ff575575ef] Lifecycle complete -- result stored
+2026-05-09 11:06:43,054 [INFO] CNN -> Unknown (77.7%)
+2026-05-09 11:06:43,054 [INFO] [1348890e-ccae-4be3-ad50-781b7df49530] Lifecycle: waiting 15 s before activating sensor ...
+2026-05-09 11:06:43,054 [INFO] analyze-image -> Unknown 77.7%  session=1348890e-ccae-4be3-ad50-781b7df49530  (sensor in 15 s)
+2026-05-09 11:06:53,923 [INFO] CNN -> Mango (91.0%)
+2026-05-09 11:06:53,923 [INFO] [c1a6c64f-0e22-4897-93e1-dc0915a93dbe] Lifecycle: waiting 15 s before activating sensor ...
+2026-05-09 11:06:53,923 [INFO] analyze-image -> Mango 91.0%  session=c1a6c64f-0e22-4897-93e1-dc0915a93dbe  (sensor in 15 s)
+2026-05-09 11:06:58,079 [INFO] Turning LED ON -- sensor activation in progress
+2026-05-09 11:06:58,079 [INFO] -> Arduino: LED_ON
+2026-05-09 11:06:58,079 [INFO] [1348890e-ccae-4be3-ad50-781b7df49530] Sensor ACTIVATED -- collecting for 15 s
+2026-05-09 11:06:58,079 [INFO] Arduino: # LED ON
+2026-05-09 11:06:58,134 [INFO] Sensor <- mq3=539  mq5=564  mq135=621  t=30.0 C  h=46.5%
+2026-05-09 11:06:59,118 [INFO] Sensor <- mq3=539  mq5=564  mq135=620  t=30.0 C  h=46.5%
+2026-05-09 11:07:00,142 [INFO] Sensor <- mq3=539  mq5=564  mq135=620  t=30.3 C  h=46.4%
+2026-05-09 11:07:01,120 [INFO] Sensor <- mq3=540  mq5=564  mq135=620  t=30.3 C  h=46.4%
+2026-05-09 11:07:02,149 [INFO] Sensor <- mq3=540  mq5=564  mq135=620  t=30.3 C  h=46.4%
+2026-05-09 11:07:03,130 [INFO] Sensor <- mq3=540  mq5=564  mq135=620  t=30.3 C  h=46.4%
+2026-05-09 11:07:04,130 [INFO] Sensor <- mq3=540  mq5=564  mq135=620  t=30.3 C  h=46.4%
+2026-05-09 11:07:05,162 [INFO] Sensor <- mq3=540  mq5=564  mq135=620  t=30.3 C  h=46.5%
+2026-05-09 11:07:06,133 [INFO] Sensor <- mq3=540  mq5=564  mq135=620  t=30.3 C  h=46.5%
+2026-05-09 11:07:07,163 [INFO] Sensor <- mq3=540  mq5=564  mq135=620  t=30.3 C  h=46.7%
+2026-05-09 11:07:08,150 [INFO] Sensor <- mq3=540  mq5=564  mq135=620  t=30.3 C  h=46.7%
+2026-05-09 11:07:08,931 [INFO] Turning LED ON -- sensor activation in progress
+2026-05-09 11:07:08,933 [INFO] -> Arduino: LED_ON
+2026-05-09 11:07:08,933 [INFO] [c1a6c64f-0e22-4897-93e1-dc0915a93dbe] Sensor ACTIVATED -- collecting for 15 s
+2026-05-09 11:07:08,933 [INFO] Arduino: # LED ON
+2026-05-09 11:07:09,164 [INFO] Sensor <- mq3=540  mq5=564  mq135=620  t=30.3 C  h=46.6%
+2026-05-09 11:07:10,149 [INFO] Sensor <- mq3=540  mq5=563  mq135=619  t=30.3 C  h=46.6%
+2026-05-09 11:07:11,149 [INFO] Sensor <- mq3=540  mq5=563  mq135=619  t=30.3 C  h=46.6%
+2026-05-09 11:07:12,180 [INFO] Sensor <- mq3=540  mq5=563  mq135=619  t=30.3 C  h=46.7%
+2026-05-09 11:07:13,081 [INFO] Turning LED OFF
+2026-05-09 11:07:13,082 [INFO] -> Arduino: LED_OFF
+2026-05-09 11:07:13,082 [INFO] [1348890e-ccae-4be3-ad50-781b7df49530] Collection window complete -- processing buffer
+2026-05-09 11:07:13,082 [INFO] [1348890e-ccae-4be3-ad50-781b7df49530] Averaged 15 readings: mq3=539.8 mq5=563.8 mq135=619.9 t=30.3 h=46.5
+2026-05-09 11:07:13,082 [INFO] Using NEW ML models (best_classifier + best_regressor + scaler + le_fruit)
+2026-05-09 11:07:13,082 [WARNING] Fruit 'Unknown' not in LE vocabulary -- using 'apple' as fallback
+2026-05-09 11:07:13,082 [INFO] fruit_enc for 'Unknown' -> 0  (LE class: 'apple')
+2026-05-09 11:07:13,082 [INFO] Features: mq3=539.8 mq5=563.8 mq135=619.9 t=30.3 h=46.5 | gas=1723.5 ferm=1.1483 spoil=1.0445 env=0.4791 enc=0
+2026-05-09 11:07:13,082 [INFO] Arduino: # LED OFF
+2026-05-09 11:07:13,147 [INFO] Ripening signals: sig1(MQ5/MQ3)=0.000 sig2(MQ135/MQ3)=0.000 sig3(MQ5/MQ135)=0.012 sig4(absQ5)=0.000 sig5(absMQ135)=0.000 sig6(suppression)=0.055 | env_corr=0.000 -> score=0.005 -> Natural
+2026-05-09 11:07:13,148 [ERROR] New model prediction failed (name '_reconcile_quality' is not defined) -- trying legacy bundle
+2026-05-09 11:07:13,148 [INFO] Using LEGACY ML bundle (fruit_quality_models.pkl)
+2026-05-09 11:07:13,148 [WARNING] Fruit 'Unknown' not in LE vocabulary -- using 'Apple' as fallback
+2026-05-09 11:07:13,149 [INFO] fruit_enc for 'Unknown' -> 0  (LE class: 'Apple')
+2026-05-09 11:07:13,149 [INFO] Features: mq3=539.8 mq5=563.8 mq135=619.9 t=30.3 h=46.5 | gas=1723.5 ferm=1.1483 spoil=1.0445 env=0.4791 enc=0
+2026-05-09 11:07:13,480 [INFO] LEGACY ML -> edible=False  condition=Fresh  ripening=Natural  shelf=107.7d
+2026-05-09 11:07:13,481 [INFO] [1348890e-ccae-4be3-ad50-781b7df49530] Lifecycle complete -- result stored
+2026-05-09 11:07:23,939 [INFO] Turning LED OFF
+2026-05-09 11:07:23,939 [INFO] -> Arduino: LED_OFF
+2026-05-09 11:07:23,939 [INFO] [c1a6c64f-0e22-4897-93e1-dc0915a93dbe] Collection window complete -- processing buffer
+2026-05-09 11:07:23,939 [INFO] [c1a6c64f-0e22-4897-93e1-dc0915a93dbe] Averaged 15 readings: mq3=539.8 mq5=563.8 mq135=619.9 t=30.3 h=46.5
+2026-05-09 11:07:23,939 [INFO] Using NEW ML models (best_classifier + best_regressor + scaler + le_fruit)
+2026-05-09 11:07:23,939 [INFO] fruit_enc for 'Mango' -> 3  (LE class: 'mango')
+2026-05-09 11:07:23,939 [INFO] Features: mq3=539.8 mq5=563.8 mq135=619.9 t=30.3 h=46.5 | gas=1723.5 ferm=1.1483 spoil=1.0445 env=0.4791 enc=3
+2026-05-09 11:07:23,939 [INFO] Arduino: # LED OFF
+2026-05-09 11:07:24,063 [INFO] Ripening signals: sig1(MQ5/MQ3)=0.000 sig2(MQ135/MQ3)=0.000 sig3(MQ5/MQ135)=0.012 sig4(absQ5)=0.000 sig5(absMQ135)=0.000 sig6(suppression)=0.055 | env_corr=0.000 -> score=0.005 -> Natural
+2026-05-09 11:07:24,063 [ERROR] New model prediction failed (name '_reconcile_quality' is not defined) -- trying legacy bundle
+2026-05-09 11:07:24,063 [INFO] Using LEGACY ML bundle (fruit_quality_models.pkl)
+2026-05-09 11:07:24,063 [INFO] fruit_enc for 'Mango' -> 3  (LE class: 'Mango')
+2026-05-09 11:07:24,063 [INFO] Features: mq3=539.8 mq5=563.8 mq135=619.9 t=30.3 h=46.5 | gas=1723.5 ferm=1.1483 spoil=1.0445 env=0.4791 enc=3
+2026-05-09 11:07:24,513 [INFO] LEGACY ML -> edible=False  condition=Fresh  ripening=Natural  shelf=107.7d
+2026-05-09 11:07:24,513 [INFO] [c1a6c64f-0e22-4897-93e1-dc0915a93dbe] Lifecycle complete -- result stored
+2026-05-09 11:10:15,158 [INFO] CNN -> Banana (93.5%)
+2026-05-09 11:10:15,174 [INFO] [3080dcca-f157-4137-be69-58e9a01d19fb] Lifecycle: waiting 15 s before activating sensor ...
+2026-05-09 11:10:15,174 [INFO] analyze-image -> Banana 93.5%  session=3080dcca-f157-4137-be69-58e9a01d19fb  (sensor in 15 s)
+2026-05-09 11:10:30,181 [INFO] Turning LED ON -- sensor activation in progress
+2026-05-09 11:10:30,181 [INFO] -> Arduino: LED_ON
+2026-05-09 11:10:30,181 [INFO] [3080dcca-f157-4137-be69-58e9a01d19fb] Sensor ACTIVATED -- collecting for 15 s
+2026-05-09 11:10:30,181 [INFO] Arduino: # LED ON
+2026-05-09 11:10:30,243 [INFO] Sensor <- mq3=551  mq5=555  mq135=603  t=30.3 C  h=46.6%
+2026-05-09 11:10:31,222 [INFO] Sensor <- mq3=551  mq5=554  mq135=603  t=30.3 C  h=46.6%
+2026-05-09 11:10:32,245 [INFO] Sensor <- mq3=551  mq5=554  mq135=603  t=30.7 C  h=45.9%
+2026-05-09 11:10:33,228 [INFO] Sensor <- mq3=551  mq5=553  mq135=601  t=30.7 C  h=45.9%
+2026-05-09 11:10:34,256 [INFO] Sensor <- mq3=548  mq5=551  mq135=598  t=30.7 C  h=46.0%
+2026-05-09 11:10:35,232 [INFO] Sensor <- mq3=549  mq5=551  mq135=599  t=30.7 C  h=46.0%
+2026-05-09 11:10:36,248 [INFO] Sensor <- mq3=549  mq5=551  mq135=599  t=30.7 C  h=46.1%
+2026-05-09 11:10:37,237 [INFO] Sensor <- mq3=550  mq5=551  mq135=599  t=30.7 C  h=46.1%
+2026-05-09 11:10:38,264 [INFO] Sensor <- mq3=549  mq5=550  mq135=598  t=30.7 C  h=46.1%
+2026-05-09 11:10:39,237 [INFO] Sensor <- mq3=549  mq5=551  mq135=598  t=30.7 C  h=46.1%
+2026-05-09 11:10:40,271 [INFO] Sensor <- mq3=549  mq5=551  mq135=599  t=30.7 C  h=46.1%
+2026-05-09 11:10:41,257 [INFO] Sensor <- mq3=549  mq5=550  mq135=599  t=30.7 C  h=46.1%
+2026-05-09 11:10:42,283 [INFO] Sensor <- mq3=549  mq5=551  mq135=599  t=30.7 C  h=46.0%
+2026-05-09 11:10:43,253 [INFO] Sensor <- mq3=550  mq5=551  mq135=599  t=30.7 C  h=46.0%
+2026-05-09 11:10:44,264 [INFO] Sensor <- mq3=550  mq5=551  mq135=600  t=30.7 C  h=46.0%
+2026-05-09 11:10:45,185 [INFO] Turning LED OFF
+2026-05-09 11:10:45,185 [INFO] -> Arduino: LED_OFF
+2026-05-09 11:10:45,185 [INFO] [3080dcca-f157-4137-be69-58e9a01d19fb] Collection window complete -- processing buffer
+2026-05-09 11:10:45,185 [INFO] [3080dcca-f157-4137-be69-58e9a01d19fb] Averaged 15 readings: mq3=549.7 mq5=551.7 mq135=599.8 t=30.6 h=46.1
+2026-05-09 11:10:45,185 [INFO] Using NEW ML models (best_classifier + best_regressor + scaler + le_fruit)
+2026-05-09 11:10:45,185 [INFO] fruit_enc for 'Banana' -> 1  (LE class: 'banana')
+2026-05-09 11:10:45,185 [INFO] Features: mq3=549.7 mq5=551.7 mq135=599.8 t=30.6 h=46.1 | gas=1701.1 ferm=1.0912 spoil=1.0036 env=0.4857 enc=1
+2026-05-09 11:10:45,194 [INFO] Arduino: # LED OFF
+2026-05-09 11:10:45,260 [INFO] Ripening signals: sig1(MQ5/MQ3)=0.000 sig2(MQ135/MQ3)=0.000 sig3(MQ5/MQ135)=0.025 sig4(absQ5)=0.000 sig5(absMQ135)=0.000 sig6(suppression)=0.042 | env_corr=0.000 -> score=0.006 -> Natural
+2026-05-09 11:10:45,260 [ERROR] New model prediction failed (name '_reconcile_quality' is not defined) -- trying legacy bundle
+2026-05-09 11:10:45,260 [INFO] Using LEGACY ML bundle (fruit_quality_models.pkl)
+2026-05-09 11:10:45,261 [INFO] fruit_enc for 'Banana' -> 1  (LE class: 'Banana')
+2026-05-09 11:10:45,261 [INFO] Features: mq3=549.7 mq5=551.7 mq135=599.8 t=30.6 h=46.1 | gas=1701.1 ferm=1.0912 spoil=1.0036 env=0.4857 enc=1
+2026-05-09 11:10:45,700 [INFO] LEGACY ML -> edible=False  condition=Fresh  ripening=Natural  shelf=107.7d
+2026-05-09 11:10:45,700 [INFO] [3080dcca-f157-4137-be69-58e9a01d19fb] Lifecycle complete -- result stored
+2026-05-09 11:17:22,455 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:23,459 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:24,471 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:25,483 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:26,487 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:27,498 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:28,502 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:29,502 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:30,519 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:31,532 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:32,536 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:33,543 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:34,553 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:35,559 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:36,568 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:37,585 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:38,594 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:39,601 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:40,615 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:41,623 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:42,627 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:43,634 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:44,634 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:45,649 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:46,651 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:47,663 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:48,667 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:49,670 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:50,685 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:51,700 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:52,715 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:53,717 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:54,732 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:55,733 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:56,749 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:57,750 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:58,765 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:17:59,769 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:00,782 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:01,784 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:02,800 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:03,816 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:04,832 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:05,849 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:06,850 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:07,852 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:08,865 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:09,873 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:10,883 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:11,893 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:12,899 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:13,914 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:14,917 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:15,930 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:16,944 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:17,948 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:18,961 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:19,965 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:20,980 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:21,998 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:23,013 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:24,029 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:25,040 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:26,053 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:27,066 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:28,070 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:29,072 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:30,080 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:31,096 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:32,112 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:33,114 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:34,128 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:35,133 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:36,138 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:37,145 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:38,152 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:39,158 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:40,177 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:41,196 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:42,208 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:43,211 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:44,226 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:45,227 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:46,229 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:47,243 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:48,245 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:49,261 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:50,264 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:51,280 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:52,281 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:53,285 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:54,292 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:55,296 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:56,312 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:57,315 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:58,330 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:18:59,338 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:19:00,342 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:19:01,359 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:19:02,360 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:19:03,372 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:19:04,375 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:19:05,376 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:19:06,391 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:19:07,393 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:19:08,408 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:19:09,423 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:19:10,424 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:19:11,426 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:19:12,429 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:19:13,436 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:19:14,437 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:19:15,444 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:19:16,457 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:19:17,460 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:19:18,475 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:19:19,492 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:19:20,495 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:19:21,506 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:19:22,507 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:19:23,519 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:19:24,533 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:19:25,539 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:19:26,542 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:19:27,544 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:19:28,556 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:19:29,564 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:19:30,574 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:19:31,575 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:19:32,586 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:19:33,590 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:20:58,657 [INFO] ==============================================================
+2026-05-09 11:20:58,657 [INFO]   FruitSense Backend  v3.2  (FIXED)
+2026-05-09 11:20:58,657 [INFO]   Serial port        : COM4
+2026-05-09 11:20:58,657 [INFO]   Baud rate          : 115200
+2026-05-09 11:20:58,657 [INFO]   Sensor delay       : 15 s after image upload
+2026-05-09 11:20:58,657 [INFO]   Collection window  : 15 s
+2026-05-09 11:20:58,657 [INFO]   Sensor gate        : CLOSED at startup
+2026-05-09 11:20:58,657 [INFO] ==============================================================
+2026-05-09 11:21:00,430 [INFO] Loading CNN from E:\finall-iot\backend\model\best_fruit_model_resnet50.pth
+2026-05-09 11:21:02,635 [WARNING] Unexpected keys (first 10): ['_backbone_ref.0.weight', '_backbone_ref.1.weight', '_backbone_ref.1.bias', '_backbone_ref.1.running_mean', '_backbone_ref.1.running_var', '_backbone_ref.1.num_batches_tracked', '_backbone_ref.4.0.conv1.weight', '_backbone_ref.4.0.bn1.weight', '_backbone_ref.4.0.bn1.bias', '_backbone_ref.4.0.bn1.running_mean']
+2026-05-09 11:21:02,638 [INFO] CNN loaded OK (5 classes)
+2026-05-09 11:21:02,638 [INFO] CNN model          : READY
+2026-05-09 11:21:03,931 [INFO] le_fruit classes : ['apple', 'banana', 'grape', 'mango', 'strawberry']
+2026-05-09 11:21:03,931 [INFO] classifier classes: [0, 1]
+2026-05-09 11:21:03,931 [INFO] New ML models loaded OK (classifier + regressor + scaler + le_fruit)
+2026-05-09 11:21:03,931 [INFO] New ML models      : READY  (classifier + regressor + scaler + le_fruit)
+2026-05-09 11:21:03,937 [INFO] Opening COM4 @ 115200 baud ...
+2026-05-09 11:21:03,939 [INFO] Waiting 2.5 s for Arduino boot + sensor warm-up ...
+2026-05-09 11:21:06,447 [INFO] Serial ready (COM4 @ 115200 baud) -- sensor INACTIVE until image upload
+2026-05-09 11:21:06,447 [INFO] Serial reader thread running (COM4 @ 115200 baud) -- idle until sensor activated
+2026-05-09 11:21:06,447 [INFO] Serial reader thread started (sensor gate CLOSED -- awaiting image upload)
+2026-05-09 11:21:06,447 [INFO] Serial reader      : IDLE (gate opens on first /analyze-image call)
+2026-05-09 11:21:06,447 [INFO] Server             : http://127.0.0.1:5000
+2026-05-09 11:21:06,447 [INFO] ==============================================================
+2026-05-09 11:21:07,545 [INFO] Arduino: # Ready. Awaiting commands: LED_ON | LED_OFF
+2026-05-09 11:21:07,549 [INFO] Arduino: # CSV format: mq3,mq5,mq135,temperature,humidity
+2026-05-09 11:21:29,647 [INFO] CNN -> Banana (92.9%)
+2026-05-09 11:21:29,647 [INFO] [572b7109-acf5-4510-b86f-bb157808e4de] Lifecycle: waiting 15 s before activating sensor ...
+2026-05-09 11:21:29,647 [INFO] analyze-image -> Banana 92.9%  session=572b7109-acf5-4510-b86f-bb157808e4de  (sensor in 15 s)
+2026-05-09 11:21:44,660 [INFO] Turning LED ON -- sensor activation in progress
+2026-05-09 11:21:44,661 [INFO] -> Arduino: LED_ON
+2026-05-09 11:21:44,661 [INFO] [572b7109-acf5-4510-b86f-bb157808e4de] Sensor ACTIVATED -- collecting for 15 s
+2026-05-09 11:21:44,661 [INFO] Arduino: # LED ON
+2026-05-09 11:21:44,717 [INFO] Sensor <- mq3=548  mq5=538  mq135=600  t=29.8 C  h=45.6%
+2026-05-09 11:21:45,695 [INFO] Sensor <- mq3=549  mq5=538  mq135=600  t=29.8 C  h=45.6%
+2026-05-09 11:21:46,728 [INFO] Sensor <- mq3=550  mq5=538  mq135=601  t=30.0 C  h=46.3%
+2026-05-09 11:21:47,706 [INFO] Sensor <- mq3=553  mq5=541  mq135=603  t=30.0 C  h=46.3%
+2026-05-09 11:21:48,710 [INFO] Sensor <- mq3=553  mq5=541  mq135=603  t=30.0 C  h=46.3%
+2026-05-09 11:21:49,730 [INFO] Sensor <- mq3=553  mq5=541  mq135=603  t=30.1 C  h=46.4%
+2026-05-09 11:21:50,713 [INFO] Sensor <- mq3=554  mq5=540  mq135=603  t=30.1 C  h=46.4%
+2026-05-09 11:21:51,741 [INFO] Sensor <- mq3=554  mq5=541  mq135=603  t=30.1 C  h=46.6%
+2026-05-09 11:21:52,712 [INFO] Sensor <- mq3=554  mq5=540  mq135=602  t=30.1 C  h=46.6%
+2026-05-09 11:21:53,743 [INFO] Sensor <- mq3=555  mq5=540  mq135=603  t=30.1 C  h=46.6%
+2026-05-09 11:21:54,729 [INFO] Sensor <- mq3=555  mq5=541  mq135=603  t=30.1 C  h=46.6%
+2026-05-09 11:21:55,730 [INFO] Sensor <- mq3=555  mq5=540  mq135=602  t=30.1 C  h=46.6%
+2026-05-09 11:21:56,750 [INFO] Sensor <- mq3=555  mq5=540  mq135=602  t=30.1 C  h=46.6%
+2026-05-09 11:21:57,738 [INFO] Sensor <- mq3=554  mq5=539  mq135=601  t=30.1 C  h=46.6%
+2026-05-09 11:21:58,757 [INFO] Sensor <- mq3=554  mq5=538  mq135=600  t=30.1 C  h=46.6%
+2026-05-09 11:21:59,669 [INFO] Turning LED OFF
+2026-05-09 11:21:59,669 [INFO] -> Arduino: LED_OFF
+2026-05-09 11:21:59,669 [INFO] [572b7109-acf5-4510-b86f-bb157808e4de] Collection window complete -- processing buffer
+2026-05-09 11:21:59,671 [INFO] [572b7109-acf5-4510-b86f-bb157808e4de] Averaged 15 readings: mq3=553.1 mq5=539.7 mq135=601.9 t=30.0 h=46.4
+2026-05-09 11:21:59,671 [INFO] Using NEW ML models (best_classifier + best_regressor + scaler + le_fruit)
+2026-05-09 11:21:59,671 [INFO] fruit_enc for 'Banana' -> 1  (LE class: 'banana')
+2026-05-09 11:21:59,671 [INFO] Features: mq3=553.1 mq5=539.7 mq135=601.9 t=30.0 h=46.4 | gas=1694.7 ferm=1.0884 spoil=0.9759 env=0.4764 enc=1
+2026-05-09 11:21:59,671 [INFO] Arduino: # LED OFF
+2026-05-09 11:21:59,696 [INFO] Classifier raw='0' -> condition='Ripe'
+2026-05-09 11:21:59,767 [INFO] Shelf life: raw=10.0 -> capped=10.0 (fruit=Banana condition=Ripe)
+2026-05-09 11:21:59,767 [INFO] Regressor raw=48.8 -> sanitised=10.0 days
+2026-05-09 11:21:59,767 [INFO] Ripening signals: sig1(MQ5/MQ3)=0.095 sig2(MQ135/MQ3)=0.110 sig3(MQ5/MQ135)=0.281 sig4(absMQ5)=0.079 sig5(absMQ135)=0.204 sig6(supp)=0.056 | env_corr=0.000 -> score=0.134 -> Natural (13.4% chemical)
+2026-05-09 11:21:59,767 [INFO] _reconcile_quality: condition=Ripe ripening=Natural chem=13.4% -> edible=True risk=Low label=Naturally Ripened
+2026-05-09 11:21:59,768 [INFO] FINAL -> fruit=Banana condition=Ripe ripening=Natural edible=True risk=Low label=Naturally Ripened shelf=10.0d chem=13.4%
+2026-05-09 11:21:59,768 [INFO] [572b7109-acf5-4510-b86f-bb157808e4de] Lifecycle complete -- result stored
+2026-05-09 11:22:51,079 [INFO] CNN -> Grape (91.0%)
+2026-05-09 11:22:51,079 [INFO] [8fa40c31-1f40-4fa2-b51e-ea18ce49959a] Lifecycle: waiting 15 s before activating sensor ...
+2026-05-09 11:22:51,079 [INFO] analyze-image -> Grape 91.0%  session=8fa40c31-1f40-4fa2-b51e-ea18ce49959a  (sensor in 15 s)
+2026-05-09 11:23:06,100 [INFO] Turning LED ON -- sensor activation in progress
+2026-05-09 11:23:06,100 [INFO] -> Arduino: LED_ON
+2026-05-09 11:23:06,100 [INFO] [8fa40c31-1f40-4fa2-b51e-ea18ce49959a] Sensor ACTIVATED -- collecting for 15 s
+2026-05-09 11:23:06,100 [INFO] Arduino: # LED ON
+2026-05-09 11:23:06,154 [INFO] Sensor <- mq3=548  mq5=535  mq135=598  t=30.1 C  h=46.6%
+2026-05-09 11:23:07,142 [INFO] Sensor <- mq3=548  mq5=535  mq135=597  t=30.1 C  h=46.6%
+2026-05-09 11:23:08,168 [INFO] Sensor <- mq3=547  mq5=534  mq135=597  t=30.3 C  h=46.7%
+2026-05-09 11:23:09,140 [INFO] Sensor <- mq3=547  mq5=534  mq135=597  t=30.3 C  h=46.7%
+2026-05-09 11:23:10,177 [INFO] Sensor <- mq3=547  mq5=534  mq135=597  t=30.3 C  h=46.8%
+2026-05-09 11:23:11,153 [INFO] Sensor <- mq3=547  mq5=534  mq135=596  t=30.3 C  h=46.8%
+2026-05-09 11:23:12,174 [INFO] Sensor <- mq3=547  mq5=534  mq135=597  t=30.3 C  h=46.8%
+2026-05-09 11:23:13,152 [INFO] Sensor <- mq3=546  mq5=534  mq135=596  t=30.3 C  h=46.8%
+2026-05-09 11:23:14,180 [INFO] Sensor <- mq3=547  mq5=534  mq135=596  t=30.3 C  h=46.8%
+2026-05-09 11:23:15,165 [INFO] Sensor <- mq3=546  mq5=534  mq135=596  t=30.3 C  h=46.8%
+2026-05-09 11:23:16,180 [INFO] Sensor <- mq3=546  mq5=533  mq135=596  t=30.3 C  h=46.7%
+2026-05-09 11:23:17,168 [INFO] Sensor <- mq3=546  mq5=533  mq135=596  t=30.3 C  h=46.7%
+2026-05-09 11:23:18,197 [INFO] Sensor <- mq3=546  mq5=533  mq135=596  t=30.3 C  h=46.6%
+2026-05-09 11:23:19,169 [INFO] Sensor <- mq3=545  mq5=533  mq135=595  t=30.3 C  h=46.6%
+2026-05-09 11:23:20,179 [INFO] Sensor <- mq3=545  mq5=533  mq135=595  t=30.3 C  h=46.6%
+2026-05-09 11:23:21,115 [INFO] Turning LED OFF
+2026-05-09 11:23:21,115 [INFO] -> Arduino: LED_OFF
+2026-05-09 11:23:21,115 [INFO] [8fa40c31-1f40-4fa2-b51e-ea18ce49959a] Collection window complete -- processing buffer
+2026-05-09 11:23:21,115 [INFO] [8fa40c31-1f40-4fa2-b51e-ea18ce49959a] Averaged 15 readings: mq3=546.5 mq5=533.8 mq135=596.3 t=30.3 h=46.7
+2026-05-09 11:23:21,115 [INFO] Using NEW ML models (best_classifier + best_regressor + scaler + le_fruit)
+2026-05-09 11:23:21,115 [INFO] fruit_enc for 'Grape' -> 2  (LE class: 'grape')
+2026-05-09 11:23:21,115 [INFO] Arduino: # LED OFF
+2026-05-09 11:23:21,118 [INFO] Features: mq3=546.5 mq5=533.8 mq135=596.3 t=30.3 h=46.7 | gas=1676.7 ferm=1.0911 spoil=0.9767 env=0.4787 enc=2
+2026-05-09 11:23:21,127 [INFO] Classifier raw='0' -> condition='Ripe'
+2026-05-09 11:23:21,202 [INFO] Shelf life: raw=14.0 -> capped=14.0 (fruit=Grape condition=Ripe)
+2026-05-09 11:23:21,202 [INFO] Regressor raw=48.8 -> sanitised=14.0 days
+2026-05-09 11:23:21,202 [INFO] Ripening signals: sig1(MQ5/MQ3)=0.096 sig2(MQ135/MQ3)=0.114 sig3(MQ5/MQ135)=0.279 sig4(absMQ5)=0.068 sig5(absMQ135)=0.193 sig6(supp)=0.063 | env_corr=0.000 -> score=0.132 -> Natural (13.2% chemical)
+2026-05-09 11:23:21,203 [INFO] _reconcile_quality: condition=Ripe ripening=Natural chem=13.2% -> edible=True risk=Low label=Naturally Ripened
+2026-05-09 11:23:21,203 [INFO] FINAL -> fruit=Grape condition=Ripe ripening=Natural edible=True risk=Low label=Naturally Ripened shelf=14.0d chem=13.2%
+2026-05-09 11:23:21,203 [INFO] [8fa40c31-1f40-4fa2-b51e-ea18ce49959a] Lifecycle complete -- result stored
+2026-05-09 11:25:36,076 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:25:37,087 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:25:38,104 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:25:39,121 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:25:40,137 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:25:41,154 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:25:42,171 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:25:43,187 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:25:44,204 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:25:45,215 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:25:46,220 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:25:47,237 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:25:48,250 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:25:49,253 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:25:50,270 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:25:51,286 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:25:52,303 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:25:53,320 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:25:54,322 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:25:55,348 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:54:48,912 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:54:49,925 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:54:51,021 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:54:52,115 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:54:53,146 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:54:54,227 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:54:55,360 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:54:56,377 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:54:57,386 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:54:58,391 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:55:27,468 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:55:28,495 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:55:29,512 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:55:30,513 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:55:31,514 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:55:32,523 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:55:33,531 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:55:34,538 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:55:35,548 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:55:36,562 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:55:37,567 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:55:38,578 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:55:39,583 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:55:40,584 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:55:41,585 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:55:42,601 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:55:43,616 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:55:44,624 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:55:45,635 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:55:46,648 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:55:47,661 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:55:48,672 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:55:49,682 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:55:50,685 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:55:51,695 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:55:52,701 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:55:53,701 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:55:54,709 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:55:55,711 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:55:56,720 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:55:57,729 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:55:58,743 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:55:59,758 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:00,768 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:01,779 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:02,852 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:03,901 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:04,904 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:05,918 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:06,934 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:07,949 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:08,953 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:09,960 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:10,961 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:12,010 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:13,089 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:14,099 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:15,126 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:16,142 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:17,150 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:18,159 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:19,167 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:20,168 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:21,179 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:22,181 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:23,192 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:24,197 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:25,208 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:26,216 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:27,232 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:28,242 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:29,245 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:30,249 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:31,250 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:32,258 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:33,267 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:34,282 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:35,299 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:36,323 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:37,332 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:38,349 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:39,423 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:40,448 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:41,481 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:42,517 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:43,530 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:44,530 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:45,531 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:46,547 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:47,551 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:48,564 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:49,581 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:50,583 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:51,585 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:52,597 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:53,601 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:54,603 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:55,610 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:56,611 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:57,614 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:58,620 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:56:59,630 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:00,637 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:01,640 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:02,645 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:03,662 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:04,686 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:05,696 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:06,698 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:07,704 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:08,713 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:09,728 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:10,742 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:11,743 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:12,745 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:13,749 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:14,761 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:15,762 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:16,764 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:17,780 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:18,794 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:19,796 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:20,797 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:21,811 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:22,812 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:23,827 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:24,829 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:25,836 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:26,839 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:27,845 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:28,860 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:29,862 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:30,864 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:31,870 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:32,875 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:33,876 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:34,879 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:35,881 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:36,892 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:37,898 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:38,910 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:39,925 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:40,927 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:41,931 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:42,943 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:43,948 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:44,958 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:45,961 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:46,966 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:47,976 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:48,989 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:49,990 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:51,006 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:52,009 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:53,024 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:54,041 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:55,049 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:56,058 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:57,059 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:58,068 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:57:59,074 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:00,084 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:01,089 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:02,091 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:03,094 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:04,097 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:05,110 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:06,113 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:07,123 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:08,130 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:09,137 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:10,141 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:11,157 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:12,172 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:13,192 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:14,222 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:15,239 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:16,242 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:17,246 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:18,254 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:19,268 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:20,270 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:21,271 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:22,281 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:23,287 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:24,300 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:25,307 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:26,321 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:27,322 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:28,324 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:29,327 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:30,337 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:31,341 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:32,342 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:33,353 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:34,368 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:35,377 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:36,390 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:37,402 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:38,405 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:39,407 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:40,415 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:41,420 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:42,422 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:43,436 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:44,443 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:45,454 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:46,456 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:47,470 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:48,477 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:49,482 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:50,483 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:51,487 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:52,491 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:53,502 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:54,514 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:55,522 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:56,532 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:57,535 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:58,541 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:58:59,552 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:00,569 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:01,572 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:02,584 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:03,594 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:04,601 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:05,614 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:06,617 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:07,633 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:08,651 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:09,667 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:10,683 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:11,684 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:12,685 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:13,700 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:14,712 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:15,715 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:16,716 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:17,731 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:18,734 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:19,745 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:20,749 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:21,765 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:22,782 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:23,784 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:24,785 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:25,798 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:26,800 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:27,801 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:28,815 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:29,816 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:30,829 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:31,831 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:32,833 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:33,836 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:34,839 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:35,848 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:36,864 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:37,866 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:38,881 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:39,887 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:40,897 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:41,913 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:42,914 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:43,930 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:44,432 [INFO] CNN -> Unknown (61.0%)
+2026-05-09 11:59:44,446 [INFO] [299009b6-b946-4cd7-b70d-1a4841990dc1] Lifecycle: waiting 15 s before activating sensor ...
+2026-05-09 11:59:44,447 [INFO] analyze-image -> Unknown 61.0%  session=299009b6-b946-4cd7-b70d-1a4841990dc1  (sensor in 15 s)
+2026-05-09 11:59:44,932 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:45,946 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:46,948 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:47,963 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:48,979 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:49,981 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:50,986 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:51,988 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:52,993 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:53,995 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:55,011 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:56,027 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:57,047 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:58,049 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:59,056 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:59,458 [INFO] Turning LED ON -- sensor activation in progress
+2026-05-09 11:59:59,458 [WARNING] Serial write error: WriteFile failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 11:59:59,458 [INFO] [299009b6-b946-4cd7-b70d-1a4841990dc1] Sensor ACTIVATED -- collecting for 15 s
+2026-05-09 12:00:00,062 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:00:01,074 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:00:02,081 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:00:03,089 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:00:04,101 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:00:05,109 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:00:06,111 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:00:07,113 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:00:08,127 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:00:09,139 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:04:30,155 [INFO] ==============================================================
+2026-05-09 12:04:30,155 [INFO]   FruitSense Backend  v3.2  (FIXED)
+2026-05-09 12:04:30,155 [INFO]   Serial port        : COM4
+2026-05-09 12:04:30,155 [INFO]   Baud rate          : 115200
+2026-05-09 12:04:30,155 [INFO]   Sensor delay       : 15 s after image upload
+2026-05-09 12:04:30,155 [INFO]   Collection window  : 15 s
+2026-05-09 12:04:30,155 [INFO]   Sensor gate        : CLOSED at startup
+2026-05-09 12:04:30,155 [INFO] ==============================================================
+2026-05-09 12:04:31,852 [INFO] Loading CNN from E:\finall-iot\backend\model\best_fruit_model_resnet50.pth
+2026-05-09 12:04:34,809 [WARNING] Unexpected keys (first 10): ['_backbone_ref.0.weight', '_backbone_ref.1.weight', '_backbone_ref.1.bias', '_backbone_ref.1.running_mean', '_backbone_ref.1.running_var', '_backbone_ref.1.num_batches_tracked', '_backbone_ref.4.0.conv1.weight', '_backbone_ref.4.0.bn1.weight', '_backbone_ref.4.0.bn1.bias', '_backbone_ref.4.0.bn1.running_mean']
+2026-05-09 12:04:34,809 [INFO] CNN loaded OK (5 classes)
+2026-05-09 12:04:34,809 [INFO] CNN model          : READY
+2026-05-09 12:04:37,368 [INFO] le_fruit classes : ['apple', 'banana', 'grape', 'mango', 'strawberry']
+2026-05-09 12:04:37,368 [INFO] classifier classes: [0, 1]
+2026-05-09 12:04:37,383 [INFO] New ML models loaded OK (classifier + regressor + scaler + le_fruit)
+2026-05-09 12:04:37,383 [INFO] New ML models      : READY  (classifier + regressor + scaler + le_fruit)
+2026-05-09 12:04:37,393 [INFO] Opening COM4 @ 115200 baud ...
+2026-05-09 12:04:37,393 [WARNING] Cannot open COM4: could not open port 'COM4': FileNotFoundError(2, 'The system cannot find the file specified.', None, 2)
+2026-05-09 12:04:37,395 [INFO] Opening COM4 @ 115200 baud ...
+2026-05-09 12:04:37,395 [INFO] Serial reader thread started (sensor gate CLOSED -- awaiting image upload)
+2026-05-09 12:04:37,397 [WARNING] Cannot open COM4: could not open port 'COM4': FileNotFoundError(2, 'The system cannot find the file specified.', None, 2)
+2026-05-09 12:04:37,397 [INFO] Serial reader      : IDLE (gate opens on first /analyze-image call)
+2026-05-09 12:04:37,397 [WARNING] Serial reader thread exiting -- port unavailable.
+2026-05-09 12:04:37,397 [INFO] Server             : http://127.0.0.1:5000
+2026-05-09 12:04:37,397 [INFO] ==============================================================
+2026-05-09 12:04:42,818 [INFO] CNN -> Grape (89.7%)
+2026-05-09 12:04:42,818 [INFO] [fd86dc5d-57bd-4ce8-aa46-9ec5bf027ae5] Lifecycle: waiting 15 s before activating sensor ...
+2026-05-09 12:04:42,818 [INFO] analyze-image -> Grape 89.7%  session=fd86dc5d-57bd-4ce8-aa46-9ec5bf027ae5  (sensor in 15 s)
+2026-05-09 12:04:57,832 [INFO] Turning LED ON -- sensor activation in progress
+2026-05-09 12:04:57,833 [WARNING] Serial not open -- cannot send: 'LED_ON'
+2026-05-09 12:04:57,833 [INFO] [fd86dc5d-57bd-4ce8-aa46-9ec5bf027ae5] Sensor ACTIVATED -- collecting for 15 s
+2026-05-09 12:05:02,260 [INFO] ==============================================================
+2026-05-09 12:05:02,260 [INFO]   FruitSense Backend  v3.2  (FIXED)
+2026-05-09 12:05:02,260 [INFO]   Serial port        : COM4
+2026-05-09 12:05:02,265 [INFO]   Baud rate          : 115200
+2026-05-09 12:05:02,265 [INFO]   Sensor delay       : 15 s after image upload
+2026-05-09 12:05:02,265 [INFO]   Collection window  : 15 s
+2026-05-09 12:05:02,265 [INFO]   Sensor gate        : CLOSED at startup
+2026-05-09 12:05:02,265 [INFO] ==============================================================
+2026-05-09 12:05:04,159 [INFO] Loading CNN from E:\finall-iot\backend\model\best_fruit_model_resnet50.pth
+2026-05-09 12:05:06,916 [WARNING] Unexpected keys (first 10): ['_backbone_ref.0.weight', '_backbone_ref.1.weight', '_backbone_ref.1.bias', '_backbone_ref.1.running_mean', '_backbone_ref.1.running_var', '_backbone_ref.1.num_batches_tracked', '_backbone_ref.4.0.conv1.weight', '_backbone_ref.4.0.bn1.weight', '_backbone_ref.4.0.bn1.bias', '_backbone_ref.4.0.bn1.running_mean']
+2026-05-09 12:05:06,931 [INFO] CNN loaded OK (5 classes)
+2026-05-09 12:05:06,931 [INFO] CNN model          : READY
+2026-05-09 12:05:08,193 [INFO] le_fruit classes : ['apple', 'banana', 'grape', 'mango', 'strawberry']
+2026-05-09 12:05:08,194 [INFO] classifier classes: [0, 1]
+2026-05-09 12:05:08,194 [INFO] New ML models loaded OK (classifier + regressor + scaler + le_fruit)
+2026-05-09 12:05:08,194 [INFO] New ML models      : READY  (classifier + regressor + scaler + le_fruit)
+2026-05-09 12:05:08,198 [INFO] Opening COM4 @ 115200 baud ...
+2026-05-09 12:05:08,200 [INFO] Waiting 2.5 s for Arduino boot + sensor warm-up ...
+2026-05-09 12:05:10,710 [INFO] Serial ready (COM4 @ 115200 baud) -- sensor INACTIVE until image upload
+2026-05-09 12:05:10,714 [INFO] Serial reader thread running (COM4 @ 115200 baud) -- idle until sensor activated
+2026-05-09 12:05:10,714 [INFO] Serial reader thread started (sensor gate CLOSED -- awaiting image upload)
+2026-05-09 12:05:10,715 [INFO] Serial reader      : IDLE (gate opens on first /analyze-image call)
+2026-05-09 12:05:10,716 [INFO] Server             : http://127.0.0.1:5000
+2026-05-09 12:05:10,716 [INFO] ==============================================================
+2026-05-09 12:05:11,791 [INFO] Arduino: # Ready. Awaiting commands: LED_ON | LED_OFF
+2026-05-09 12:05:11,807 [INFO] Arduino: # CSV format: mq3,mq5,mq135,temperature,humidity
+2026-05-09 12:05:35,981 [INFO] CNN -> Grape (91.0%)
+2026-05-09 12:05:35,981 [INFO] [aa0160d8-745d-4556-80fb-581bfa4094ce] Lifecycle: waiting 15 s before activating sensor ...
+2026-05-09 12:05:35,981 [INFO] analyze-image -> Grape 91.0%  session=aa0160d8-745d-4556-80fb-581bfa4094ce  (sensor in 15 s)
+2026-05-09 12:05:50,992 [INFO] Turning LED ON -- sensor activation in progress
+2026-05-09 12:05:50,992 [INFO] -> Arduino: LED_ON
+2026-05-09 12:05:50,992 [INFO] [aa0160d8-745d-4556-80fb-581bfa4094ce] Sensor ACTIVATED -- collecting for 15 s
+2026-05-09 12:05:50,992 [INFO] Arduino: # LED ON
+2026-05-09 12:05:51,045 [INFO] Sensor <- mq3=473  mq5=547  mq135=575  t=26.4 C  h=42.5%
+2026-05-09 12:05:52,028 [INFO] Sensor <- mq3=479  mq5=552  mq135=579  t=26.4 C  h=42.5%
+2026-05-09 12:05:53,026 [INFO] Sensor <- mq3=476  mq5=549  mq135=577  t=26.4 C  h=42.5%
+2026-05-09 12:05:54,059 [INFO] Sensor <- mq3=478  mq5=551  mq135=579  t=26.8 C  h=42.6%
+2026-05-09 12:05:55,040 [INFO] Sensor <- mq3=474  mq5=547  mq135=574  t=26.8 C  h=42.6%
+2026-05-09 12:05:56,059 [INFO] Sensor <- mq3=479  mq5=550  mq135=577  t=26.8 C  h=42.5%
+2026-05-09 12:05:57,047 [INFO] Sensor <- mq3=480  mq5=551  mq135=579  t=26.8 C  h=42.5%
+2026-05-09 12:05:58,074 [INFO] Sensor <- mq3=479  mq5=549  mq135=577  t=26.8 C  h=42.5%
+2026-05-09 12:05:59,054 [INFO] Sensor <- mq3=479  mq5=549  mq135=577  t=26.8 C  h=42.5%
+2026-05-09 12:06:00,081 [INFO] Sensor <- mq3=481  mq5=550  mq135=578  t=26.9 C  h=42.5%
+2026-05-09 12:06:01,060 [INFO] Sensor <- mq3=481  mq5=550  mq135=578  t=26.9 C  h=42.5%
+2026-05-09 12:06:02,087 [INFO] Sensor <- mq3=483  mq5=551  mq135=579  t=26.9 C  h=42.5%
+2026-05-09 12:06:03,059 [INFO] Sensor <- mq3=482  mq5=549  mq135=578  t=26.9 C  h=42.5%
+2026-05-09 12:06:04,094 [INFO] Sensor <- mq3=481  mq5=548  mq135=577  t=26.9 C  h=42.5%
+2026-05-09 12:06:05,071 [INFO] Sensor <- mq3=483  mq5=549  mq135=578  t=26.9 C  h=42.5%
+2026-05-09 12:06:05,995 [INFO] Turning LED OFF
+2026-05-09 12:06:05,995 [INFO] -> Arduino: LED_OFF
+2026-05-09 12:06:05,995 [INFO] [aa0160d8-745d-4556-80fb-581bfa4094ce] Collection window complete -- processing buffer
+2026-05-09 12:06:05,995 [INFO] [aa0160d8-745d-4556-80fb-581bfa4094ce] Averaged 15 readings: mq3=479.2 mq5=549.5 mq135=577.5 t=26.8 h=42.5
+2026-05-09 12:06:05,995 [INFO] Using NEW ML models (best_classifier + best_regressor + scaler + le_fruit)
+2026-05-09 12:06:05,995 [INFO] fruit_enc for 'Grape' -> 2  (LE class: 'grape')
+2026-05-09 12:06:05,995 [INFO] Features: mq3=479.2 mq5=549.5 mq135=577.5 t=26.8 h=42.5 | gas=1606.1 ferm=1.2051 spoil=1.1466 env=0.4421 enc=2
+2026-05-09 12:06:05,995 [INFO] Arduino: # LED OFF
+2026-05-09 12:06:06,011 [INFO] Classifier raw='0' -> condition='Ripe'
+2026-05-09 12:06:06,126 [INFO] Shelf life: raw=14.0 -> capped=14.0 (fruit=Grape condition=Ripe)
+2026-05-09 12:06:06,127 [INFO] Regressor raw=48.8 -> sanitised=14.0 days
+2026-05-09 12:06:06,127 [INFO] Ripening signals: sig1(MQ5/MQ3)=0.308 sig2(MQ135/MQ3)=0.256 sig3(MQ5/MQ135)=0.359 sig4(absMQ5)=0.099 sig5(absMQ135)=0.155 sig6(supp)=0.131 | env_corr=0.000 -> score=0.244 -> Natural (24.4% chemical)
+2026-05-09 12:06:06,128 [INFO] _reconcile_quality: condition=Ripe ripening=Natural chem=24.4% -> edible=True risk=Low label=Naturally Ripened
+2026-05-09 12:06:06,128 [INFO] FINAL -> fruit=Grape condition=Ripe ripening=Natural edible=True risk=Low label=Naturally Ripened shelf=14.0d chem=24.4%
+2026-05-09 12:06:06,128 [INFO] [aa0160d8-745d-4556-80fb-581bfa4094ce] Lifecycle complete -- result stored
+2026-05-09 12:06:33,331 [INFO] CNN -> Banana (93.2%)
+2026-05-09 12:06:33,339 [INFO] [1ca3cf3e-5481-4901-bc09-912a38207bc3] Lifecycle: waiting 15 s before activating sensor ...
+2026-05-09 12:06:33,339 [INFO] analyze-image -> Banana 93.2%  session=1ca3cf3e-5481-4901-bc09-912a38207bc3  (sensor in 15 s)
+2026-05-09 12:06:48,355 [INFO] Turning LED ON -- sensor activation in progress
+2026-05-09 12:06:48,356 [INFO] -> Arduino: LED_ON
+2026-05-09 12:06:48,356 [INFO] [1ca3cf3e-5481-4901-bc09-912a38207bc3] Sensor ACTIVATED -- collecting for 15 s
+2026-05-09 12:06:48,356 [INFO] Arduino: # LED ON
+2026-05-09 12:06:48,409 [INFO] Sensor <- mq3=485  mq5=540  mq135=578  t=26.9 C  h=42.5%
+2026-05-09 12:06:49,389 [INFO] Sensor <- mq3=488  mq5=542  mq135=580  t=26.9 C  h=42.5%
+2026-05-09 12:06:50,423 [INFO] Sensor <- mq3=488  mq5=542  mq135=581  t=27.1 C  h=42.7%
+2026-05-09 12:06:51,404 [INFO] Sensor <- mq3=490  mq5=543  mq135=582  t=27.1 C  h=42.7%
+2026-05-09 12:06:52,405 [INFO] Sensor <- mq3=489  mq5=543  mq135=582  t=27.1 C  h=42.7%
+2026-05-09 12:06:53,423 [INFO] Sensor <- mq3=490  mq5=543  mq135=582  t=27.1 C  h=42.5%
+2026-05-09 12:06:54,407 [INFO] Sensor <- mq3=490  mq5=542  mq135=581  t=27.1 C  h=42.5%
+2026-05-09 12:06:55,439 [INFO] Sensor <- mq3=491  mq5=543  mq135=582  t=27.2 C  h=42.3%
+2026-05-09 12:06:56,420 [INFO] Sensor <- mq3=491  mq5=543  mq135=582  t=27.2 C  h=42.3%
+2026-05-09 12:06:57,439 [INFO] Sensor <- mq3=494  mq5=545  mq135=585  t=27.2 C  h=42.2%
+2026-05-09 12:06:58,422 [INFO] Sensor <- mq3=495  mq5=546  mq135=585  t=27.2 C  h=42.2%
+2026-05-09 12:06:59,421 [INFO] Sensor <- mq3=493  mq5=544  mq135=584  t=27.2 C  h=42.2%
+2026-05-09 12:07:00,454 [INFO] Sensor <- mq3=492  mq5=543  mq135=583  t=27.2 C  h=42.2%
+2026-05-09 12:07:01,423 [INFO] Sensor <- mq3=490  mq5=541  mq135=581  t=27.2 C  h=42.2%
+2026-05-09 12:07:02,455 [INFO] Sensor <- mq3=491  mq5=542  mq135=582  t=27.2 C  h=42.1%
+2026-05-09 12:07:03,369 [INFO] Turning LED OFF
+2026-05-09 12:07:03,370 [INFO] -> Arduino: LED_OFF
+2026-05-09 12:07:03,370 [INFO] [1ca3cf3e-5481-4901-bc09-912a38207bc3] Collection window complete -- processing buffer
+2026-05-09 12:07:03,371 [INFO] [1ca3cf3e-5481-4901-bc09-912a38207bc3] Averaged 15 readings: mq3=490.5 mq5=542.8 mq135=582.0 t=27.1 h=42.4
+2026-05-09 12:07:03,372 [INFO] Using NEW ML models (best_classifier + best_regressor + scaler + le_fruit)
+2026-05-09 12:07:03,373 [INFO] fruit_enc for 'Banana' -> 1  (LE class: 'banana')
+2026-05-09 12:07:03,375 [INFO] Features: mq3=490.5 mq5=542.8 mq135=582.0 t=27.1 h=42.4 | gas=1615.3 ferm=1.1866 spoil=1.1067 env=0.4476 enc=1
+2026-05-09 12:07:03,378 [INFO] Arduino: # LED OFF
+2026-05-09 12:07:03,387 [INFO] Classifier raw='0' -> condition='Ripe'
+2026-05-09 12:07:03,488 [INFO] Shelf life: raw=10.0 -> capped=10.0 (fruit=Banana condition=Ripe)
+2026-05-09 12:07:03,488 [INFO] Regressor raw=48.8 -> sanitised=10.0 days
+2026-05-09 12:07:03,488 [INFO] Ripening signals: sig1(MQ5/MQ3)=0.258 sig2(MQ135/MQ3)=0.233 sig3(MQ5/MQ135)=0.332 sig4(absMQ5)=0.086 sig5(absMQ135)=0.164 sig6(supp)=0.121 | env_corr=0.000 -> score=0.218 -> Natural (21.8% chemical)
+2026-05-09 12:07:03,488 [INFO] _reconcile_quality: condition=Ripe ripening=Natural chem=21.8% -> edible=True risk=Low label=Naturally Ripened
+2026-05-09 12:07:03,488 [INFO] FINAL -> fruit=Banana condition=Ripe ripening=Natural edible=True risk=Low label=Naturally Ripened shelf=10.0d chem=21.8%
+2026-05-09 12:07:03,488 [INFO] [1ca3cf3e-5481-4901-bc09-912a38207bc3] Lifecycle complete -- result stored
+2026-05-09 12:07:43,216 [INFO] CNN -> Apple (92.7%)
+2026-05-09 12:07:43,218 [INFO] [ef0b9041-67f8-4ba2-8297-76c021a8340e] Lifecycle: waiting 15 s before activating sensor ...
+2026-05-09 12:07:43,218 [INFO] analyze-image -> Apple 92.7%  session=ef0b9041-67f8-4ba2-8297-76c021a8340e  (sensor in 15 s)
+2026-05-09 12:07:58,224 [INFO] Turning LED ON -- sensor activation in progress
+2026-05-09 12:07:58,224 [INFO] -> Arduino: LED_ON
+2026-05-09 12:07:58,224 [INFO] [ef0b9041-67f8-4ba2-8297-76c021a8340e] Sensor ACTIVATED -- collecting for 15 s
+2026-05-09 12:07:58,224 [INFO] Arduino: # LED ON
+2026-05-09 12:07:58,282 [INFO] Sensor <- mq3=461  mq5=492  mq135=554  t=27.2 C  h=42.1%
+2026-05-09 12:07:59,255 [INFO] Sensor <- mq3=461  mq5=492  mq135=554  t=27.2 C  h=42.1%
+2026-05-09 12:08:00,282 [INFO] Sensor <- mq3=461  mq5=491  mq135=553  t=27.3 C  h=41.0%
+2026-05-09 12:08:01,270 [INFO] Sensor <- mq3=457  mq5=488  mq135=549  t=27.3 C  h=41.0%
+2026-05-09 12:08:02,291 [INFO] Sensor <- mq3=457  mq5=488  mq135=549  t=27.3 C  h=41.0%
+2026-05-09 12:08:03,271 [INFO] Sensor <- mq3=461  mq5=492  mq135=554  t=27.3 C  h=41.0%
+2026-05-09 12:08:04,281 [INFO] Sensor <- mq3=461  mq5=492  mq135=554  t=27.3 C  h=41.0%
+2026-05-09 12:08:05,307 [INFO] Sensor <- mq3=462  mq5=492  mq135=554  t=27.3 C  h=40.9%
+2026-05-09 12:08:06,286 [INFO] Sensor <- mq3=463  mq5=493  mq135=555  t=27.3 C  h=40.9%
+2026-05-09 12:08:07,302 [INFO] Sensor <- mq3=462  mq5=492  mq135=555  t=27.3 C  h=40.9%
+2026-05-09 12:08:08,293 [INFO] Sensor <- mq3=462  mq5=492  mq135=554  t=27.3 C  h=40.9%
+2026-05-09 12:08:09,310 [INFO] Sensor <- mq3=463  mq5=493  mq135=555  t=27.3 C  h=40.9%
+2026-05-09 12:08:10,290 [INFO] Sensor <- mq3=463  mq5=493  mq135=556  t=27.3 C  h=40.9%
+2026-05-09 12:08:11,297 [INFO] Sensor <- mq3=464  mq5=493  mq135=556  t=27.3 C  h=40.9%
+2026-05-09 12:08:12,329 [INFO] Sensor <- mq3=464  mq5=493  mq135=556  t=27.3 C  h=40.9%
+2026-05-09 12:08:13,229 [INFO] Turning LED OFF
+2026-05-09 12:08:13,231 [INFO] -> Arduino: LED_OFF
+2026-05-09 12:08:13,231 [INFO] [ef0b9041-67f8-4ba2-8297-76c021a8340e] Collection window complete -- processing buffer
+2026-05-09 12:08:13,231 [INFO] [ef0b9041-67f8-4ba2-8297-76c021a8340e] Averaged 15 readings: mq3=461.5 mq5=491.7 mq135=553.9 t=27.3 h=41.1
+2026-05-09 12:08:13,231 [INFO] Using NEW ML models (best_classifier + best_regressor + scaler + le_fruit)
+2026-05-09 12:08:13,231 [INFO] fruit_enc for 'Apple' -> 0  (LE class: 'apple')
+2026-05-09 12:08:13,248 [INFO] Arduino: # LED OFF
+2026-05-09 12:08:13,250 [INFO] Features: mq3=461.5 mq5=491.7 mq135=553.9 t=27.3 h=41.1 | gas=1507.1 ferm=1.2002 spoil=1.0656 env=0.4537 enc=0
+2026-05-09 12:08:13,271 [INFO] Classifier raw='0' -> condition='Ripe'
+2026-05-09 12:08:13,397 [INFO] Shelf life: raw=30.0 -> capped=30.0 (fruit=Apple condition=Ripe)
+2026-05-09 12:08:13,397 [INFO] Regressor raw=48.8 -> sanitised=30.0 days
+2026-05-09 12:08:13,397 [INFO] Ripening signals: sig1(MQ5/MQ3)=0.207 sig2(MQ135/MQ3)=0.250 sig3(MQ5/MQ135)=0.268 sig4(absMQ5)=0.000 sig5(absMQ135)=0.108 sig6(supp)=0.134 | env_corr=0.000 -> score=0.182 -> Natural (18.2% chemical)
+2026-05-09 12:08:13,397 [INFO] _reconcile_quality: condition=Ripe ripening=Natural chem=18.2% -> edible=True risk=Low label=Naturally Ripened
+2026-05-09 12:08:13,397 [INFO] FINAL -> fruit=Apple condition=Ripe ripening=Natural edible=True risk=Low label=Naturally Ripened shelf=30.0d chem=18.2%
+2026-05-09 12:08:13,397 [INFO] [ef0b9041-67f8-4ba2-8297-76c021a8340e] Lifecycle complete -- result stored
+2026-05-09 12:08:35,833 [INFO] CNN -> Mango (82.2%)
+2026-05-09 12:08:35,833 [INFO] [3b615613-325c-4b47-9c36-5cb6efcb7934] Lifecycle: waiting 15 s before activating sensor ...
+2026-05-09 12:08:35,833 [INFO] analyze-image -> Mango 82.2%  session=3b615613-325c-4b47-9c36-5cb6efcb7934  (sensor in 15 s)
+2026-05-09 12:08:50,843 [INFO] Turning LED ON -- sensor activation in progress
+2026-05-09 12:08:50,843 [INFO] -> Arduino: LED_ON
+2026-05-09 12:08:50,843 [INFO] [3b615613-325c-4b47-9c36-5cb6efcb7934] Sensor ACTIVATED -- collecting for 15 s
+2026-05-09 12:08:50,843 [INFO] Arduino: # LED ON
+2026-05-09 12:08:50,894 [INFO] Sensor <- mq3=476  mq5=508  mq135=577  t=27.3 C  h=40.8%
+2026-05-09 12:08:51,882 [INFO] Sensor <- mq3=475  mq5=507  mq135=576  t=27.3 C  h=40.8%
+2026-05-09 12:08:52,911 [INFO] Sensor <- mq3=475  mq5=507  mq135=576  t=27.5 C  h=40.6%
+2026-05-09 12:08:53,876 [INFO] Sensor <- mq3=475  mq5=507  mq135=576  t=27.5 C  h=40.6%
+2026-05-09 12:08:54,914 [INFO] Sensor <- mq3=475  mq5=507  mq135=575  t=27.5 C  h=40.5%
+2026-05-09 12:08:55,894 [INFO] Sensor <- mq3=475  mq5=508  mq135=576  t=27.5 C  h=40.5%
+2026-05-09 12:08:56,910 [INFO] Sensor <- mq3=476  mq5=508  mq135=576  t=27.5 C  h=40.5%
+2026-05-09 12:08:57,892 [INFO] Sensor <- mq3=476  mq5=509  mq135=577  t=27.5 C  h=40.5%
+2026-05-09 12:08:58,927 [INFO] Sensor <- mq3=476  mq5=509  mq135=577  t=27.5 C  h=40.4%
+2026-05-09 12:08:59,909 [INFO] Sensor <- mq3=477  mq5=510  mq135=578  t=27.5 C  h=40.4%
+2026-05-09 12:09:00,926 [INFO] Sensor <- mq3=477  mq5=510  mq135=577  t=27.5 C  h=40.3%
+2026-05-09 12:09:01,910 [INFO] Sensor <- mq3=477  mq5=510  mq135=577  t=27.5 C  h=40.3%
+2026-05-09 12:09:02,941 [INFO] Sensor <- mq3=477  mq5=511  mq135=578  t=27.5 C  h=40.3%
+2026-05-09 12:09:03,924 [INFO] Sensor <- mq3=477  mq5=511  mq135=578  t=27.5 C  h=40.3%
+2026-05-09 12:09:04,925 [INFO] Sensor <- mq3=477  mq5=510  mq135=577  t=27.5 C  h=40.3%
+2026-05-09 12:09:05,857 [INFO] Turning LED OFF
+2026-05-09 12:09:05,858 [INFO] -> Arduino: LED_OFF
+2026-05-09 12:09:05,858 [INFO] [3b615613-325c-4b47-9c36-5cb6efcb7934] Collection window complete -- processing buffer
+2026-05-09 12:09:05,858 [INFO] [3b615613-325c-4b47-9c36-5cb6efcb7934] Averaged 15 readings: mq3=476.1 mq5=508.8 mq135=576.7 t=27.5 h=40.5
+2026-05-09 12:09:05,858 [INFO] Using NEW ML models (best_classifier + best_regressor + scaler + le_fruit)
+2026-05-09 12:09:05,858 [INFO] Arduino: # LED OFF
+2026-05-09 12:09:05,858 [INFO] fruit_enc for 'Mango' -> 3  (LE class: 'mango')
+2026-05-09 12:09:05,858 [INFO] Features: mq3=476.1 mq5=508.8 mq135=576.7 t=27.5 h=40.5 | gas=1561.6 ferm=1.2115 spoil=1.0688 env=0.4582 enc=3
+2026-05-09 12:09:05,858 [INFO] Classifier raw='0' -> condition='Ripe'
+2026-05-09 12:09:05,974 [INFO] Shelf life: raw=12.0 -> capped=12.0 (fruit=Mango condition=Ripe)
+2026-05-09 12:09:05,974 [INFO] Regressor raw=49.0 -> sanitised=12.0 days
+2026-05-09 12:09:05,974 [INFO] Ripening signals: sig1(MQ5/MQ3)=0.211 sig2(MQ135/MQ3)=0.264 sig3(MQ5/MQ135)=0.260 sig4(absMQ5)=0.018 sig5(absMQ135)=0.153 sig6(supp)=0.134 | env_corr=0.000 -> score=0.193 -> Natural (19.3% chemical)
+2026-05-09 12:09:05,974 [INFO] _reconcile_quality: condition=Ripe ripening=Natural chem=19.3% -> edible=True risk=Low label=Naturally Ripened
+2026-05-09 12:09:05,974 [INFO] FINAL -> fruit=Mango condition=Ripe ripening=Natural edible=True risk=Low label=Naturally Ripened shelf=12.0d chem=19.3%
+2026-05-09 12:09:05,974 [INFO] [3b615613-325c-4b47-9c36-5cb6efcb7934] Lifecycle complete -- result stored
+2026-05-09 12:11:03,319 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:04,344 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:05,345 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:06,354 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:07,355 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:08,360 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:09,371 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:10,385 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:11,387 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:12,390 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:13,392 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:14,407 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:15,408 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:16,423 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:17,434 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:18,438 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:19,454 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:20,456 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:21,472 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:22,488 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:23,504 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:24,511 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:25,522 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:26,523 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:27,539 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:28,541 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:29,556 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:30,559 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:31,574 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:32,590 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:33,605 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:34,622 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:35,636 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:36,639 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:37,641 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:38,657 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:39,674 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:40,689 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:41,691 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:42,706 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:43,707 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:44,722 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:45,724 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:46,739 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:47,756 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:48,758 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:49,772 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:50,788 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:51,790 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:52,807 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:53,823 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:54,839 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:55,855 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:56,872 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:57,887 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:58,888 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:11:59,905 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:00,920 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:01,922 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:02,924 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:03,938 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:04,954 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:05,956 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:06,957 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:07,958 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:08,972 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:09,974 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:10,977 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:11,993 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:12,995 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:14,010 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:15,026 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:16,041 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:17,042 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:18,058 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:19,060 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:20,074 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:21,090 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:22,092 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:23,107 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:24,123 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:25,125 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:26,126 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:27,142 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:28,158 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:29,161 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:30,175 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:31,175 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:32,191 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:33,193 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:34,208 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:35,210 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:36,224 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:37,241 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:38,243 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:39,245 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:40,260 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:41,276 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:42,279 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:43,293 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:44,295 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:45,311 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:46,325 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:47,328 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:48,328 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:49,344 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:50,361 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:51,362 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:52,377 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:53,378 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:54,379 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:55,381 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:56,396 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:57,397 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:58,400 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:12:59,414 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:00,415 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:01,429 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:02,430 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:03,432 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:04,447 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:05,448 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:06,463 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:07,464 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:08,466 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:09,482 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:10,484 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:11,497 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:12,498 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:13,499 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:14,515 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:15,518 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:16,531 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:17,543 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:18,547 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:19,561 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:20,572 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:21,575 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:22,576 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:23,577 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:24,578 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:25,593 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:26,594 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:27,610 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:28,624 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:29,626 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:30,630 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:31,643 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:32,659 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:33,663 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:34,677 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:35,692 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:36,693 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:37,709 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:38,723 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:39,729 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:40,743 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:41,754 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:42,760 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:43,761 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:44,762 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:45,763 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:46,768 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:47,781 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:48,795 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:49,797 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:50,813 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:51,829 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:52,844 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:53,846 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:54,859 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:55,867 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:56,878 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:57,881 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:58,883 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:13:59,897 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:00,913 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:01,914 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:02,915 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:03,919 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:04,919 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:05,931 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:06,933 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:07,938 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:08,950 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:09,952 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:10,958 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:11,969 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:12,971 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:13,985 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:14,986 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:15,987 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:17,002 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:18,018 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:19,033 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:20,038 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:21,051 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:22,066 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:23,070 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:24,084 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:25,100 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:26,101 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:27,102 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:28,119 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:29,121 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:30,123 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:31,125 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:32,140 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:33,153 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:34,170 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:35,184 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:36,186 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:37,188 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:38,189 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:39,191 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:40,206 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:41,222 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:42,228 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:43,240 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:44,245 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:45,258 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:46,261 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:47,263 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:48,272 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:49,287 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:50,289 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:51,306 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:52,308 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:53,323 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:54,340 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:55,341 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:56,346 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:57,357 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:58,360 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:14:59,361 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:15:00,362 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:15:01,366 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:15:02,379 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:15:03,380 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:15:04,396 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:15:05,412 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:15:06,417 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:15:07,430 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:15:08,446 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:15:09,447 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:15:10,461 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:15:11,478 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:15:12,481 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:15:13,495 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:15:14,498 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:15:15,511 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:15:16,512 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:15:17,529 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:15:18,529 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:15:19,530 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:15:20,531 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:15:21,532 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:15:22,548 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:15:23,564 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:15:24,566 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:15:25,581 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:15:26,582 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:15:27,584 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
+2026-05-09 12:15:28,587 [WARNING] Serial read error: ClearCommError failed (PermissionError(13, 'The device does not recognize the command.', None, 22))
